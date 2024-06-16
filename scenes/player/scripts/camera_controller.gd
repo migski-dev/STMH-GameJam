@@ -27,7 +27,7 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseMotion: 
 		yaw += -event.relative.x * yaw_sens
-		pitch += event.relative.y * pitch_sens
+		pitch += -event.relative.y * pitch_sens
 
 func _physics_process(delta):
 	pitch = clamp(pitch, pitch_min, pitch_max)
