@@ -214,7 +214,6 @@ texture_under = SubResource("AtlasTexture_3pel6")
 texture_progress = SubResource("AtlasTexture_kdcc4")
 tint_under = Color(1, 1, 1, 0.752941)
 
-[connection signal="press_jump" from="." to="MovementController" method="_on_player_press_jump"]
 [connection signal="set_movement_direction" from="." to="MovementController" method="_on_set_movement_direction"]
 [connection signal="set_movement_state" from="." to="MovementController" method="_on_set_movement_state"]
 [connection signal="set_movement_state" from="." to="AnimationController" method="_on_set_movement_state"]

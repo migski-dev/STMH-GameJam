@@ -95,6 +95,9 @@ movement_states = {
 script = ExtResource("5_281mm")
 player = NodePath("..")
 mesh_root = NodePath("../MeshRoot")
+rotation_speed = null
+jump_height = null
+jump_duration = null
 
 [node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "player")]
 script = ExtResource("6_r4in5")
@@ -214,7 +217,6 @@ texture_under = SubResource("AtlasTexture_3pel6")
 texture_progress = SubResource("AtlasTexture_kdcc4")
 tint_under = Color(1, 1, 1, 0.752941)
 
-[connection signal="press_jump" from="." to="MovementController" method="_on_player_press_jump"]
 [connection signal="set_movement_direction" from="." to="MovementController" method="_on_set_movement_direction"]
 [connection signal="set_movement_state" from="." to="MovementController" method="_on_set_movement_state"]
 [connection signal="set_movement_state" from="." to="AnimationController" method="_on_set_movement_state"]
