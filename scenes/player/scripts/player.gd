@@ -4,10 +4,17 @@ extends CharacterBody3D
 signal set_movement_state(_movement_state: MovementState)
 signal set_movement_direction(_movement_direction: Vector3)
 
-#Jumping Signals
+#Jumping Stuff
 signal press_jump(_jump_state: JumpState)
 @export var jump_states: Dictionary
 @export var default_jump: JumpState
+
+
+@export var jump_buffer_time: float = 0.5
+var jump_available:bool = true
+var jump_buffer:bool = false
+var fall_gravity : float = 45
+var jump_gravity: float = fall_gravity
 
 # Movement State Variables
 @export var movement_states: Dictionary
@@ -32,6 +39,18 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:	
 	if is_movement_ongoing():
 		set_movement_direction.emit(movement_direction)
+	
+	if not is_on_floor():
+		if jump_available == true:
+			if velocity.y > 0:
+				velocity.y -= jump_gravity * delta
+			else:
+				velocity.y -= fall_gravity * delta
+	else:
+		jump_available = true
+		if jump_buffer:
+			jump()
+			jump_buffer = false
 
 func _process(delta: float) -> void:
 	# Light detection
@@ -56,8 +75,20 @@ func _input(event: InputEvent) -> void:
 			set_movement_state.emit(movement_states['idle'])
 	
 	if event.is_action_pressed("jump"):
+		if jump_available:
+			jump()
 		# press_jump.emit(jump_states['jump'])
-		press_jump.emit(default_jump)
+		# press_jump.emit(default_jump)
+		else:
+			jump_buffer = true
+			get_tree().create_timer(jump_buffer_time).timeout.connect(on_jump_buffer_timeout)
+
+func jump()->void:
+	press_jump.emit(default_jump)
+	jump_available = false
+
+func on_jump_buffer_timeout()->void:
+	jump_buffer = false
 
 func is_movement_ongoing():
 	return abs(movement_direction.x) > 0 or abs(movement_direction.z) > 0

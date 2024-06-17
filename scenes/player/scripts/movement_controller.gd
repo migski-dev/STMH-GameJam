@@ -4,8 +4,8 @@ extends Node
 @export var mesh_root: Node3D
 @export var rotation_speed: float = 8
 @export var fall_gravity : float = 45
+@export var jump_gravity: float = fall_gravity
 
-var jump_gravity: float = fall_gravity
 var direction: Vector3
 var velocity: Vector3
 var acceleration: float 
