@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://b1d6wjeyr4emj"]
+[gd_scene load_steps=22 format=3 uid="uid://b1d6wjeyr4emj"]
 
 [ext_resource type="PackedScene" uid="uid://fh4px1avreu3" path="res://scenes/level/entity/torch/torch.tscn" id="3_4ktk8"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="3_gof21"]
+[ext_resource type="Script" path="res://resources/jump_state.gd" id="4_f1qbs"]
 [ext_resource type="Material" uid="uid://c1o412knfb1cr" path="res://scenes/level/entity/torch/assets/metal.tres" id="4_gllqp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mct5x"]
@@ -595,6 +596,12 @@ material_override = SubResource("StandardMaterial3D_8u8y5")
 mesh = SubResource("CylinderMesh_6dtw6")
 
 [node name="Player" parent="." instance=ExtResource("3_gof21")]
+jump_states = {
+"jump": ExtResource("4_f1qbs")
+}
+
+[node name="MovementController" parent="Player" index="0"]
+rotation_speed = null
 
 [node name="AnimationTree" parent="Player/MeshRoot" index="1"]
 libraries = {

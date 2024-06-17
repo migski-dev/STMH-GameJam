@@ -1,0 +1,222 @@
+[gd_scene load_steps=24 format=3 uid="uid://c7b1ix1wtarcb"]
+
+[ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_bx071"]
+[ext_resource type="Texture2D" uid="uid://dairqkv1rcfbp" path="res://scenes/player/assets/light_meter_ui.svg" id="2_6ohhj"]
+[ext_resource type="Resource" uid="uid://8bp5tv13u3t2" path="res://resources/movement_states/stand.tres" id="2_7yl7o"]
+[ext_resource type="Resource" uid="uid://c7xhvi6elqr03" path="res://resources/movement_states/walk.tres" id="3_aujnm"]
+[ext_resource type="Resource" uid="uid://debe4k8nrwq3c" path="res://resources/movement_states/jump.tres" id="4_do3mw"]
+[ext_resource type="Script" path="res://scenes/player/scripts/movement_controller.gd" id="5_281mm"]
+[ext_resource type="PackedScene" uid="uid://byqcnramq3jkb" path="res://scenes/player/assets/green_blob.tscn" id="6_pkfwl"]
+[ext_resource type="Script" path="res://scenes/player/scripts/animation_controller.gd" id="6_r4in5"]
+[ext_resource type="Script" path="res://scenes/player/scripts/camera_controller.gd" id="8_vm7y7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rbwvg"]
+radius = 0.2
+height = 1.0
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_etv3w"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dijt3"]
+animation = &"CharacterArmature|Dance"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_38baq"]
+animation = &"CharacterArmature|Walk -loop"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_0xlu4"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_dijt3")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_38baq")
+blend_point_1/pos = 1.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_prsh6"]
+graph_offset = Vector2(-36.6999, -31.7168)
+nodes/movement_anim_speed/node = SubResource("AnimationNodeTimeScale_etv3w")
+nodes/movement_anim_speed/position = Vector2(203.949, 70.6915)
+nodes/movement_blend/node = SubResource("AnimationNodeBlendSpace1D_0xlu4")
+nodes/movement_blend/position = Vector2(13.6163, 130.72)
+nodes/output/position = Vector2(480, 140)
+node_connections = [&"movement_anim_speed", 0, &"movement_blend", &"output", 0, &"movement_anim_speed"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vm6r1"]
+radius = 0.07
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3a27g"]
+dof_blur_far_distance = 5.0
+dof_blur_far_transition = 8.0
+dof_blur_near_distance = 5.0
+dof_blur_near_transition = 6.0
+dof_blur_amount = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8e1wd"]
+cull_mode = 2
+backlight = Color(1, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rxubc"]
+material = SubResource("StandardMaterial3D_8e1wd")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xf4cn"]
+material = SubResource("StandardMaterial3D_8e1wd")
+top_radius = 0.0
+bottom_radius = 0.4
+height = 0.4
+rings = 1
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_81o2g"]
+lightmap_size_hint = Vector2i(11, 6)
+material = SubResource("StandardMaterial3D_8e1wd")
+radius = 0.3
+height = 0.6
+radial_segments = 4
+rings = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pel6"]
+atlas = ExtResource("2_6ohhj")
+region = Rect2(0, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdcc4"]
+atlas = ExtResource("2_6ohhj")
+region = Rect2(0, 0, 256, 128)
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_bx071")
+movement_states = {
+"idle": ExtResource("2_7yl7o"),
+"jump": ExtResource("4_do3mw"),
+"walk": ExtResource("3_aujnm")
+}
+
+[node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("player", "mesh_root")]
+script = ExtResource("5_281mm")
+player = NodePath("..")
+mesh_root = NodePath("../MeshRoot")
+
+[node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "player")]
+script = ExtResource("6_r4in5")
+animation_tree = NodePath("../MeshRoot/AnimationTree")
+player = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_rbwvg")
+
+[node name="MeshRoot" type="Node3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="Root Scene" parent="MeshRoot" instance=ExtResource("6_pkfwl")]
+
+[node name="Skeleton3D" parent="MeshRoot/Root Scene/RootNode/CharacterArmature" index="0"]
+bones/0/rotation = Quaternion(0.707107, 0, 0, 0.707107)
+bones/2/position = Vector3(-0.000491702, -8.27448e-11, 0.00534457)
+bones/2/rotation = Quaternion(0.688499, -0.161151, 0.161151, 0.688499)
+bones/3/rotation = Quaternion(2.22045e-16, 6.73392e-33, 3.03269e-17, 1)
+bones/4/rotation = Quaternion(4.44089e-16, 4.42751e-16, -1.24545e-24, 1)
+
+[node name="AnimationTree" type="AnimationTree" parent="MeshRoot"]
+root_node = NodePath("../Root Scene")
+tree_root = SubResource("AnimationNodeBlendTree_prsh6")
+anim_player = NodePath("../Root Scene/AnimationPlayer")
+parameters/movement_anim_speed/scale = 1.0
+parameters/movement_blend/blend_position = 0
+
+[node name="CamRoot" type="Node3D" parent="."]
+script = ExtResource("8_vm7y7")
+
+[node name="CamYaw" type="Node3D" parent="CamRoot"]
+
+[node name="CamPitch" type="Node3D" parent="CamRoot/CamYaw"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CamRoot/CamYaw/CamPitch"]
+shape = SubResource("SphereShape3D_vm6r1")
+
+[node name="Camera3D" type="Camera3D" parent="CamRoot/CamYaw/CamPitch/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+cull_mask = 524287
+attributes = SubResource("CameraAttributesPractical_3a27g")
+current = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="LightDetection" type="Node3D" parent="SubViewport"]
+
+[node name="Camera" type="Camera3D" parent="SubViewport/LightDetection"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+cull_mask = 1048574
+current = true
+fov = 40.0
+size = 0.25
+far = 20.0
+
+[node name="MeshPlane" type="MeshInstance3D" parent="SubViewport/LightDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+layers = 524288
+mesh = SubResource("PlaneMesh_rxubc")
+
+[node name="MeshCone" type="MeshInstance3D" parent="SubViewport/LightDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+layers = 524288
+mesh = SubResource("CylinderMesh_xf4cn")
+
+[node name="MeshOctahedron" type="MeshInstance3D" parent="SubViewport/LightDetection"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0.5, 0)
+visible = false
+layers = 524288
+mesh = SubResource("SphereMesh_81o2g")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(256, 256)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(256, 256)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="LightLevel" type="TextureProgressBar" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -192.0
+offset_right = 128.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+max_value = 1.0
+step = 0.0
+value = 0.25
+fill_mode = 7
+texture_under = SubResource("AtlasTexture_3pel6")
+texture_progress = SubResource("AtlasTexture_kdcc4")
+tint_under = Color(1, 1, 1, 0.752941)
+
+[connection signal="set_movement_direction" from="." to="MovementController" method="_on_set_movement_direction"]
+[connection signal="set_movement_state" from="." to="MovementController" method="_on_set_movement_state"]
+[connection signal="set_movement_state" from="." to="AnimationController" method="_on_set_movement_state"]
+[connection signal="set_cam_rotation" from="CamRoot" to="MovementController" method="_on_set_cam_rotation"]
+
+[editable path="MeshRoot/Root Scene"]
