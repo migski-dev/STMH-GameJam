@@ -12,7 +12,7 @@ func _ready():
 	animation = animation_player.get_animation("CharacterArmature|Dance")
 	animation.loop_mode = Animation.LOOP_LINEAR
 	
-
+	
 func _process(delta):
 	# Syncs the color of the body to the averaged surface color
 	var player = get_tree().get_first_node_in_group("player")

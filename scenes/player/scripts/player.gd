@@ -16,6 +16,9 @@ var movement_direction: Vector3
 @onready var light_level := $LightLevel
 @onready var mesh := $MeshRoot
 
+var is_in_shadow : bool = true
+
+
 func _ready() -> void:
 	# Set Default movement state
 	set_movement_state.emit(movement_states["idle"])
@@ -27,7 +30,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:	
 	if is_movement_ongoing():
 		set_movement_direction.emit(movement_direction)
-	
+
 
 func _process(delta: float) -> void:
 	# Light detection
@@ -62,3 +65,6 @@ func get_average_color(texture: ViewportTexture) -> Color:
 	
 func get_color_rect_color():
 	return color_rect.color
+
+func _on_ray_cast_root_player_in_light():
+	pass

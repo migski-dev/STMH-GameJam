@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c7b1ix1wtarcb"]
+[gd_scene load_steps=35 format=3 uid="uid://c7b1ix1wtarcb"]
 
 [ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_bx071"]
 [ext_resource type="Texture2D" uid="uid://dairqkv1rcfbp" path="res://scenes/player/assets/light_meter_ui.svg" id="2_6ohhj"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://byqcnramq3jkb" path="res://scenes/player/assets/green_blob.tscn" id="6_pkfwl"]
 [ext_resource type="Script" path="res://scenes/player/scripts/animation_controller.gd" id="6_r4in5"]
 [ext_resource type="Script" path="res://scenes/player/scripts/camera_controller.gd" id="8_vm7y7"]
+[ext_resource type="Script" path="res://scenes/player/scripts/light_detection.gd" id="9_psnlo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rbwvg"]
 radius = 0.2
@@ -517,10 +518,12 @@ movement_states = {
 "walk": ExtResource("3_aujnm")
 }
 
-[node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("player", "mesh_root")]
+[node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("player", "mesh_root", "light_raycast", "light_detection")]
 script = ExtResource("5_281mm")
 player = NodePath("..")
 mesh_root = NodePath("../MeshRoot")
+light_raycast = NodePath("../LightDetectionRoot/TargetRaycast")
+light_detection = NodePath("../LightDetectionRoot")
 
 [node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "player")]
 script = ExtResource("6_r4in5")
@@ -531,8 +534,30 @@ player = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_rbwvg")
 
+[node name="LightDetectionRoot" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("9_psnlo")
+player = NodePath("..")
+
+[node name="BackRayCast" type="RayCast3D" parent="LightDetectionRoot" groups=["light_raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00181392, 0.0380146, -0.0615971)
+visible = false
+
+[node name="RightRayCast" type="RayCast3D" parent="LightDetectionRoot" groups=["light_raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0728285, 0.0380146, 0)
+visible = false
+
+[node name="FrontRayCast" type="RayCast3D" parent="LightDetectionRoot" groups=["light_raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00155647, 0.0380146, 0.0681655)
+visible = false
+
+[node name="LeftRayCast" type="RayCast3D" parent="LightDetectionRoot" groups=["light_raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0552798, 0.0380146, 0)
+visible = false
+
+[node name="TargetRaycast" type="RayCast3D" parent="LightDetectionRoot"]
+
 [node name="MeshRoot" type="Node3D" parent="."]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0, 0, 0)
 
 [node name="Root Scene" parent="MeshRoot" instance=ExtResource("6_pkfwl")]
 
@@ -561,6 +586,7 @@ script = ExtResource("8_vm7y7")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CamRoot/CamYaw/CamPitch"]
 shape = SubResource("SphereShape3D_vm6r1")
+spring_length = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="CamRoot/CamYaw/CamPitch/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -645,6 +671,7 @@ tint_under = Color(1, 1, 1, 0.752941)
 [connection signal="set_movement_direction" from="." to="MovementController" method="_on_set_movement_direction"]
 [connection signal="set_movement_state" from="." to="MovementController" method="_on_set_movement_state"]
 [connection signal="set_movement_state" from="." to="AnimationController" method="_on_set_movement_state"]
+[connection signal="player_in_light" from="LightDetectionRoot" to="." method="_on_ray_cast_root_player_in_light"]
 [connection signal="set_cam_rotation" from="CamRoot" to="MovementController" method="_on_set_cam_rotation"]
 
 [editable path="MeshRoot/Root Scene"]
