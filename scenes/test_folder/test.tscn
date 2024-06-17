@@ -8,8 +8,9 @@ background_mode = 3
 ambient_light_source = 3
 reflected_light_source = 1
 
-[node name="Test" type="Node3D"]
+[node name="Test" type="Node3D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_cj5we")
+player = NodePath("Player")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 use_collision = true
@@ -42,6 +43,7 @@ environment = SubResource("Environment_jiosu")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-1, 1.61895e-08, 8.59107e-08, 0, -0.982703, 0.185186, 8.74228e-08, 0.185186, 0.982703, 0, 0, 0)
 shadow_enabled = true
+shadow_blur = 0.7
 
 [node name="Player" parent="." instance=ExtResource("1_av4of")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.36966, -8.9407e-08, -6.41793)

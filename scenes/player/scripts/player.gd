@@ -8,6 +8,7 @@ signal set_movement_direction(_movement_direction: Vector3)
 signal press_jump(_jump_state: JumpState)
 @export var jump_states: Dictionary
 @export var default_jump: JumpState
+var pre_jump_position: Vector3
 
 # Movement State Variables
 @export var movement_states: Dictionary
@@ -27,12 +28,13 @@ var is_in_shadow : bool = true
 func _ready() -> void:
 	# Set Default movement state
 	set_movement_state.emit(movement_states["idle"])
+	
 	# Capture mouse cursor for mouse look
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	# Make SubViewport render lighting only
 	sub_viewport.debug_draw = 2
 
-func _physics_process(delta: float) -> void:	
+func _physics_process(delta: float) -> void:
 	if is_movement_ongoing():
 		set_movement_direction.emit(movement_direction)
 
@@ -60,6 +62,8 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("jump"):
 		# press_jump.emit(jump_states['jump'])
+		if is_in_shadow:
+			pre_jump_position = self.global_transform.origin
 		press_jump.emit(default_jump)
 
 func is_movement_ongoing():
@@ -73,5 +77,3 @@ func get_average_color(texture: ViewportTexture) -> Color:
 func get_color_rect_color():
 	return color_rect.color
 
-func _on_ray_cast_root_player_in_light():
-	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c7b1ix1wtarcb"]
+[gd_scene load_steps=36 format=3 uid="uid://c7b1ix1wtarcb"]
 
 [ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_bx071"]
 [ext_resource type="Texture2D" uid="uid://dairqkv1rcfbp" path="res://scenes/player/assets/light_meter_ui.svg" id="2_6ohhj"]
@@ -12,9 +12,7 @@
 [ext_resource type="Script" path="res://scenes/player/scripts/camera_controller.gd" id="8_vm7y7"]
 [ext_resource type="Script" path="res://scenes/player/scripts/light_detection.gd" id="9_psnlo"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rbwvg"]
-radius = 0.2
-height = 1.0
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1bqh8"]
 
 [sub_resource type="Animation" id="Animation_ltvx0"]
 resource_name = "CharacterArmature|Bite_Front"
@@ -536,12 +534,13 @@ animation_tree = NodePath("../MeshRoot/AnimationTree")
 player = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("CapsuleShape3D_rbwvg")
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.016256, 0.310032, 0.00238013)
+shape = SubResource("CapsuleShape3D_1bqh8")
 
-[node name="LightDetectionRoot" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+[node name="LightDetectionRoot" type="Node3D" parent="." node_paths=PackedStringArray("player", "player_raycast")]
 script = ExtResource("9_psnlo")
 player = NodePath("..")
+player_raycast = NodePath("FrontRayCast")
 
 [node name="BackRayCast" type="RayCast3D" parent="LightDetectionRoot" groups=["light_raycasts"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00181392, 0.0380146, -0.0615971)
@@ -562,7 +561,7 @@ visible = false
 [node name="TargetRaycast" type="RayCast3D" parent="LightDetectionRoot"]
 
 [node name="MeshRoot" type="Node3D" parent="."]
-transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0, 0, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
 [node name="Root Scene" parent="MeshRoot" instance=ExtResource("6_pkfwl")]
 
