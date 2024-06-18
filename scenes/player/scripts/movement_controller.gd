@@ -23,17 +23,11 @@ func _physics_process(delta):
 	move_player(delta)
 	set_rotations(delta)
 
+
 func set_horizontal_velocity():
 	velocity.x = speed * direction.normalized().x
 	velocity.z = speed * direction.normalized().z
-	
-	if speed == 0:
-		target_velocity.x = 10 * direction.normalized().x
-		target_velocity.z = 10 * direction.normalized().z
-	else:
-		target_velocity.x = velocity.x
-		target_velocity.z = velocity.z
-		
+
 
 func set_vertical_velocity(delta):
 	if not player.is_on_floor():
@@ -63,11 +57,6 @@ func move_player(delta):
 	
 	
 func check_if_heading_into_light(delta):
-	var target_velocity2 : Vector3
-	if speed == 0:
-		target_velocity2 = direction * 15
-	else:
-		target_velocity2 = player.velocity + (direction * 5)
 	var target_position : Vector3 = player.global_transform.origin + player.velocity * delta * target_position_bias
 	target_position.y += .1
 	return not light_detection.check_valid_move(target_position)
@@ -94,5 +83,3 @@ func _on_set_movement_direction(_movement_direction: Vector3):
 
 func _on_set_cam_rotation(_cam_rotation: float):
 	cam_rotation = _cam_rotation
-
-

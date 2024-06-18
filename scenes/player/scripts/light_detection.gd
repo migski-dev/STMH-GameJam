@@ -50,7 +50,6 @@ func check_valid_move(target_source: Vector3) -> bool:
 	raycast_to_light_source(target_raycast, target_raycast.position)
 	
 	if target_raycast.is_colliding():
-		var blah = target_raycast.get_collider()
 		return true	
 	else:
 		

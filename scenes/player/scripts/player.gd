@@ -28,15 +28,16 @@ var is_in_shadow : bool = true
 func _ready() -> void:
 	# Set Default movement state
 	set_movement_state.emit(movement_states["idle"])
-	
 	# Capture mouse cursor for mouse look
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	# Make SubViewport render lighting only
 	sub_viewport.debug_draw = 2
 
+
 func _physics_process(delta: float) -> void:
 	if is_movement_ongoing():
 		set_movement_direction.emit(movement_direction)
+
 
 func _process(delta: float) -> void:
 	# Light detection
@@ -66,13 +67,16 @@ func _input(event: InputEvent) -> void:
 			pre_jump_position = self.global_transform.origin
 		press_jump.emit(default_jump)
 
+
 func is_movement_ongoing():
 	return abs(movement_direction.x) > 0 or abs(movement_direction.z) > 0
+
 
 func get_average_color(texture: ViewportTexture) -> Color:
 	var image = texture.get_image() # Get the Image of the input texture
 	image.resize(1, 1, Image.INTERPOLATE_LANCZOS) # Resize the image to one pixel
 	return image.get_pixel(0, 0) # Read the color of that pixel
+	
 	
 func get_color_rect_color():
 	return color_rect.color
