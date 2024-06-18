@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://c75ysyxmlojlv"]
+
+[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="1_av4of"]
+[ext_resource type="Script" path="res://scenes/test_folder/test.gd" id="1_cj5we"]
+
+[sub_resource type="Environment" id="Environment_jiosu"]
+background_mode = 3
+ambient_light_source = 3
+reflected_light_source = 1
+
+[node name="Test" type="Node3D"]
+script = ExtResource("1_cj5we")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(13.5786, 0, 0, 0, 45.6112, 0, 0, 0, 58.0489, 8.60843, 9.85864, 0)
+size = Vector3(3.29614, 0.766479, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(8.55854, 0, 0, 0, 24.7332, 0, 0, 0, 26.0107, 8.60843, 11.7701, -0.538004)
+operation = 2
+size = Vector3(3.29614, 1, 2.20972)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 0.993175, 0.116636, 0, -0.116636, 0.993175, 9.11399, 8.22505, 13.421)
+light_energy = 5.746
+light_specular = 16.0
+shadow_enabled = true
+spot_range = 32.052
+spot_angle = 9.91
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(3.80011, 0, 0, 0, 3.80011, 0, 0, 0, 3.80011, 7.06817, 14.6539, 27.6375)
+operation = 2
+size = Vector3(3.98584, 3.51312, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jiosu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, 1.61895e-08, 8.59107e-08, 0, -0.982703, 0.185186, 8.74228e-08, 0.185186, 0.982703, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_av4of")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
