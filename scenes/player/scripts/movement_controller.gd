@@ -46,7 +46,7 @@ func move_player(delta):
 			player.global_transform.origin -= direction.normalized() * 0.02
 			player.velocity = -player.velocity * .1 # Add negative velocity
 			
-	player.velocity = player.velocity.lerp(velocity, acceleration * delta) 
+	# player.velocity = player.velocity.lerp(velocity, acceleration * delta) 
 	
 	var was_in_air: bool = not player.is_on_floor()
 	
@@ -64,7 +64,7 @@ func move_player(delta):
 	#else:
 		#velocity.y = player.velocity.y  # Normal gravity or other vertical forces
 	
-	player.velocity = player.velocity.lerp(velocity, acceleration * delta)
+	# player.velocity = player.velocity.lerp(velocity, acceleration * delta)
 	player.move_and_slide()
 	
 	just_landed = player.is_on_floor() and was_in_air
