@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_aej8k")
 id = 2
-movement_speed = 5.0
-acceleration = 6.0
+movement_speed = 3.0
+acceleration = 3.0
 camera_fov = 75.0
 animation_speed = 1.5

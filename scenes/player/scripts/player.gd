@@ -8,6 +8,7 @@ signal set_movement_direction(_movement_direction: Vector3)
 signal press_jump(_jump_state: JumpState)
 @export var jump_states: Dictionary
 @export var default_jump: JumpState
+var pre_jump_position: Vector3
 
 
 @export var jump_buffer_time: float = 0.5
@@ -15,6 +16,7 @@ var jump_available:bool = true
 var jump_buffer:bool = false
 var fall_gravity : float = 45
 var jump_gravity: float = fall_gravity
+
 
 # Movement State Variables
 @export var movement_states: Dictionary
@@ -28,6 +30,9 @@ var movement_direction: Vector3
 @onready var light_level := $LightLevel
 @onready var mesh := $MeshRoot
 
+var is_in_shadow : bool = true
+
+
 func _ready() -> void:
 	# Set Default movement state
 	set_movement_state.emit(movement_states["idle"])
@@ -36,7 +41,8 @@ func _ready() -> void:
 	# Make SubViewport render lighting only
 	sub_viewport.debug_draw = 2
 
-func _physics_process(delta: float) -> void:	
+
+func _physics_process(delta: float) -> void:
 	if is_movement_ongoing():
 		set_movement_direction.emit(movement_direction)
 	
@@ -73,7 +79,13 @@ func _input(event: InputEvent) -> void:
 				set_movement_state.emit(movement_states['walk'])
 		else:
 			set_movement_state.emit(movement_states['idle'])
-	
+		
+	if event.is_action_pressed("jump"):
+		# press_jump.emit(jump_states['jump'])
+		if is_in_shadow:
+			pre_jump_position = self.global_transform.origin
+		press_jump.emit(default_jump)
+
 	if event.is_action_pressed("jump"):
 		if jump_available:
 			jump()
@@ -93,10 +105,13 @@ func on_jump_buffer_timeout()->void:
 func is_movement_ongoing():
 	return abs(movement_direction.x) > 0 or abs(movement_direction.z) > 0
 
+
 func get_average_color(texture: ViewportTexture) -> Color:
 	var image = texture.get_image() # Get the Image of the input texture
 	image.resize(1, 1, Image.INTERPOLATE_LANCZOS) # Resize the image to one pixel
 	return image.get_pixel(0, 0) # Read the color of that pixel
 	
+	
 func get_color_rect_color():
 	return color_rect.color
+
