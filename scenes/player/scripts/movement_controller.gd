@@ -88,11 +88,6 @@ func _on_player_press_jump(_jump_state: JumpState):
 	jump_gravity = velocity.y / _jump_state.apex_duration
 
 
-func _on_player_press_jump(_jump_state: JumpState):
-	velocity.y = 2 * _jump_state.jump_height / _jump_state.apex_duration
-	jump_gravity = velocity.y / _jump_state.apex_duration
-
-
 func _on_set_movement_state(_movement_state: MovementState):
 	speed = _movement_state.movement_speed
 	acceleration = _movement_state.acceleration

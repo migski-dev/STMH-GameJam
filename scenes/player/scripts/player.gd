@@ -58,6 +58,7 @@ func _physics_process(delta: float) -> void:
 			jump()
 			jump_buffer = false
 
+
 func _process(delta: float) -> void:
 	# Light detection
 	light_detection.global_position = global_position # Make light detection follow the player
@@ -80,13 +81,16 @@ func _input(event: InputEvent) -> void:
 		else:
 			set_movement_state.emit(movement_states['idle'])
 		
-	if event.is_action_pressed("jump"):
-		# press_jump.emit(jump_states['jump'])
-		if is_in_shadow:
-			pre_jump_position = self.global_transform.origin
-		press_jump.emit(default_jump)
+	#if event.is_action_pressed("jump"):
+		## press_jump.emit(jump_states['jump'])
+		#if is_in_shadow:
+			#pre_jump_position = self.global_transform.origin
+		#press_jump.emit(default_jump)
 
 	if event.is_action_pressed("jump"):
+		if is_in_shadow:
+			pre_jump_position = self.global_transform.origin
+		
 		if jump_available:
 			jump()
 		# press_jump.emit(jump_states['jump'])
@@ -94,6 +98,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			jump_buffer = true
 			get_tree().create_timer(jump_buffer_time).timeout.connect(on_jump_buffer_timeout)
+
 
 func jump()->void:
 	press_jump.emit(default_jump)
