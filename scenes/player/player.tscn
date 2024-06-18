@@ -1,8 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://c7b1ix1wtarcb"]
+[gd_scene load_steps=35 format=3 uid="uid://c7b1ix1wtarcb"]
 
 [ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_bx071"]
 [ext_resource type="Texture2D" uid="uid://dairqkv1rcfbp" path="res://scenes/player/assets/light_meter_ui.svg" id="2_6ohhj"]
 [ext_resource type="Resource" uid="uid://8bp5tv13u3t2" path="res://resources/movement_states/stand.tres" id="2_7yl7o"]
+[ext_resource type="Resource" uid="uid://bpkut43n56hxl" path="res://resources/jump_states/default_jump.tres" id="2_b2egw"]
 [ext_resource type="Resource" uid="uid://c7xhvi6elqr03" path="res://resources/movement_states/walk.tres" id="3_aujnm"]
 [ext_resource type="Resource" uid="uid://debe4k8nrwq3c" path="res://resources/movement_states/jump.tres" id="4_do3mw"]
 [ext_resource type="Script" path="res://scenes/player/scripts/movement_controller.gd" id="5_281mm"]
@@ -511,6 +512,10 @@ region = Rect2(0, 0, 256, 128)
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_bx071")
+jump_states = {
+"jump": ExtResource("2_b2egw")
+}
+default_jump = ExtResource("2_b2egw")
 movement_states = {
 "idle": ExtResource("2_7yl7o"),
 "jump": ExtResource("4_do3mw"),
@@ -537,6 +542,7 @@ transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
 [node name="Root Scene" parent="MeshRoot" instance=ExtResource("6_pkfwl")]
 
 [node name="Skeleton3D" parent="MeshRoot/Root Scene/RootNode/CharacterArmature" index="0"]
+bones/0/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/position = Vector3(-0.000491702, -8.27448e-11, 0.00534457)
 bones/2/rotation = Quaternion(0.688499, -0.161151, 0.161151, 0.688499)
 bones/3/rotation = Quaternion(2.22045e-16, 6.73392e-33, 3.03269e-17, 1)
@@ -642,6 +648,7 @@ texture_under = SubResource("AtlasTexture_3pel6")
 texture_progress = SubResource("AtlasTexture_kdcc4")
 tint_under = Color(1, 1, 1, 0.752941)
 
+[connection signal="press_jump" from="." to="MovementController" method="_on_player_press_jump"]
 [connection signal="set_movement_direction" from="." to="MovementController" method="_on_set_movement_direction"]
 [connection signal="set_movement_state" from="." to="MovementController" method="_on_set_movement_state"]
 [connection signal="set_movement_state" from="." to="AnimationController" method="_on_set_movement_state"]
