@@ -31,7 +31,7 @@ var movement_direction: Vector3
 @onready var mesh := $MeshRoot
 
 var is_in_shadow : bool = true
-
+var movement_locked: bool = false
 
 func _ready() -> void:
 	# Set Default movement state
@@ -59,6 +59,9 @@ func _process(delta: float) -> void:
 	
 
 func _input(event: InputEvent) -> void:
+	if movement_locked:
+		return
+		
 	if event.is_action("movement"):
 		movement_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 		movement_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")
