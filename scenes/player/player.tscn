@@ -527,6 +527,7 @@ player = NodePath("..")
 mesh_root = NodePath("../MeshRoot")
 light_raycast = NodePath("../LightDetectionRoot/TargetRaycast")
 light_detection = NodePath("../LightDetectionRoot")
+jump_state_temp = ExtResource("2_b2egw")
 
 [node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "player")]
 script = ExtResource("6_r4in5")
