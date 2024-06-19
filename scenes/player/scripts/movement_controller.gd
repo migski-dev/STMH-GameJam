@@ -1,14 +1,16 @@
 extends Node
 
-@export var player: CharacterBody3D
+@export var player: Player
 @export var mesh_root: Node3D
 @export var light_raycast: RayCast3D
 @export var rotation_speed: float = 8
 @export var fall_gravity : float = 30
 @export var light_detection: Node3D
 @export var target_position_bias: float = 3
+@export var jump_gravity: float = fall_gravity
+@export var jump_state_temp: JumpState
+@export var coyote_time: float = 0.5
 
-var jump_gravity: float = 30
 var direction: Vector3
 var velocity: Vector3
 var target_velocity: Vector3
@@ -31,10 +33,19 @@ func set_horizontal_velocity():
 
 func set_vertical_velocity(delta):
 	if not player.is_on_floor():
+		if player.jump_available:
+			get_tree().create_timer(coyote_time).timeout.connect(coyote_timeout)
+		
 		if velocity.y >= 0:
 			velocity.y -= jump_gravity * delta
 		else:
 			velocity.y -= fall_gravity * delta
+	else:
+		player.jump_available = true
+		if player.jump_buffer:
+			player.jump()
+			player.jump_buffer = false
+			
 
 
 func move_player(delta):
@@ -46,16 +57,37 @@ func move_player(delta):
 			player.global_transform.origin -= direction.normalized() * 0.02
 			player.velocity = -player.velocity * .1 # Add negative velocity
 			
-	player.velocity = player.velocity.lerp(velocity, acceleration * delta) 
+	# player.velocity = player.velocity.lerp(velocity, acceleration * delta) 
 	
 	var was_in_air: bool = not player.is_on_floor()
+	
+	#if is_jumping:
+		#velocity.y = player.velocity.y - (jump_gravity * delta)
+	#else:
+		#velocity.y = player.velocity.y  # Normal gravity or other vertical forces
+	
+	#if not player.is_on_floor():
+		#if velocity.y >= 0:
+			#velocity.y -= jump_gravity * delta
+		#else:
+			#velocity.y -= fall_gravity * delta
+			
+		#velocity.y = player.velocity.y - (jump_gravity * delta)
+	#else:
+		#velocity.y = player.velocity.y  # Normal gravity or other vertical forces
+	
+	# player.velocity = player.velocity.lerp(velocity, acceleration * delta)
 	player.move_and_slide()
 	
 	just_landed = player.is_on_floor() and was_in_air
 	if just_landed and not player.is_in_shadow:
 		player.global_transform.origin = player.pre_jump_position
 	
-	
+
+func coyote_timeout():
+	player.jump_available = false
+
+
 func check_if_heading_into_light(delta):
 	var target_position : Vector3 = player.global_transform.origin + player.velocity * delta * target_position_bias
 	target_position.y += .1
@@ -83,3 +115,5 @@ func _on_set_movement_direction(_movement_direction: Vector3):
 
 func _on_set_cam_rotation(_cam_rotation: float):
 	cam_rotation = _cam_rotation
+
+
