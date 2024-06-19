@@ -1,6 +1,6 @@
 extends Node
 
-@export var player: CharacterBody3D
+@export var player: Player
 @export var mesh_root: Node3D
 @export var light_raycast: RayCast3D
 @export var rotation_speed: float = 8
@@ -8,6 +8,7 @@ extends Node
 @export var light_detection: Node3D
 @export var target_position_bias: float = 3
 @export var jump_gravity: float = fall_gravity
+@export var jump_state_temp: JumpState
 
 var direction: Vector3
 var velocity: Vector3
@@ -35,6 +36,12 @@ func set_vertical_velocity(delta):
 			velocity.y -= jump_gravity * delta
 		else:
 			velocity.y -= fall_gravity * delta
+	else:
+		player.jump_available = true
+		if player.jump_buffer:
+			player.jump()
+			player.jump_buffer = false
+			
 
 
 func move_player(delta):
@@ -55,11 +62,12 @@ func move_player(delta):
 	#else:
 		#velocity.y = player.velocity.y  # Normal gravity or other vertical forces
 	
-	if not player.is_on_floor():
-		if velocity.y >= 0:
-			velocity.y -= jump_gravity * delta
-		else:
-			velocity.y -= fall_gravity * delta
+	#if not player.is_on_floor():
+		#if velocity.y >= 0:
+			#velocity.y -= jump_gravity * delta
+		#else:
+			#velocity.y -= fall_gravity * delta
+			
 		#velocity.y = player.velocity.y - (jump_gravity * delta)
 	#else:
 		#velocity.y = player.velocity.y  # Normal gravity or other vertical forces

@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+class_name Player
 # Movement State Signals
 signal set_movement_state(_movement_state: MovementState)
 signal set_movement_direction(_movement_direction: Vector3)
@@ -12,8 +12,8 @@ var pre_jump_position: Vector3
 
 
 @export var jump_buffer_time: float = 0.5
-var jump_available:bool = true
-var jump_buffer:bool = false
+@onready var jump_available:bool = true
+@onready var jump_buffer:bool = false
 var fall_gravity : float = 45
 var jump_gravity: float = fall_gravity
 
@@ -45,18 +45,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_movement_ongoing():
 		set_movement_direction.emit(movement_direction)
-	
-	if not is_on_floor():
-		if jump_available == true:
-			if velocity.y > 0:
-				velocity.y -= jump_gravity * delta
-			else:
-				velocity.y -= fall_gravity * delta
-	else:
-		jump_available = true
-		if jump_buffer:
-			jump()
-			jump_buffer = false
 
 
 func _process(delta: float) -> void:
@@ -80,25 +68,19 @@ func _input(event: InputEvent) -> void:
 				set_movement_state.emit(movement_states['walk'])
 		else:
 			set_movement_state.emit(movement_states['idle'])
-		
-	#if event.is_action_pressed("jump"):
-		## press_jump.emit(jump_states['jump'])
-		#if is_in_shadow:
-			#pre_jump_position = self.global_transform.origin
-		#press_jump.emit(default_jump)
 
 	if event.is_action_pressed("jump"):
 		if is_in_shadow:
 			pre_jump_position = self.global_transform.origin
-		
-		if jump_available:
+				
+		if is_on_floor() || jump_buffer:
 			jump()
-		# press_jump.emit(jump_states['jump'])
-		# press_jump.emit(default_jump)
-		else:
-			jump_buffer = true
-			get_tree().create_timer(jump_buffer_time).timeout.connect(on_jump_buffer_timeout)
 
+		else:
+			if not is_on_floor():
+				jump_buffer = true
+				get_tree().create_timer(jump_buffer_time).timeout.connect(on_jump_buffer_timeout)
+			jump_available = true
 
 func jump()->void:
 	press_jump.emit(default_jump)
