@@ -61,17 +61,22 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if movement_locked:
 		return
-		
+	movement_input_handler(event)
+	jump_input_handler(event)
+	
+
+func movement_input_handler(event: InputEvent) -> void:
 	if event.is_action("movement"):
 		movement_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 		movement_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")
-		
+			
 		if is_movement_ongoing():
 			if Input.is_action_pressed("left") || Input.is_action_pressed("right") || Input.is_action_pressed("forward") || Input.is_action_pressed("back") :
 				set_movement_state.emit(movement_states['walk'])
 		else:
 			set_movement_state.emit(movement_states['idle'])
 
+func jump_input_handler(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		if is_in_shadow:
 			pre_jump_position = self.global_transform.origin
@@ -83,7 +88,7 @@ func _input(event: InputEvent) -> void:
 				jump_buffer = true
 				get_tree().create_timer(jump_buffer_time).timeout.connect(on_jump_buffer_timeout)
 			jump_available = true
-
+		
 func jump()->void:
 	press_jump.emit(default_jump)
 	jump_available = false
