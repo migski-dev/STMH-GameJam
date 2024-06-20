@@ -92,9 +92,6 @@ func jump()->void:
 func on_jump_buffer_timeout()->void:
 	jump_buffer = false
 
-func on_jump_buffer_timeout()->void:
-	jump_buffer = false
-
 func is_movement_ongoing():
 	return abs(movement_direction.x) > 0 or abs(movement_direction.z) > 0
 
