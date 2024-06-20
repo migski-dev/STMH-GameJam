@@ -9,7 +9,7 @@ extends Node
 @export var target_position_bias: float = 3
 @export var jump_gravity: float = fall_gravity
 @export var jump_state_temp: JumpState
-
+@export var coyote_time: float = 0.5
 
 var direction: Vector3
 var velocity: Vector3
@@ -35,6 +35,9 @@ func set_horizontal_velocity():
 
 func set_vertical_velocity(delta):
 	if not player.is_on_floor():
+		if player.jump_available:
+			get_tree().create_timer(coyote_time).timeout.connect(coyote_timeout)
+		
 		if velocity.y >= 0:
 			velocity.y -= jump_gravity * delta
 		else:
@@ -61,6 +64,23 @@ func move_player(delta):
 	# player.velocity = player.velocity.lerp(velocity, acceleration * delta) 
 	
 	var was_in_air: bool = not player.is_on_floor()
+	
+	#if is_jumping:
+		#velocity.y = player.velocity.y - (jump_gravity * delta)
+	#else:
+		#velocity.y = player.velocity.y  # Normal gravity or other vertical forces
+	
+	#if not player.is_on_floor():
+		#if velocity.y >= 0:
+			#velocity.y -= jump_gravity * delta
+		#else:
+			#velocity.y -= fall_gravity * delta
+			
+		#velocity.y = player.velocity.y - (jump_gravity * delta)
+	#else:
+		#velocity.y = player.velocity.y  # Normal gravity or other vertical forces
+	
+	# player.velocity = player.velocity.lerp(velocity, acceleration * delta)
 	player.move_and_slide()
 	
 	just_landed = player.is_on_floor() and was_in_air
@@ -72,7 +92,11 @@ func move_player(delta):
 		
 		
 	
-	
+
+func coyote_timeout():
+	player.jump_available = false
+
+
 func check_if_heading_into_light(delta):
 	var target_position : Vector3 = player.global_transform.origin + player.velocity * delta * target_position_bias
 	target_position.y += .1

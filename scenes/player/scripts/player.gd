@@ -78,7 +78,6 @@ func _input(event: InputEvent) -> void:
 				
 		if is_on_floor() || jump_buffer:
 			jump()
-
 		else:
 			if not is_on_floor():
 				jump_buffer = true
@@ -88,6 +87,10 @@ func _input(event: InputEvent) -> void:
 func jump()->void:
 	press_jump.emit(default_jump)
 	jump_available = false
+
+
+func on_jump_buffer_timeout()->void:
+	jump_buffer = false
 
 func on_jump_buffer_timeout()->void:
 	jump_buffer = false
