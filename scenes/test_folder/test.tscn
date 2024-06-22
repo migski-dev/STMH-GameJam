@@ -1,12 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://c75ysyxmlojlv"]
+[gd_scene load_steps=8 format=3 uid="uid://c75ysyxmlojlv"]
 
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="1_av4of"]
 [ext_resource type="Script" path="res://scenes/test_folder/test.gd" id="1_cj5we"]
+[ext_resource type="Script" path="res://scenes/test_folder/AnimatableBody3D.gd" id="2_ayt24"]
 
 [sub_resource type="Environment" id="Environment_jiosu"]
 background_mode = 3
 ambient_light_source = 3
 reflected_light_source = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xpaj6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jmwh7"]
+
+[sub_resource type="Curve3D" id="Curve3D_uiqqe"]
+_data = {
+"points": PackedVector3Array(0.0788274, -0.0876248, 0.164867, 0, 0, 0, 4.26745, 0.679504, -3.71792, 0, 0, 0, 0, 0, 0, -2.82337, 1.30154, -4.89355, 0, 0, 0, 0, 0, 0, 4.267, 0.68, -3.718),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
 
 [node name="Test" type="Node3D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_cj5we")
@@ -33,12 +45,38 @@ spot_range = 32.052
 spot_angle = 9.91
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(3.80011, 0, 0, 0, 3.80011, 0, 0, 0, 3.80011, 7.06817, 14.6539, 27.6375)
+transform = Transform3D(3.80011, 0, 0, 0, 3.80011, 0, 0, 0, 3.80011, 8.01727, 13.7228, 27.6375)
 operation = 2
-size = Vector3(3.98584, 3.51312, 1)
+size = Vector3(5.39697, 4.00314, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jiosu")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("player", "path")]
+transform = Transform3D(0.617359, -0.11817, 3.74776, 0.0721557, 3.79786, 0.107865, -3.74892, 0.053638, 0.619243, 15.3958, 15.3227, 66.9198)
+script = ExtResource("2_ayt24")
+player = NodePath("../Player")
+path = NodePath("../Path3D/PathFollow3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+shape = SubResource("BoxShape3D_xpaj6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D"]
+mesh = SubResource("BoxMesh_jmwh7")
+
+[node name="RayCast3D" type="RayCast3D" parent="AnimatableBody3D"]
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(3.77445, -0.440858, 0, 0.440858, 3.77445, 0, 0, 0, 3.80011, 7.64448, 11.1085, 82.3794)
+curve = SubResource("Curve3D_uiqqe")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.163564, 0.085057, 0.982857, 1.2502e-05, 0.996268, -0.0862207, -0.98653, 0.0141148, 0.162954, 2.15464, 0.864849, -4.06821)
+progress = 2.14984
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+transform = Transform3D(1, -8.3819e-09, -5.96046e-08, 9.31323e-10, 1, -4.19095e-09, -2.98023e-08, -5.3551e-09, 1, 0, 0, 0)
+remote_path = NodePath("../../../AnimatableBody3D")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-1, 1.61895e-08, 8.59107e-08, 0, -0.982703, 0.185186, 8.74228e-08, 0.185186, 0.982703, 0, 0, 0)

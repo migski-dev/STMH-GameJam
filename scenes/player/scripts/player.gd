@@ -11,7 +11,7 @@ signal press_jump(_jump_state: JumpState)
 var pre_jump_position: Vector3
 
 
-@export var jump_buffer_time: float = 0.5
+@export var jump_buffer_time: float = 0.3
 @onready var jump_available:bool = true
 @onready var jump_buffer:bool = false
 var fall_gravity : float = 45
@@ -32,6 +32,7 @@ var movement_direction: Vector3
 
 var is_in_shadow : bool = true
 var movement_locked: bool = false
+var moving_shadow_bias: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	# Set Default movement state
@@ -81,7 +82,7 @@ func jump_input_handler(event: InputEvent) -> void:
 		if is_in_shadow:
 			pre_jump_position = self.global_transform.origin
 				
-		if is_on_floor() || jump_buffer:
+		if (is_on_floor() or jump_buffer) and jump_available:
 			jump()
 		else:
 			if not is_on_floor():

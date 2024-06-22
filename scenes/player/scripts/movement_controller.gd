@@ -92,7 +92,7 @@ func _on_player_press_jump(_jump_state: JumpState):
 
 
 func _on_set_movement_state(_movement_state: MovementState):
-	speed = _movement_state.movement_speed
+	speed = _movement_state.movement_speed + player.moving_shadow_bias.length()
 	acceleration = _movement_state.acceleration
 
 
