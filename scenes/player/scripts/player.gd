@@ -81,7 +81,7 @@ func jump_input_handler(event: InputEvent) -> void:
 		if is_in_shadow:
 			pre_jump_position = self.global_transform.origin
 				
-		if is_on_floor() || jump_buffer:
+		if (is_on_floor() ) and jump_available: #|| jump_buffer
 			jump()
 		else:
 			if not is_on_floor():
