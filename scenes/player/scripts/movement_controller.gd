@@ -6,7 +6,7 @@ extends Node
 @export var rotation_speed: float = 8
 @export var fall_gravity : float = 30
 @export var light_detection: Node3D
-@export var target_position_bias: float = 3
+@export var target_position_bias: float = 4
 @export var jump_gravity: float = fall_gravity
 @export var jump_state_temp: JumpState
 @export var coyote_time: float = 0.5
@@ -18,6 +18,8 @@ var acceleration: float
 var speed: float
 var cam_rotation : float = 0
 @onready var just_landed: bool = false
+var lock_time: float = 1.0
+
 
 func _physics_process(delta):
 	set_horizontal_velocity()
@@ -49,40 +51,25 @@ func set_vertical_velocity(delta):
 
 
 func move_player(delta):
+	if(player.movement_locked):
+		return
 	player.velocity = player.velocity.lerp(velocity, acceleration * delta) # Sets Intended velocity
 	
 	if player.is_on_floor():
 		if check_if_heading_into_light(delta):
-			print('GOING TO LIGHT')
 			player.global_transform.origin -= direction.normalized() * 0.02
 			player.velocity = -player.velocity * .1 # Add negative velocity
 			
-	# player.velocity = player.velocity.lerp(velocity, acceleration * delta) 
-	
+	# Added logic to check if player landed in the light 
 	var was_in_air: bool = not player.is_on_floor()
-	
-	#if is_jumping:
-		#velocity.y = player.velocity.y - (jump_gravity * delta)
-	#else:
-		#velocity.y = player.velocity.y  # Normal gravity or other vertical forces
-	
-	#if not player.is_on_floor():
-		#if velocity.y >= 0:
-			#velocity.y -= jump_gravity * delta
-		#else:
-			#velocity.y -= fall_gravity * delta
-			
-		#velocity.y = player.velocity.y - (jump_gravity * delta)
-	#else:
-		#velocity.y = player.velocity.y  # Normal gravity or other vertical forces
-	
-	# player.velocity = player.velocity.lerp(velocity, acceleration * delta)
 	player.move_and_slide()
 	
 	just_landed = player.is_on_floor() and was_in_air
 	if just_landed and not player.is_in_shadow:
-		player.global_transform.origin = player.pre_jump_position
-	
+		player.movement_locked = true
+		velocity = Vector3.ZERO
+		player.velocity = Vector3.ZERO
+		get_tree().create_timer(lock_time).timeout.connect(_on_lock_timer_end)
 
 func coyote_timeout():
 	player.jump_available = false
@@ -116,4 +103,8 @@ func _on_set_movement_direction(_movement_direction: Vector3):
 func _on_set_cam_rotation(_cam_rotation: float):
 	cam_rotation = _cam_rotation
 
+
+func _on_lock_timer_end():
+	player.global_transform.origin = player.pre_jump_position
+	player.movement_locked = false
 

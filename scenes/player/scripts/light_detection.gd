@@ -18,21 +18,22 @@ func _physics_process(delta):
 
 		
 func is_in_shadow() -> bool:
-	#var raycast_array = get_tree().get_nodes_in_group('light_raycasts') as Array[RayCast3D]
+	var raycast_array = get_tree().get_nodes_in_group('light_raycasts') as Array[RayCast3D]
 	var light_raycast = player_raycast
 	var player_position = player.global_transform.origin
+	var light_check = true
+	#raycast_to_light_source(light_raycast, player_position)
+	#if not light_raycast.is_colliding():
+		#return false
 	
-	raycast_to_light_source(light_raycast, player_position)
-	if not light_raycast.is_colliding():
-		return false
-	#for raycast in raycast_array:
-		#raycast_to_light_source(raycast, player_position)
-		#if raycast.is_colliding(): 
-			#GameData.light_blocking_object = raycast.get_collider()
-			#return true
+	for light_check_raycast in raycast_array:
+		raycast_to_light_source(light_check_raycast, player_position)
+		if light_check_raycast.is_colliding():
+			GameData.light_blocking_object = light_raycast.get_collider()
+			return true
+		
 	
-	GameData.light_blocking_object = light_raycast.get_collider()
-	return true
+	return false
 		
 
 func raycast_to_light_source(raycast: RayCast3D, start_position: Vector3) -> void:
