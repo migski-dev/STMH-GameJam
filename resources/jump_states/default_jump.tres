@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_7inyj")
 animation_name = "CharacterArmature|Jump"
-jump_height = 7.0
-apex_duration = 0.6
+jump_height = 3.0
+apex_duration = 0.2
