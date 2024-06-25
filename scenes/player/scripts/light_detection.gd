@@ -4,7 +4,7 @@ signal player_in_light()
 signal on_target_in_light()
 #signal on_player_enter_moving_shadow()
 
-@export var player: CharacterBody3D 
+@export var player: Player 
 @onready var target_raycast: RayCast3D = $TargetRaycast
 
 var light_blocked_flag: bool = false 
@@ -62,12 +62,11 @@ func raycast_to_light_source(raycast: RayCast3D, start_position: Vector3) -> voi
 
 # Returns true if the target position is in the shadow; false if in the light
 func check_valid_move(target_source: Vector3) -> bool:
-	target_raycast.global_transform.origin = target_source
+	target_raycast.global_transform.origin = target_source 
 	raycast_to_light_source(target_raycast, target_raycast.position)
 	
 	if target_raycast.is_colliding():
 		return true	
 	else:
-		
 		return false
 

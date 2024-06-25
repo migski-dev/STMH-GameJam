@@ -6,8 +6,8 @@
 
 [sub_resource type="Environment" id="Environment_jiosu"]
 background_mode = 3
-ambient_light_source = 3
-reflected_light_source = 1
+ambient_light_color = Color(0.137255, 0.372549, 1, 1)
+ambient_light_energy = 8.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xpaj6"]
 
@@ -52,8 +52,14 @@ size = Vector3(5.39697, 4.00314, 1)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jiosu")
 
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("player", "path")]
-transform = Transform3D(0.617359, -0.11817, 3.74776, 0.0721557, 3.79786, 0.107865, -3.74892, 0.053638, 0.619243, 15.3958, 15.3227, 66.9198)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, 1.61895e-08, 8.59107e-08, 0, -0.982704, 0.185186, 8.74228e-08, 0.185186, 0.982704, 0, 0, 0)
+shadow_enabled = true
+shadow_opacity = 0.8
+shadow_blur = 0.7
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("player", "path") groups=["moving_objects"]]
+transform = Transform3D(0.617362, -0.118154, 3.74776, 0.0720512, 3.79786, 0.107866, -3.74892, 0.0535346, 0.619243, 15.3958, 15.3227, 66.9197)
 script = ExtResource("2_ayt24")
 player = NodePath("../Player")
 path = NodePath("../Path3D/PathFollow3D")
@@ -71,17 +77,12 @@ transform = Transform3D(3.77445, -0.440858, 0, 0.440858, 3.77445, 0, 0, 0, 3.800
 curve = SubResource("Curve3D_uiqqe")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.163564, 0.085057, 0.982857, 1.2502e-05, 0.996268, -0.0862207, -0.98653, 0.0141148, 0.162954, 2.15464, 0.864849, -4.06821)
+transform = Transform3D(0.163562, 0.0850611, 0.982857, -1.49086e-05, 0.996268, -0.0862203, -0.98653, 0.0140876, 0.162954, 2.15465, 0.864848, -4.06821)
 progress = 2.14984
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(1, -8.3819e-09, -5.96046e-08, 9.31323e-10, 1, -4.19095e-09, -2.98023e-08, -5.3551e-09, 1, 0, 0, 0)
 remote_path = NodePath("../../../AnimatableBody3D")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-1, 1.61895e-08, 8.59107e-08, 0, -0.982703, 0.185186, 8.74228e-08, 0.185186, 0.982703, 0, 0, 0)
-shadow_enabled = true
-shadow_blur = 0.7
 
 [node name="Player" parent="." instance=ExtResource("1_av4of")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.36966, -8.9407e-08, -6.41793)
