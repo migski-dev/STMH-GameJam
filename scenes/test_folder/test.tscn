@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://c75ysyxmlojlv"]
+[gd_scene load_steps=7 format=3 uid="uid://c75ysyxmlojlv"]
 
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="1_av4of"]
 [ext_resource type="Script" path="res://scenes/test_folder/test.gd" id="1_cj5we"]
+[ext_resource type="Script" path="res://scenes/test_folder/CSGBox3D.gd" id="3_lg6cu"]
+[ext_resource type="PackedScene" uid="uid://3xvyx4icdkxw" path="res://systems/interaction/Interactable.tscn" id="4_npg17"]
 
 [sub_resource type="Environment" id="Environment_jiosu"]
 background_mode = 3
 ambient_light_source = 3
 reflected_light_source = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jtf8r"]
 
 [node name="Test" type="Node3D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_cj5we")
@@ -47,3 +51,18 @@ shadow_blur = 0.7
 
 [node name="Player" parent="." instance=ExtResource("1_av4of")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.36966, -8.9407e-08, -6.41793)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.509212, -0.0939728, -17.6115)
+script = ExtResource("3_lg6cu")
+
+[node name="Interactable" parent="CSGBox3D" instance=ExtResource("4_npg17")]
+
+[node name="CollisionShape3D" parent="CSGBox3D/Interactable" index="0"]
+shape = SubResource("BoxShape3D_jtf8r")
+
+[connection signal="focused" from="CSGBox3D/Interactable" to="CSGBox3D" method="_on_interactable_focused"]
+[connection signal="interacted" from="CSGBox3D/Interactable" to="CSGBox3D" method="_on_interactable_interacted"]
+[connection signal="unfocused" from="CSGBox3D/Interactable" to="CSGBox3D" method="_on_interactable_unfocused"]
+
+[editable path="CSGBox3D/Interactable"]

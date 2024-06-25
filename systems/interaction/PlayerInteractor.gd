@@ -1,4 +1,4 @@
-extends  Interactor
+extends Interactor
 
 @export var player: CharacterBody3D
 
