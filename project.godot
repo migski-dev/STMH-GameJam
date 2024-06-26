@@ -24,6 +24,10 @@ GameData="*res://scenes/singletons/game_data/game_data.tscn"
 window/size/viewport_width=1366
 window/size/viewport_height=768
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 forward={

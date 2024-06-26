@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cxacex8x4gt36"
+path="res://.godot/imported/car_police_wheel_rear_left.obj-7f784079c94ddfb3d3c30c33d21e6902.mesh"
+
+[deps]
+
+files=["res://.godot/imported/car_police_wheel_rear_left.obj-7f784079c94ddfb3d3c30c33d21e6902.mesh"]
+
+source_file="res://scenes/level/assets/KayKit_City_Builder_Bits_1.0_FREE/KayKit_City_Builder_Bits_1.0_FREE/Assets/obj/car_police_wheel_rear_left.obj"
+dest_files=["res://.godot/imported/car_police_wheel_rear_left.obj-7f784079c94ddfb3d3c30c33d21e6902.mesh", "res://.godot/imported/car_police_wheel_rear_left.obj-7f784079c94ddfb3d3c30c33d21e6902.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
