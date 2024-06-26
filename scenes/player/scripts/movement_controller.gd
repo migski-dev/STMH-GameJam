@@ -20,7 +20,6 @@ var cam_rotation : float = 0
 @onready var just_landed: bool = false
 var lock_time: float = 1.0
 
-var lock_time: float = 1.0
 
 
 func _physics_process(delta):

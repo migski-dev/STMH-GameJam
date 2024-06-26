@@ -605,6 +605,10 @@ jump_states = {
 "jump": ExtResource("4_f1qbs")
 }
 
+[node name="Skeleton3D" parent="Player/MeshRoot/Root Scene/RootNode/CharacterArmature" index="0"]
+bones/2/rotation = Quaternion(0.705467, -0.0481251, 0.0481252, 0.705467)
+bones/3/rotation = Quaternion(2.20394e-16, -2.70248e-17, -0.121709, 0.992566)
+
 [node name="AnimationTree" parent="Player/MeshRoot" index="1"]
 libraries = {
 "": SubResource("AnimationLibrary_m7n75")

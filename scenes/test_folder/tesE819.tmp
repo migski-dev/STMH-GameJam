@@ -58,7 +58,7 @@ shadow_enabled = true
 shadow_opacity = 0.8
 shadow_blur = 0.7
 
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("player", "path") groups=["interactable_group", "moving_objects"]]
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("player", "path") groups=["moving_objects"]]
 transform = Transform3D(0.617362, -0.118154, 3.74776, 0.0720512, 3.79786, 0.107866, -3.74892, 0.0535346, 0.619243, 15.3958, 15.3227, 66.9197)
 script = ExtResource("2_ayt24")
 player = NodePath("../Player")

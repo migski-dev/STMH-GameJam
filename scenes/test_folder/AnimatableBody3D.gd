@@ -5,12 +5,14 @@ extends AnimatableBody3D
 @onready var raycast: RayCast3D = $RayCast3D
 var previous_position: Vector3
 var current_velocity: Vector3
+var move: bool = true
+var MOVE_SPEED: float = 1.0
 
 func _ready():
 	previous_position = global_transform.origin
 	
 func _physics_process(delta):
-	const MOVE_SPEED = 1
+	
 	path.progress += MOVE_SPEED * delta
 	
 	# Calculate current velocity
@@ -30,3 +32,11 @@ func add_velocity_bias():
 
 func reset_velocity_bias():
 	player.moving_shadow_bias = Vector3.ZERO
+	
+func _on_interacted():
+	if(move):
+		MOVE_SPEED = 0.0
+		move = false
+	else:
+		MOVE_SPEED = 1.0
+		move = true
