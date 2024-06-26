@@ -4,9 +4,6 @@ class_name Player
 signal set_movement_state(_movement_state: MovementState)
 signal set_movement_direction(_movement_direction: Vector3)
 
-# Interaction
-signal on_player_interact
-
 #Jumping Stuff
 signal press_jump(_jump_state: JumpState)
 @export var jump_states: Dictionary
