@@ -61,8 +61,8 @@ func move_player(delta) -> void:
 	if player.is_on_floor():
 		if check_if_heading_into_light(delta):
 			if GameData.is_light_blocking_object_moving():
-				player.global_transform.origin -= direction.normalized() * 0.12 * player.moving_shadow_bias.length()
-				player.velocity = -player.velocity * .01 * player.moving_shadow_bias.length()
+				player.global_transform.origin -= direction.normalized() * 0.08 * player.moving_shadow_bias.length()
+				player.velocity = -player.velocity * .1 * player.moving_shadow_bias.length()
 			else:
 				player.global_transform.origin -= direction.normalized() * 0.02 
 				player.velocity = -player.velocity * .1

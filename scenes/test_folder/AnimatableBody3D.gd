@@ -10,7 +10,7 @@ func _ready():
 	previous_position = global_transform.origin
 	
 func _physics_process(delta):
-	const MOVE_SPEED = 2
+	const MOVE_SPEED = 1
 	path.progress += MOVE_SPEED * delta
 	
 	# Calculate current velocity
