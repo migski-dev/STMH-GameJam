@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c7b1ix1wtarcb"]
+[gd_scene load_steps=26 format=3 uid="uid://c7b1ix1wtarcb"]
 
 [ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_bx071"]
 [ext_resource type="Texture2D" uid="uid://dairqkv1rcfbp" path="res://scenes/player/assets/light_meter_ui.svg" id="2_6ohhj"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://scenes/player/scripts/animation_controller.gd" id="6_r4in5"]
 [ext_resource type="Script" path="res://scenes/player/scripts/camera_controller.gd" id="8_vm7y7"]
 [ext_resource type="Script" path="res://scenes/player/scripts/light_detection.gd" id="9_psnlo"]
-[ext_resource type="PackedScene" uid="uid://ciwdob0pspgos" path="res://systems/interaction/PlayerInteractor.tscn" id="12_bxks7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1bqh8"]
 
@@ -50,9 +49,6 @@ dof_blur_far_transition = 8.0
 dof_blur_near_distance = 5.0
 dof_blur_near_transition = 6.0
 dof_blur_amount = 0.2
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_0mell"]
-size = Vector3(0.5, 1, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8e1wd"]
 cull_mode = 2
@@ -175,13 +171,6 @@ cull_mask = 524287
 attributes = SubResource("CameraAttributesPractical_3a27g")
 current = true
 
-[node name="PlayerInteractor" parent="CamRoot/CamYaw/CamPitch" instance=ExtResource("12_bxks7")]
-transform = Transform3D(1.82126, 0, 0, 0, 0.720753, 0, 0, 0, 0.171984, 0, 0, 0)
-
-[node name="CollisionShape3D" parent="CamRoot/CamYaw/CamPitch/PlayerInteractor" index="0"]
-transform = Transform3D(3.28264e-15, 6.03552e-07, 0.570468, 1.71804, -6.03551e-07, 0, 7.50981e-08, 13.8076, -2.49359e-08, 0, 0.45, 6.24)
-shape = SubResource("BoxShape3D_0mell")
-
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
 size = Vector2i(256, 256)
@@ -264,4 +253,3 @@ tint_under = Color(1, 1, 1, 0.752941)
 [connection signal="set_cam_rotation" from="CamRoot" to="MovementController" method="_on_set_cam_rotation"]
 
 [editable path="MeshRoot/Root Scene"]
-[editable path="CamRoot/CamYaw/CamPitch/PlayerInteractor"]
