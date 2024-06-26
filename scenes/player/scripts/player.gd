@@ -64,6 +64,9 @@ func _input(event: InputEvent) -> void:
 	movement_input_handler(event)
 	jump_input_handler(event)
 	
+	if event.is_action_pressed("interact"):
+		GameData.on_player_interact()
+
 
 func movement_input_handler(event: InputEvent) -> void:
 	if event.is_action("movement"):

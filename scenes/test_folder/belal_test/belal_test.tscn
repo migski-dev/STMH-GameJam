@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c75ysyxmlojlv"]
+[gd_scene load_steps=5 format=3 uid="uid://bukn2pw4src24"]
 
-[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="1_av4of"]
-[ext_resource type="Script" path="res://scenes/test_folder/test.gd" id="1_cj5we"]
-[ext_resource type="Script" path="res://scenes/test_folder/CSGBox3D.gd" id="3_lg6cu"]
+[ext_resource type="Script" path="res://scenes/test_folder/test.gd" id="1_luuxg"]
+[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_lt63k"]
+[ext_resource type="Script" path="res://scenes/test_folder/CSGBox3D.gd" id="3_hv44y"]
 
 [sub_resource type="Environment" id="Environment_jiosu"]
 background_mode = 3
@@ -10,7 +10,7 @@ ambient_light_source = 3
 reflected_light_source = 1
 
 [node name="Test" type="Node3D" node_paths=PackedStringArray("player")]
-script = ExtResource("1_cj5we")
+script = ExtResource("1_luuxg")
 player = NodePath("Player")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
@@ -46,10 +46,10 @@ transform = Transform3D(-1, 1.61895e-08, 8.59107e-08, 0, -0.982703, 0.185186, 8.
 shadow_enabled = true
 shadow_blur = 0.7
 
-[node name="Player" parent="." instance=ExtResource("1_av4of")]
+[node name="Player" parent="." instance=ExtResource("2_lt63k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.36966, -8.9407e-08, -6.41793)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." groups=["interactable_group"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.509212, -0.0939728, -17.6115)
 use_collision = true
-script = ExtResource("3_lg6cu")
+script = ExtResource("3_hv44y")
