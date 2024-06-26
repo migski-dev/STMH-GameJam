@@ -65,11 +65,15 @@ func _input(event: InputEvent) -> void:
 	movement_input_handler(event)
 	jump_input_handler(event)
 	
+	if event.is_action_pressed("interact"):
+		GameData.on_player_interact()
+
 
 func movement_input_handler(event: InputEvent) -> void:
 	if event.is_action("movement"):
 		movement_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 		movement_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")
+			
 			
 		if is_movement_ongoing():
 			if Input.is_action_pressed("left") || Input.is_action_pressed("right") || Input.is_action_pressed("forward") || Input.is_action_pressed("back") :
@@ -89,6 +93,7 @@ func jump_input_handler(event: InputEvent) -> void:
 				jump_buffer = true
 				get_tree().create_timer(jump_buffer_time).timeout.connect(on_jump_buffer_timeout)
 			jump_available = true
+		
 		
 func jump()->void:
 	press_jump.emit(default_jump)

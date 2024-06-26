@@ -20,6 +20,8 @@ var cam_rotation : float = 0
 @onready var just_landed: bool = false
 var lock_time: float = 1.0
 
+var lock_time: float = 1.0
+
 
 func _physics_process(delta):
 	set_horizontal_velocity()
@@ -68,6 +70,7 @@ func move_player(delta) -> void:
 				player.velocity = -player.velocity * .1
 			 # Add negative velocity
 			
+	# Added logic to check if player landed in the light 
 	# Added logic to check if player landed in the light 
 	var was_in_air: bool = not player.is_on_floor()
 	player.move_and_slide()

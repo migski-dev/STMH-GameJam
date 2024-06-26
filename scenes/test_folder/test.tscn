@@ -86,3 +86,8 @@ remote_path = NodePath("../../../AnimatableBody3D")
 
 [node name="Player" parent="." instance=ExtResource("1_av4of")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.36966, -8.9407e-08, -6.41793)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." groups=["interactable_group"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.509212, -0.0939728, -17.6115)
+use_collision = true
+script = ExtResource("3_lg6cu")
