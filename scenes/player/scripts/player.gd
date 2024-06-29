@@ -44,6 +44,9 @@ func _input(event: InputEvent) -> void:
 	movement_input_handler(event)
 	jump_input_handler(event)
 	
+	if is_in_shadow:
+		GameData.player_in_interactable()
+	
 	if event.is_action_pressed("interact"):
 		GameData.on_player_interact()
 
