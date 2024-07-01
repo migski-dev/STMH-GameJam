@@ -1,13 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://bukn2pw4src24"]
+[gd_scene load_steps=8 format=3 uid="uid://bukn2pw4src24"]
 
 [ext_resource type="Script" path="res://scenes/test_folder/test.gd" id="1_luuxg"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_lt63k"]
 [ext_resource type="Script" path="res://scenes/test_folder/CSGBox3D.gd" id="3_hv44y"]
+[ext_resource type="Shader" path="res://scenes/test_folder/belal_test/Outline.gdshader" id="3_sdc26"]
 
 [sub_resource type="Environment" id="Environment_jiosu"]
 background_mode = 3
 ambient_light_source = 3
 reflected_light_source = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hgdcy"]
+render_priority = 0
+shader = ExtResource("3_sdc26")
+shader_parameter/outline_color = Color(1, 1, 0, 1)
+shader_parameter/outline_width = 5.5
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dq40x"]
+next_pass = SubResource("ShaderMaterial_hgdcy")
 
 [node name="Test" type="Node3D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_luuxg")
@@ -52,4 +63,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.36966, -8.9407e-08, -6.4179
 [node name="CSGBox3D" type="CSGBox3D" parent="." groups=["interactable_group"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.509212, -0.0939728, -17.6115)
 use_collision = true
+material = SubResource("StandardMaterial3D_dq40x")
 script = ExtResource("3_hv44y")
