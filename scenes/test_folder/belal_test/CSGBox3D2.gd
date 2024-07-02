@@ -1,7 +1,5 @@
 extends CSGBox3D
 
-class_name interactable_test
-
 const OUTLINE_SHADER_PATH = "res://scenes/test_folder/belal_test/Outline.gdshader"
 
 var original_material : Material
@@ -18,6 +16,3 @@ func enable_outline():
 
 func disable_outline():
 	material = original_material
-
-func _on_interacted():
-	print("hi")

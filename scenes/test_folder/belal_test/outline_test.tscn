@@ -7,7 +7,6 @@ render_priority = 0
 shader = ExtResource("1_igoeg")
 shader_parameter/outline_color = Color(2.02149e-06, 0.618598, 0.809963, 1)
 shader_parameter/outline_width = 6.645
-shader_parameter/constant_width = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u6o3f"]
 next_pass = SubResource("ShaderMaterial_8xwxk")
