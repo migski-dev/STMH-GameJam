@@ -14,6 +14,7 @@ reflected_light_source = 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hgdcy"]
 render_priority = 0
 shader = ExtResource("3_sdc26")
+shader_parameter/enable_shader = null
 shader_parameter/outline_color = Color(0, 1, 1, 1)
 shader_parameter/outline_width = 2.0
 
@@ -23,6 +24,7 @@ next_pass = SubResource("ShaderMaterial_hgdcy")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4rvl"]
 render_priority = 0
 shader = ExtResource("3_sdc26")
+shader_parameter/enable_shader = null
 shader_parameter/outline_color = Color(0, 1, 1, 1)
 shader_parameter/outline_width = 2.0
 

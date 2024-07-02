@@ -1,18 +1,16 @@
 extends CSGBox3D
 
-const OUTLINE_SHADER_PATH = "res://scenes/test_folder/belal_test/Outline.gdshader"
-
-var original_material : Material
-var outline_material : ShaderMaterial
+var shader_material : ShaderMaterial
 
 func _ready():
-	original_material = material
-	var shader = load(OUTLINE_SHADER_PATH)
-	outline_material = ShaderMaterial.new()
-	outline_material.shader = shader
+	shader_material = self.material.next_pass
+	toggle_shader(false)
 
-func enable_outline():
-	material = outline_material
+func toggle_shader(enable: bool):
+	shader_material.set_shader_parameter("enable_shader", enable)
 
-func disable_outline():
-	material = original_material
+func _physics_process(delta):
+	if GameData.light_blocking_object == self:
+		toggle_shader(true)
+	else:
+		toggle_shader(false)

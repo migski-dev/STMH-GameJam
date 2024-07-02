@@ -13,12 +13,4 @@ func is_light_blocking_object_moving() -> bool:
 func on_player_interact():
 	if light_blocking_object.is_in_group("interactable_group") and light_blocking_object.has_method("_on_interacted"):
 		light_blocking_object._on_interacted()
-		light_blocking_object.disable_outline()
 		light_blocking_object.is_interacted = true
-
-#func player_in_interactable():
-	#if light_blocking_object.is_in_group("interactable_group") and light_blocking_object.has_method("enable_outline"):
-		#light_blocking_object.enable_outline()
-		#print("hey")
-	#else:
-		#light_blocking_object.disable_outline()
