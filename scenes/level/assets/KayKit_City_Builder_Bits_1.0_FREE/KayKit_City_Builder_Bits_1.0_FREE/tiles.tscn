@@ -629,7 +629,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7aoun")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gh8xm"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7j1og"]
 points = PackedVector3Array(-1, 0, -1, -1, 0, 1, -1, 0.0999902, -1, 1, 0, -1, -1, 0.0999902, 1, 1, 0, 1, 1, 0.0999902, -1, 1, 0.0999902, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jrg67"]
@@ -903,8 +903,10 @@ visible = false
 mesh = SubResource("ArrayMesh_e3pcv")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="road_straight_crossing2/road_straight_crossing"]
-shape = SubResource("ConvexPolygonShape3D_gh8xm")
+[node name="StaticBody3D" type="StaticBody3D" parent="road_straight_crossing2/road_straight_crossing"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="road_straight_crossing2/road_straight_crossing/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_7j1og")
 
 [node name="road_tsplit2" type="Node3D" parent="."]
 visible = false

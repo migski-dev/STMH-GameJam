@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c7b1ix1wtarcb"]
+[gd_scene load_steps=19 format=3 uid="uid://c7b1ix1wtarcb"]
 
 [ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_bx071"]
 [ext_resource type="Resource" uid="uid://8bp5tv13u3t2" path="res://resources/movement_states/stand.tres" id="2_7yl7o"]

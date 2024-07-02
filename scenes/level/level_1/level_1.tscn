@@ -1,11 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dy8uuh6d0wf4y"]
+[gd_scene load_steps=6 format=3 uid="uid://dy8uuh6d0wf4y"]
 
 [ext_resource type="Script" path="res://scenes/level/level_1/level_1.gd" id="1_iejuj"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="1_umudv"]
+[ext_resource type="PackedScene" uid="uid://5aac8n6nfn41" path="res://scenes/user_interface/ui_manager.tscn" id="2_5tgou"]
 [ext_resource type="MeshLibrary" uid="uid://dyr2naarnd055" path="res://scenes/level/tiles.tres" id="3_m78hd"]
+[ext_resource type="PackedScene" uid="uid://dmccvsoo6t1w3" path="res://scenes/user_interface/pause_menu/pause_menu.tscn" id="4_ub5k0"]
 
 [node name="level1" type="Node3D"]
 script = ExtResource("1_iejuj")
+
+[node name="ui_manager" parent="." instance=ExtResource("2_5tgou")]
+
+[node name="PauseMenu" parent="ui_manager" instance=ExtResource("4_ub5k0")]
+visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.991227, 0.129992, -0.0238945, -0.126722, 0.98608, 0.107643, 0.0375546, -0.103671, 0.993902, 0, 0, 0)
