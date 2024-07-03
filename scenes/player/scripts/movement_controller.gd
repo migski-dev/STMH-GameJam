@@ -70,7 +70,6 @@ func move_player(delta) -> void:
 			 # Add negative velocity
 			
 	# Added logic to check if player landed in the light 
-	# Added logic to check if player landed in the light 
 	var was_in_air: bool = not player.is_on_floor()
 	player.move_and_slide()
 	
