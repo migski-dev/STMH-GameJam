@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dk6clxjks6dv8"
+path="res://.godot/imported/Spring In My Step (i1jOvVfNwDQ).mp3-f67974cd4e006a6406d3a290fc3a1334.mp3str"
+
+[deps]
+
+source_file="res://scenes/level/assets/audio/music/Spring In My Step (i1jOvVfNwDQ).mp3"
+dest_files=["res://.godot/imported/Spring In My Step (i1jOvVfNwDQ).mp3-f67974cd4e006a6406d3a290fc3a1334.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

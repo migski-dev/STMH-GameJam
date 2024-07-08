@@ -17,6 +17,7 @@ var pre_jump_position: Vector3
 var fall_gravity : float = 45
 var jump_gravity: float = fall_gravity
 
+@onready var audio_player = $AudioStreamPlayer
 
 # Movement State Variables
 @export var movement_states: Dictionary
@@ -76,6 +77,7 @@ func jump_input_handler(event: InputEvent) -> void:
 		
 func jump()->void:
 	press_jump.emit(default_jump)
+	audio_player.play()
 	jump_available = false
 
 

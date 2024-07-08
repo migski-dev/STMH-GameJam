@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bukn2pw4src24"]
+[gd_scene load_steps=8 format=3 uid="uid://bukn2pw4src24"]
 
 [ext_resource type="Script" path="res://scenes/test_folder/test.gd" id="1_luuxg"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_lt63k"]
 [ext_resource type="Script" path="res://scenes/test_folder/CSGBox3D.gd" id="3_hv44y"]
+[ext_resource type="AudioStream" uid="uid://baikw7wxmqqvv" path="res://scenes/level/assets/audio/sfx/jump.ogg" id="3_ve2c5"]
+[ext_resource type="AudioStream" uid="uid://dyonem1q75lwd" path="res://scenes/level/assets/audio/sfx/hi.mp3" id="4_hc6df"]
+[ext_resource type="AudioStream" uid="uid://dk6clxjks6dv8" path="res://scenes/level/assets/audio/music/Spring In My Step (i1jOvVfNwDQ).mp3" id="5_y4l65"]
 
 [sub_resource type="Environment" id="Environment_jiosu"]
 background_mode = 3
@@ -49,7 +52,21 @@ shadow_blur = 0.7
 [node name="Player" parent="." instance=ExtResource("2_lt63k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.36966, -8.9407e-08, -6.41793)
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("3_ve2c5")
+bus = &"SFX"
+
 [node name="CSGBox3D" type="CSGBox3D" parent="." groups=["interactable_group"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.509212, -0.0939728, -17.6115)
 use_collision = true
 script = ExtResource("3_hv44y")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CSGBox3D"]
+stream = ExtResource("4_hc6df")
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_y4l65")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
