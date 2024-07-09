@@ -6,11 +6,16 @@ extends AnimatableBody3D
 var previous_position: Vector3
 var current_velocity: Vector3
 var move: bool = true
-var MOVE_SPEED: float = 1.0
+var MOVE_SPEED: float = 0.0
+@onready var possession_camera = $Camera3D
 
 func _ready():
 	previous_position = global_transform.origin
-	
+
+func _input(event):
+	if event.is_action("movement") and player.possession_locked:
+		MOVE_SPEED = Input.get_action_strength("left") - Input.get_action_strength("right")
+
 func _physics_process(delta):
 	
 	path.progress += MOVE_SPEED * delta
@@ -34,9 +39,11 @@ func reset_velocity_bias():
 	player.moving_shadow_bias = Vector3.ZERO
 	
 func _on_interacted():
-	if(move):
-		MOVE_SPEED = 0.0
-		move = false
-	else:
-		MOVE_SPEED = 1.0
-		move = true
+	#if(move):
+		#MOVE_SPEED = 0.0
+		#move = false
+	#else:
+		#MOVE_SPEED = 1.0
+		#move = true
+	pass
+

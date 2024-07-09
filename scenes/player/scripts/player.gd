@@ -1,5 +1,6 @@
 extends CharacterBody3D
 class_name Player
+
 # Movement State Signals
 signal set_movement_state(_movement_state: MovementState)
 signal set_movement_direction(_movement_direction: Vector3)
@@ -8,23 +9,22 @@ signal set_movement_direction(_movement_direction: Vector3)
 signal press_jump(_jump_state: JumpState)
 @export var jump_states: Dictionary
 @export var default_jump: JumpState
-var pre_jump_position: Vector3
-
-
 @export var jump_buffer_time: float = 0.3
 @onready var jump_available:bool = true
 @onready var jump_buffer:bool = false
+var pre_jump_position: Vector3
 var fall_gravity : float = 45
 var jump_gravity: float = fall_gravity
-
 
 # Movement State Variables
 @export var movement_states: Dictionary
 var movement_direction: Vector3 
-
 var is_in_shadow : bool = true
 var movement_locked: bool = false
 var moving_shadow_bias: Vector3 = Vector3.ZERO
+
+@onready var player_camera: Camera3D = $CamRoot/CamYaw/CamPitch/SpringArm3D/Camera3D
+var possession_locked: bool = false
 
 func _ready() -> void:
 	# Set Default movement state
@@ -34,15 +34,17 @@ func _ready() -> void:
 
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if is_movement_ongoing():
 		set_movement_direction.emit(movement_direction)
 
 func _input(event: InputEvent) -> void:
 	if movement_locked:
 		return
-	movement_input_handler(event)
-	jump_input_handler(event)
+		
+	if not possession_locked: 
+		movement_input_handler(event)
+		jump_input_handler(event)
 	
 	if event.is_action_pressed("interact"):
 		GameData.on_player_interact()

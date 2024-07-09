@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c75ysyxmlojlv"]
+[gd_scene load_steps=12 format=3 uid="uid://c75ysyxmlojlv"]
 
-[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="1_av4of"]
-[ext_resource type="Script" path="res://scenes/test_folder/test.gd" id="1_cj5we"]
-[ext_resource type="Script" path="res://scenes/test_folder/AnimatableBody3D.gd" id="2_ayt24"]
+[ext_resource type="Script" path="res://scenes/test_folder/miguel_test/test.gd" id="1_l6sxd"]
+[ext_resource type="Script" path="res://scenes/test_folder/miguel_test/AnimatableBody3D.gd" id="2_6oi28"]
+[ext_resource type="Shader" path="res://scenes/test_folder/belal_test/Outline.gdshader" id="3_n0oda"]
+[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="3_ws7i2"]
+[ext_resource type="Script" path="res://scenes/test_folder/miguel_test/MeshInstance3D.gd" id="4_s6pda"]
 
 [sub_resource type="Environment" id="Environment_jiosu"]
 background_mode = 3
@@ -11,7 +13,18 @@ ambient_light_energy = 8.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xpaj6"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_movlr"]
+render_priority = 0
+shader = ExtResource("3_n0oda")
+shader_parameter/enable_shader = null
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ndq0c"]
+next_pass = SubResource("ShaderMaterial_movlr")
+
 [sub_resource type="BoxMesh" id="BoxMesh_jmwh7"]
+material = SubResource("StandardMaterial3D_ndq0c")
 
 [sub_resource type="Curve3D" id="Curve3D_uiqqe"]
 _data = {
@@ -21,7 +34,7 @@ _data = {
 point_count = 3
 
 [node name="Test" type="Node3D" node_paths=PackedStringArray("player")]
-script = ExtResource("1_cj5we")
+script = ExtResource("1_l6sxd")
 player = NodePath("Player")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
@@ -60,7 +73,7 @@ shadow_blur = 0.7
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("player", "path") groups=["interactable_group", "moving_objects"]]
 transform = Transform3D(0.617362, -0.118154, 3.74776, 0.0720512, 3.79786, 0.107866, -3.74892, 0.0535346, 0.619243, 15.3958, 15.3227, 66.9197)
-script = ExtResource("2_ayt24")
+script = ExtResource("2_6oi28")
 player = NodePath("../Player")
 path = NodePath("../Path3D/PathFollow3D")
 
@@ -69,8 +82,12 @@ shape = SubResource("BoxShape3D_xpaj6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D"]
 mesh = SubResource("BoxMesh_jmwh7")
+script = ExtResource("4_s6pda")
 
 [node name="RayCast3D" type="RayCast3D" parent="AnimatableBody3D"]
+
+[node name="Camera3D" type="Camera3D" parent="AnimatableBody3D"]
+transform = Transform3D(0.0545752, 0.0779856, -0.245333, -0.00639176, 0.25112, 0.0784033, 0.25735, -0.0103011, 0.0539739, -3.8785, 2.09139, 0.704836)
 
 [node name="Path3D" type="Path3D" parent="."]
 transform = Transform3D(3.77445, -0.440858, 0, 0.440858, 3.77445, 0, 0, 0, 3.80011, 7.64448, 11.1085, 82.3794)
@@ -84,5 +101,5 @@ progress = 2.14984
 transform = Transform3D(1, -8.3819e-09, -5.96046e-08, 9.31323e-10, 1, -4.19095e-09, -2.98023e-08, -5.3551e-09, 1, 0, 0, 0)
 remote_path = NodePath("../../../AnimatableBody3D")
 
-[node name="Player" parent="." instance=ExtResource("1_av4of")]
+[node name="Player" parent="." instance=ExtResource("3_ws7i2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.36966, -8.9407e-08, -6.41793)

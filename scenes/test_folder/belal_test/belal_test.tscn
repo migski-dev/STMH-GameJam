@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://bukn2pw4src24"]
 
-[ext_resource type="Script" path="res://scenes/test_folder/test.gd" id="1_luuxg"]
+[ext_resource type="Script" path="res://scenes/test_folder/miguel_test/test.gd" id="1_luuxg"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_lt63k"]
-[ext_resource type="Script" path="res://scenes/test_folder/CSGBox3D.gd" id="3_hv44y"]
+[ext_resource type="Script" path="res://scenes/test_folder/miguel_test/CSGBox3D.gd" id="3_hv44y"]
 [ext_resource type="Shader" path="res://scenes/test_folder/belal_test/Outline.gdshader" id="3_sdc26"]
 [ext_resource type="Script" path="res://scenes/test_folder/belal_test/CSGBox3D2.gd" id="5_ka184"]
 
