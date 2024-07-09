@@ -5,6 +5,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8xwxk"]
 render_priority = 0
 shader = ExtResource("1_igoeg")
+shader_parameter/enable_shader = null
 shader_parameter/outline_color = Color(2.02149e-06, 0.618598, 0.809963, 1)
 shader_parameter/outline_width = 6.645
 
