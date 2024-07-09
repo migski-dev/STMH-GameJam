@@ -50,8 +50,6 @@ func is_in_shadow() -> bool:
 	
 	return player_in_shadow
 		
-	
-	return false
 		
 
 func raycast_to_light_source(raycast: RayCast3D, start_position: Vector3) -> void:
