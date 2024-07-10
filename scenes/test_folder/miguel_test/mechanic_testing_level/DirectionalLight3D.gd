@@ -10,8 +10,3 @@ func _ready():
 func _process(delta):
 	pass
 
-
-
-func _on_animatable_body_3d_turn_time(is_morning):
-	if(is_morning):
-		print('hi')

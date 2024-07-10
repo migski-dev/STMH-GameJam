@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://43wo8ndeom6m"]
+
+[ext_resource type="Script" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/interactables/interactable_csg.gd" id="1_wp574"]
+[ext_resource type="Shader" path="res://scenes/test_folder/belal_test/Outline.gdshader" id="2_vijbf"]
+[ext_resource type="Script" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/MeshInstance3D.gd" id="3_ewg17"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xpaj6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_movlr"]
+render_priority = 0
+shader = ExtResource("2_vijbf")
+shader_parameter/enable_shader = null
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ndq0c"]
+next_pass = SubResource("ShaderMaterial_movlr")
+
+[sub_resource type="BoxMesh" id="BoxMesh_jmwh7"]
+material = SubResource("StandardMaterial3D_ndq0c")
+
+[node name="interactable_anim" type="Node3D" groups=["interactable_group", "moving_objects"]]
+transform = Transform3D(1, 0, 0, 0, 1, 8.44011e-10, 0, -2.88128e-09, 1, 0, 0, 0)
+script = ExtResource("1_wp574")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.185487, 0.39311, -0.900588, -0.139787, 0.917727, 0.371801, 0.972653, 0.0569262, 0.225178, -10.341, 7.96945, 0.000215553)
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(0.0306866, 0.0286607, 0.999118, 0.00357662, 0.999579, -0.0287838, -0.999523, 0.00445674, 0.0305711, 0.01385, -0.0868998, -0.907303)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+shape = SubResource("BoxShape3D_xpaj6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 3.10442e-10, 6.716e-19, -3.10442e-10, 1, 1.35333e-08, 3.5297e-18, -1.35333e-08, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_jmwh7")
+script = ExtResource("3_ewg17")

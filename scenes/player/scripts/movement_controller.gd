@@ -11,13 +11,13 @@ extends Node
 @export var jump_state_temp: JumpState
 @export var coyote_time: float = 0.5
 
+@onready var just_landed: bool = false
 var direction: Vector3
 var velocity: Vector3
 var target_velocity: Vector3
 var acceleration: float 
 var speed: float
 var cam_rotation : float = 0
-@onready var just_landed: bool = false
 var lock_time: float = 1.0
 
 
@@ -30,7 +30,7 @@ func _physics_process(delta):
 
 
 func set_horizontal_velocity() -> void:
-	if(GameData.light_blocking_object != null and GameData.light_blocking_object.is_in_group('moving_objects') and player.is_on_floor()):
+	if(GameData.light_blocking_object != null and GameData.is_light_blocking_object_moving() and player.is_on_floor()):
 		velocity.x = speed * direction.normalized().x + player.moving_shadow_bias.x
 		velocity.z = speed * direction.normalized().z + player.moving_shadow_bias.z
 	else:
@@ -55,17 +55,18 @@ func set_vertical_velocity(delta) -> void:
 
 
 func move_player(delta) -> void:
-	if(player.movement_locked):
+	if(player.movement_locked and not CameraTransition.transitioning):
 		return
 	player.velocity = player.velocity.lerp(velocity, acceleration * delta) # Sets Intended velocity
 	
 	if player.is_on_floor():
 		if check_if_heading_into_light(delta):
 			if GameData.is_light_blocking_object_moving():
+				print('fdfddfsfds')
 				player.global_transform.origin -= direction.normalized() * 0.08 * player.moving_shadow_bias.length()
 				player.velocity = -player.velocity * .1 + player.moving_shadow_bias
 			else:
-				player.global_transform.origin -= direction.normalized() * 0.02 
+				player.global_transform.origin -= direction.normalized() * 0.04
 				player.velocity = -player.velocity * .1
 			 # Add negative velocity
 			

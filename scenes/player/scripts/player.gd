@@ -37,18 +37,29 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if is_movement_ongoing():
 		set_movement_direction.emit(movement_direction)
+	
+	if CameraTransition.transitioning:
+		movement_locked = true
+	else:
+		movement_locked = false
+	
+	if(possession_locked):
+		if(not is_in_shadow or (is_in_shadow and not GameData.is_light_blocking_object_interactable()) ):
+			CameraTransition.transition_camera(get_viewport().get_camera_3d(), player_camera)
+			possession_locked = false
+		
 
 func _input(event: InputEvent) -> void:
 	if movement_locked:
 		return
+	
+	if event.is_action_pressed("interact") and is_on_floor() and GameData.is_light_blocking_object_interactable():
+		possession_locked = not possession_locked
+		GameData.on_player_interact()
 		
 	if not possession_locked: 
 		movement_input_handler(event)
 		jump_input_handler(event)
-	
-	if event.is_action_pressed("interact"):
-		GameData.on_player_interact()
-
 
 func movement_input_handler(event: InputEvent) -> void:
 	if event.is_action("movement"):
