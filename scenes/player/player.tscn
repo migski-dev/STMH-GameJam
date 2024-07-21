@@ -11,8 +11,6 @@
 [ext_resource type="Script" path="res://scenes/player/scripts/camera_controller.gd" id="8_vm7y7"]
 [ext_resource type="Script" path="res://scenes/player/scripts/light_detection.gd" id="9_psnlo"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1bqh8"]
-
 [sub_resource type="Animation" id="Animation_ltvx0"]
 resource_name = "CharacterArmature|Bite_Front"
 length = 0.375
@@ -465,6 +463,8 @@ nodes/movement_blend/position = Vector2(13.6163, 130.72)
 nodes/output/position = Vector2(480, 140)
 node_connections = [&"movement_anim_speed", 0, &"movement_blend", &"output", 0, &"movement_anim_speed"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1bqh8"]
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_vm6r1"]
 radius = 0.07
 
@@ -487,22 +487,15 @@ movement_states = {
 "walk": ExtResource("3_aujnm")
 }
 
-[node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("player", "mesh_root", "light_raycast", "light_detection")]
-script = ExtResource("5_281mm")
-player = NodePath("..")
-mesh_root = NodePath("../MeshRoot")
-light_raycast = NodePath("../LightDetectionRoot/TargetRaycast")
-light_detection = NodePath("../LightDetectionRoot")
-jump_state_temp = ExtResource("2_b2egw")
-
 [node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "player")]
 script = ExtResource("6_r4in5")
 animation_tree = NodePath("../MeshRoot/AnimationTree")
 player = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.016256, 0.310032, 0.00238013)
-shape = SubResource("CapsuleShape3D_1bqh8")
+[node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("player", "mesh_root")]
+script = ExtResource("5_281mm")
+player = NodePath("..")
+mesh_root = NodePath("../MeshRoot/Root Scene")
 
 [node name="LightDetectionRoot" type="Node3D" parent="." node_paths=PackedStringArray("player", "player_raycast")]
 script = ExtResource("9_psnlo")
@@ -533,6 +526,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 [node name="Root Scene" parent="MeshRoot" instance=ExtResource("6_pkfwl")]
 
 [node name="Skeleton3D" parent="MeshRoot/Root Scene/RootNode/CharacterArmature" index="0"]
+bones/0/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/position = Vector3(-0.000491702, -8.27448e-11, 0.00534457)
 bones/2/rotation = Quaternion(0.688499, -0.161151, 0.161151, 0.688499)
 bones/3/rotation = Quaternion(2.22045e-16, 6.73392e-33, 3.03269e-17, 1)
@@ -547,6 +541,10 @@ tree_root = SubResource("AnimationNodeBlendTree_prsh6")
 anim_player = NodePath("../Root Scene/AnimationPlayer")
 parameters/movement_anim_speed/scale = 1.0
 parameters/movement_blend/blend_position = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.016256, 0.310032, 0.00238013)
+shape = SubResource("CapsuleShape3D_1bqh8")
 
 [node name="CamRoot" type="Node3D" parent="."]
 script = ExtResource("8_vm7y7")
@@ -568,9 +566,11 @@ current = true
 
 [connection signal="press_jump" from="." to="MovementController" method="_on_player_press_jump"]
 [connection signal="set_movement_direction" from="." to="MovementController" method="_on_set_movement_direction"]
-[connection signal="set_movement_state" from="." to="MovementController" method="_on_set_movement_state"]
 [connection signal="set_movement_state" from="." to="AnimationController" method="_on_set_movement_state"]
-[connection signal="player_in_light" from="LightDetectionRoot" to="." method="_on_ray_cast_root_player_in_light"]
+[connection signal="set_movement_state" from="." to="MovementController" method="_on_set_movement_state"]
+[connection signal="on_player_landed" from="MovementController" to="LightDetectionRoot" method="_on_player_landed"]
+[connection signal="on_player_heading_to_light" from="LightDetectionRoot" to="MovementController" method="_on_player_heading_to_light"]
+[connection signal="on_player_land_in_light" from="LightDetectionRoot" to="MovementController" method="_on_player_land_in_light"]
 [connection signal="set_cam_rotation" from="CamRoot" to="MovementController" method="_on_set_cam_rotation"]
 
 [editable path="MeshRoot/Root Scene"]

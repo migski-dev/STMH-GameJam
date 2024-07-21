@@ -5,5 +5,5 @@ extends Node3D
 
 func _ready():
 	player.apply_floor_snap()
-	GameData.current_light = dir_light
-	#GameData.current_light = spotlight
+	EventManager.current_light = dir_light
+	#EventManager.current_light = spotlight

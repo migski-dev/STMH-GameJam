@@ -35,7 +35,6 @@ func _ready() -> void:
 	CameraTransition.possession_exit_complete.connect(_on_possession_exit_complete)
 
 
-
 func _physics_process(_delta: float) -> void:
 	if is_movement_ongoing():
 		set_movement_direction.emit(movement_direction)
@@ -45,14 +44,14 @@ func _input(event: InputEvent) -> void:
 	if movement_locked:
 		return
 	
-	if event.is_action_pressed("interact") and is_on_floor() and GameData.is_light_blocking_object_interactable() and not CameraTransition.transitioning:
-		if not GameData.possession_mode:
-			GameData.possession_mode = true
-			CameraTransition.transition_camera(player_camera, GameData.light_blocking_object.get_owner().possession_camera, 1.0)
+	if event.is_action_pressed("interact") and is_on_floor() and EventManager.is_light_blocking_object_interactable() and not CameraTransition.transitioning:
+		if not EventManager.possession_mode:
+			EventManager.possession_mode = true
+			CameraTransition.transition_camera(player_camera, EventManager.light_blocking_object.get_owner().possession_camera, 1.0)
 		#else:
-			#CameraTransition.transition_camera(GameData.light_blocking_object.get_owner().possession_camera, player_camera, 1.0)
+			#CameraTransition.transition_camera(EventManager.light_blocking_object.get_owner().possession_camera, player_camera, 1.0)
 		
-	if not GameData.possession_mode: 
+	if not EventManager.possession_mode: 
 		movement_input_handler(event)
 		jump_input_handler(event)
 

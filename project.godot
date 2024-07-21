@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameData="*res://scenes/singletons/game_data/game_data.tscn"
+EventManager="*res://scenes/singletons/event_manager/event_manager.tscn"
 CameraTransition="*res://scenes/singletons/camera_transition/camera_transition.tscn"
 
 [display]

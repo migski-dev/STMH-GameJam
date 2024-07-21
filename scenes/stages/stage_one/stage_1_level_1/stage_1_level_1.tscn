@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_guj0b"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_vsdxn"]
-[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_5bqbe"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door/door.tscn" id="3_5bqbe"]
 [ext_resource type="Texture2D" uid="uid://c7b30xtmhyu8x" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_ColdNight_Equirect.png" id="4_e7o8p"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_mvfr4"]
@@ -44,16 +44,16 @@ visible = false
 size = Vector3(1, 1.57288, 1.9259)
 
 [node name="Player" parent="." instance=ExtResource("2_vsdxn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.4516, 1, 466.275)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.4516, 0, 468.817)
 
 [node name="Root Scene" parent="." instance=ExtResource("3_5bqbe")]
 transform = Transform3D(4.91852, 0, 0.89899, 0, 5, 0, -0.89899, 0, 4.91852, 88.9456, -1.26991, 478.686)
-
-[node name="WorldEnvironment_ColdNightEquirect" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_hxpcp")
 
 [node name="DirectionalLight_ColdNightEquirect" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.849579, 0.527461, 0, -0.527461, 0.849579, 0, 26.5368, 0)
 light_color = Color(0.376471, 0.517647, 0.666667, 1)
 light_energy = 0.07
 shadow_enabled = true
+
+[node name="WorldEnvironment_ColdNightEquirect" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hxpcp")
