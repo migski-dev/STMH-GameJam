@@ -533,7 +533,6 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 [node name="Root Scene" parent="MeshRoot" instance=ExtResource("6_pkfwl")]
 
 [node name="Skeleton3D" parent="MeshRoot/Root Scene/RootNode/CharacterArmature" index="0"]
-bones/0/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/position = Vector3(-0.000491702, -8.27448e-11, 0.00534457)
 bones/2/rotation = Quaternion(0.688499, -0.161151, 0.161151, 0.688499)
 bones/3/rotation = Quaternion(2.22045e-16, 6.73392e-33, 3.03269e-17, 1)
@@ -557,6 +556,7 @@ script = ExtResource("8_vm7y7")
 [node name="CamPitch" type="Node3D" parent="CamRoot/CamYaw"]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CamRoot/CamYaw/CamPitch"]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0)
 shape = SubResource("SphereShape3D_vm6r1")
 spring_length = 2.0
 

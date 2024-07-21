@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://yqg2chqkhjnd"]
+
+[ext_resource type="ArrayMesh" uid="uid://c40cqep8w6v21" path="res://addons/AllSkyFree/Demo/AllSky_DemoEnvironment.obj" id="1"]
+
+[node name="AllSkyFree_DemoLandscape" type="Node3D"]
+
+[node name="AllSky_DemoEnvironment" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 188.305)
+mesh = ExtResource("1")

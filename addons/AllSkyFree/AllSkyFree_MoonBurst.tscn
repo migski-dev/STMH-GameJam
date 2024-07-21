@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfqhn6nqqq76g"]
+
+[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="1"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ed0k1"]
+panorama = ExtResource("1")
+
+[sub_resource type="Sky" id="Sky_qnsap"]
+sky_material = SubResource("PanoramaSkyMaterial_ed0k1")
+
+[sub_resource type="Environment" id="2"]
+background_mode = 2
+sky = SubResource("Sky_qnsap")
+ssao_radius = 8.1
+ssao_intensity = 4.3
+glow_enabled = true
+glow_intensity = 1.86
+glow_strength = 0.87
+glow_bloom = 0.02
+glow_hdr_threshold = 0.44
+
+[node name="AllSkyFree_MoonBurst" type="Node3D"]
+
+[node name="WorldEnvironment_MoonBurst" type="WorldEnvironment" parent="."]
+environment = SubResource("2")
+
+[node name="DirectionalLight_MoonBurst" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.849579, 0.527461, 0, -0.527461, 0.849579, 0, 26.5368, 0)
+light_color = Color(0.52549, 0.619608, 0.733333, 1)
+light_energy = 0.32
+shadow_enabled = true

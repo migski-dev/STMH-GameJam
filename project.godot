@@ -18,11 +18,16 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameData="*res://scenes/singletons/game_data/game_data.tscn"
+CameraTransition="*res://scenes/singletons/camera_transition/camera_transition.tscn"
 
 [display]
 
 window/size/viewport_width=1366
 window/size/viewport_height=768
+
+[editor]
+
+movie_writer/movie_file="C:/Users/NewDe/Documents/STMH_GameJam/demo_videos/intro_demo.avi"
 
 [input]
 

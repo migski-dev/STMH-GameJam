@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3as3u7vcx1gj"]
+
+[ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_3lnb4"]
+[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_f0m0h"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_w15jk"]
+[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="4_gp6c3"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_stxqb"]
+panorama = ExtResource("4_gp6c3")
+
+[sub_resource type="Sky" id="Sky_046el"]
+sky_material = SubResource("PanoramaSkyMaterial_stxqb")
+
+[sub_resource type="Environment" id="Environment_j3h47"]
+background_mode = 2
+sky = SubResource("Sky_046el")
+ssao_radius = 8.1
+ssao_intensity = 4.3
+glow_enabled = true
+glow_intensity = 1.86
+glow_strength = 0.87
+glow_bloom = 0.02
+glow_hdr_threshold = 0.44
+
+[node name="StageOneLevelTwo" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
+script = ExtResource("1_3lnb4")
+player = NodePath("Player")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+use_collision = true
+collision_layer = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744, -0.0050617, -0.000326336, 0.000567901, 65.7551, 85.5708, 3.26234, 395.104)
+use_collision = true
+size = Vector3(4.90974, 1, 2.54968)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0, 0, 5, 0, 13.182, 0, -1, 0, 1.19209e-07, 84.0668, 17.578, 456.587)
+visible = false
+size = Vector3(1, 1.57288, 1.9259)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(2.50808, 0, 0, 0, 3.14872, 0, 0, 0, 1, 86.9808, 23, 417.93)
+size = Vector3(5.25928, 1, 10.0148)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(2.50808, 0, 0, 0, 3.14872, 0, 0, 0, 1, 86.9808, 23, 386.568)
+size = Vector3(5.25928, 1, 10.0148)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(2.50808, 0, 0, 0, 3.14872, 0, 0, 0, 1, 86.9808, 23, 402.262)
+size = Vector3(5.25928, 1, 10.0148)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(2.50808, 0, 0, 0, 3.14872, 0, 0, 0, 1, 86.9808, 23, 434.158)
+visible = false
+size = Vector3(5.25928, 1, 10.0148)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.655868, -0.753567, -0.0444351, 0.602987, -0.558406, 0.569727, -0.45414, 0.346872, 0.820632, 36, 0, 320)
+visible = false
+shadow_enabled = true
+shadow_opacity = 0.8
+directional_shadow_mode = 0
+
+[node name="Player" parent="." instance=ExtResource("2_f0m0h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 363.322)
+
+[node name="Root Scene" parent="." instance=ExtResource("3_w15jk")]
+transform = Transform3D(9.72464, 0, 2.33055, 0, 10, 0, -2.33055, 0, 9.72464, 88.5689, -0.99799, 437.044)
+
+[node name="WorldEnvironment_MoonBurst" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_j3h47")
+
+[node name="DirectionalLight_MoonBurst" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.849579, 0.527461, 0, -0.527461, 0.849579, 0, 26.5368, 0)
+light_color = Color(0.52549, 0.619608, 0.733333, 1)
+light_energy = 0.32
+shadow_enabled = true

@@ -11,6 +11,7 @@ var light_blocked_flag: bool = false
 @export var player_raycast: RayCast3D 
 
 func _physics_process(delta):
+	#pass
 	if is_in_shadow():
 		player.is_in_shadow = true
 		

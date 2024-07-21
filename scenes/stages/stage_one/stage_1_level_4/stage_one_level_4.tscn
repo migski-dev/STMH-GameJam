@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://drpj2djjl87p7"]
+
+[ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_x8bmf"]
+[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_l7aqs"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_ewf4q"]
+[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/interactables/interactable_anim.tscn" id="4_wnf0l"]
+[ext_resource type="Texture2D" uid="uid://cy8vvobqayx8h" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_OvercastLow_Equirect.png" id="5_a7ilq"]
+
+[sub_resource type="Curve3D" id="Curve3D_h88h2"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.391055, -0.317589, 72.907),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0ou6d"]
+panorama = ExtResource("5_a7ilq")
+
+[sub_resource type="Sky" id="1"]
+sky_material = SubResource("PanoramaSkyMaterial_0ou6d")
+
+[sub_resource type="Environment" id="Environment_qjndk"]
+background_mode = 2
+sky = SubResource("1")
+ambient_light_energy = 0.76
+ssao_radius = 8.1
+ssao_intensity = 4.3
+glow_enabled = true
+glow_intensity = 1.86
+glow_strength = 0.87
+glow_bloom = 0.02
+glow_hdr_threshold = 0.44
+
+[node name="StageOneLevelFour" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
+script = ExtResource("1_x8bmf")
+player = NodePath("Player")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+use_collision = true
+collision_layer = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744, -0.0050617, -0.000326336, 0.000567901, 65.7551, 85.5708, 3.26234, 395.104)
+use_collision = true
+size = Vector3(4.90974, 1, 2.54968)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744, -0.0050617, -0.000326336, 0.000567901, 65.7551, 85.8027, 2.18147, 399.01)
+operation = 2
+use_collision = true
+size = Vector3(5.3162, 2.20203, 0.707488)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(2.50808, 0, 0, 0, 3.14872, 0, 0, 0, 1, 86.9808, 23, 370.756)
+size = Vector3(5.25928, 1, 10.0148)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.717984, -0.695352, 0.0313788, 0.479252, -0.461152, 0.746764, -0.504794, 0.551203, 0.664348, 36, 0, 320)
+visible = false
+shadow_enabled = true
+shadow_opacity = 0.8
+shadow_blur = 0.0
+directional_shadow_mode = 0
+
+[node name="Player" parent="." instance=ExtResource("2_l7aqs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 359.322)
+
+[node name="Root Scene" parent="." instance=ExtResource("3_ewf4q")]
+transform = Transform3D(9.98384, 0, 0.568321, 0, 10, 0, -0.568321, 0, 9.98384, 87.5689, -1.99799, 461.09)
+
+[node name="interactable_anim" parent="." node_paths=PackedStringArray("player", "path") instance=ExtResource("4_wnf0l")]
+transform = Transform3D(2.50804, -5.8599e-05, -0.0134524, 1.42542e-11, 3.14869, -0.0137158, 0.00536368, 0.00435592, 0.999976, 86.9808, 15, 381.756)
+player = NodePath("../Player")
+path = NodePath("../Path3D/PathFollow3D")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(2.50808, 0, 0, 0, 3.14872, 2.65755e-09, 0, -2.88128e-09, 1, 86.9808, 15, 381.756)
+curve = SubResource("Curve3D_h88h2")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.999986, -2.33641e-05, -0.00536362, 0, 0.999991, -0.00435598, 0.00536368, 0.00435592, 0.999976, 0, 0, 0)
+use_model_front = true
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+remote_path = NodePath("../../../interactable_anim")
+
+[node name="WorldEnvironment_OvercastLow" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qjndk")
+
+[node name="DirectionalLight_OvercastLow" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.849579, 0.527461, 0, -0.527461, 0.849579, 0, 26.5368, 0)
+light_color = Color(0.654902, 0.647059, 0.635294, 1)
+light_energy = 0.18
+shadow_enabled = true
