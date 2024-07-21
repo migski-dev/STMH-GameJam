@@ -25,6 +25,10 @@ CameraTransition="*res://scenes/singletons/camera_transition/camera_transition.t
 window/size/viewport_width=1366
 window/size/viewport_height=768
 
+[editor]
+
+movie_writer/movie_file="C:/Users/NewDe/Documents/STMH_GameJam/demo_videos/intro_demo.avi"
+
 [input]
 
 forward={

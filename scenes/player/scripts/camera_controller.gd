@@ -15,8 +15,10 @@ var pitch_sens : float = 0.07
 var yaw_accel : float = 15
 var pitch_accel : float = 15
 
-var pitch_max: float = 75
-var pitch_min: float = -55
+#var pitch_max: float = 75
+#var pitch_min: float = -55
+var pitch_max: float =  55
+var pitch_min: float = -75
 
 var tween: Tween
 
@@ -34,9 +36,6 @@ func _physics_process(delta):
 	
 	yaw_node.rotation_degrees.y = lerp(yaw_node.rotation_degrees.y, yaw, yaw_accel * delta)
 	pitch_node.rotation_degrees.x = lerp(pitch_node.rotation_degrees.x, pitch, pitch_accel * delta)
-	
-	#yaw_node.rotation_degrees.y = yaw
-	#pitch_node.rotation_degrees.x = pitch
 	
 	set_cam_rotation.emit(yaw_node.rotation.y)
 

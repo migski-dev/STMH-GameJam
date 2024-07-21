@@ -1,9 +1,13 @@
 extends Node
 
+signal possession_enter_complete()
+signal possession_exit_complete()
+
 var tween: Tween
 @onready var camera3d: Camera3D = $Camera3D
 
 var transitioning: bool = false
+var player: Player
 
 func _ready():
 	camera3d.current = false
@@ -44,3 +48,7 @@ func transition_camera(from: Camera3D, to: Camera3D, duration: float = 1.0) -> v
 	
 	to.current = true
 	transitioning = false
+	if GameData.possession_mode:
+		possession_enter_complete.emit()
+	else:
+		possession_exit_complete.emit()

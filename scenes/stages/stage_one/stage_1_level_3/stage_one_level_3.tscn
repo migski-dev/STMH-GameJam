@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnxu5tcavj133"]
+
+[ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_duiv6"]
+[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_d3j34"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_k064y"]
+[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/interactables/interactable_anim.tscn" id="4_bji8h"]
+
+[sub_resource type="Environment" id="Environment_sohod"]
+background_mode = 1
+background_color = Color(0.0980392, 0.0980392, 0.0980392, 0.917647)
+ambient_light_source = 3
+ambient_light_color = Color(0.0784314, 0.239216, 0.341176, 1)
+ambient_light_sky_contribution = 0.94
+
+[sub_resource type="Curve3D" id="Curve3D_h88h2"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.391055, -0.317589, 72.907),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="StageOneLevelThree" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
+script = ExtResource("1_duiv6")
+player = NodePath("Player")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+use_collision = true
+collision_layer = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744, -0.0050617, -0.000326336, 0.000567901, 65.7551, 85.5708, 3.26234, 395.104)
+use_collision = true
+size = Vector3(4.90974, 1, 2.54968)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(2.50808, 0, 0, 0, 3.14872, 0, 0, 0, 1, 86.9808, 23, 370.756)
+size = Vector3(5.25928, 1, 10.0148)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.717984, -0.695352, 0.0313788, 0.479252, -0.461152, 0.746764, -0.504794, 0.551203, 0.664348, 36, 0, 320)
+shadow_enabled = true
+shadow_opacity = 0.8
+directional_shadow_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sohod")
+
+[node name="Player" parent="." instance=ExtResource("2_d3j34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 359.322)
+
+[node name="Root Scene" parent="." instance=ExtResource("3_k064y")]
+transform = Transform3D(9.98384, 0, 0.568321, 0, 10, 0, -0.568321, 0, 9.98384, 87.5689, -0.99799, 461.09)
+
+[node name="interactable_anim" parent="." node_paths=PackedStringArray("player", "path") instance=ExtResource("4_bji8h")]
+transform = Transform3D(-0.999986, -2.33637e-05, 0.00536354, -4.90803e-12, 0.999991, 0.00435598, -0.00536359, 0.00435592, -0.999976, 86.9808, 6.59884, 376.929)
+player = NodePath("../Player")
+path = NodePath("../Path3D/PathFollow3D")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 9.15064e-10, 0, -9.15064e-10, 1, 86.9808, 6.59884, 376.929)
+curve = SubResource("Curve3D_h88h2")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-0.999986, -2.33637e-05, 0.00536354, 0, 0.999991, 0.00435598, -0.00536359, 0.00435592, -0.999976, 0, 0, 0)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+remote_path = NodePath("../../../interactable_anim")

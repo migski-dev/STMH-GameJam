@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bygi1pwa3vby4"]
+
+[ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_guj0b"]
+[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_vsdxn"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_5bqbe"]
+[ext_resource type="Texture2D" uid="uid://c7b30xtmhyu8x" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_ColdNight_Equirect.png" id="4_e7o8p"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_mvfr4"]
+panorama = ExtResource("4_e7o8p")
+
+[sub_resource type="Sky" id="1"]
+sky_material = SubResource("PanoramaSkyMaterial_mvfr4")
+
+[sub_resource type="Environment" id="Environment_hxpcp"]
+background_mode = 2
+sky = SubResource("1")
+ambient_light_energy = 1.11
+ssao_radius = 8.1
+ssao_intensity = 4.3
+glow_enabled = true
+glow_intensity = 1.86
+glow_strength = 0.87
+glow_bloom = 0.02
+glow_hdr_threshold = 0.44
+
+[node name="ExpositionTest" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -238.905)
+script = ExtResource("1_guj0b")
+player = NodePath("Player")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+use_collision = true
+collision_layer = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744, -0.0050617, -0.000326336, 0.000567901, 65.7551, 85.5708, 3.26234, 395.104)
+use_collision = true
+size = Vector3(4.90974, 1, 2.54968)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0, 0, 5, 0, 13.182, 0, -1, 0, 1.19209e-07, 84.0668, 17.578, 456.587)
+visible = false
+size = Vector3(1, 1.57288, 1.9259)
+
+[node name="Player" parent="." instance=ExtResource("2_vsdxn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.4516, 1, 466.275)
+
+[node name="Root Scene" parent="." instance=ExtResource("3_5bqbe")]
+transform = Transform3D(4.91852, 0, 0.89899, 0, 5, 0, -0.89899, 0, 4.91852, 88.9456, -1.26991, 478.686)
+
+[node name="WorldEnvironment_ColdNightEquirect" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hxpcp")
+
+[node name="DirectionalLight_ColdNightEquirect" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.849579, 0.527461, 0, -0.527461, 0.849579, 0, 26.5368, 0)
+light_color = Color(0.376471, 0.517647, 0.666667, 1)
+light_energy = 0.07
+shadow_enabled = true

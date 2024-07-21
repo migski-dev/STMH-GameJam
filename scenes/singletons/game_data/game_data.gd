@@ -4,10 +4,13 @@ var current_light:  Light3D
 var light_blocking_object
 var local_collision_position: Vector3
 var is_interacted: bool = false
+var possession_mode = false
 var player: Player
 
 func _ready():
 	player = get_tree().get_first_node_in_group('player')
+	CameraTransition.possession_enter_complete.connect(_on_possession_enter_complete)
+	CameraTransition.possession_exit_complete.connect(_on_possession_exit_complete)
 
 func is_light_blocking_object_moving() -> bool:
 	if(light_blocking_object == null):
@@ -19,15 +22,10 @@ func is_light_blocking_object_interactable() -> bool:
 		return false
 	return light_blocking_object.is_in_group('interactable_group') || light_blocking_object.get_owner().is_in_group('interactable_group')
 
-
-
-func on_player_interact():
+func _on_possession_enter_complete():
+	print_debug('removed player from tree')
+	get_tree().get_first_node_in_group('levels').remove_child(player)
+	
+func _on_possession_exit_complete():
 	pass
-	if is_light_blocking_object_interactable() and light_blocking_object.get_owner().has_method("_on_interacted"):
-		if player.possession_locked:
-			CameraTransition.transition_camera(player.player_camera, light_blocking_object.get_owner().possession_camera, 1.0)
-		else:
-			var test = light_blocking_object.get_owner().possession_camera
-			light_blocking_object.get_owner()._on_interacted()
-			CameraTransition.transition_camera(light_blocking_object.get_owner().possession_camera, player.player_camera, 1.0)
-		#light_blocking_object.is_interacted = true
+

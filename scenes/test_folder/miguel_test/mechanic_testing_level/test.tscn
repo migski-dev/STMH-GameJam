@@ -1,13 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://c75ysyxmlojlv"]
+[gd_scene load_steps=7 format=3 uid="uid://c75ysyxmlojlv"]
 
 [ext_resource type="Script" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/test.gd" id="1_l6sxd"]
 [ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/interactables/interactable_anim.tscn" id="2_sla86"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="3_ws7i2"]
 
-[sub_resource type="Environment" id="Environment_jiosu"]
-background_mode = 3
-ambient_light_color = Color(0.137255, 0.372549, 1, 1)
-ambient_light_energy = 8.5
+[sub_resource type="Sky" id="1"]
+
+[sub_resource type="Environment" id="Environment_odxm3"]
+background_mode = 2
+sky = SubResource("1")
+ssao_radius = 8.1
+ssao_intensity = 4.3
+glow_enabled = true
+glow_intensity = 1.86
+glow_strength = 0.87
+glow_bloom = 0.02
+glow_hdr_threshold = 0.44
+fog_enabled = true
 
 [sub_resource type="Curve3D" id="Curve3D_uiqqe"]
 _data = {
@@ -45,8 +54,8 @@ transform = Transform3D(3.80011, 0, 0, 0, 3.80011, 0, 0, 0, 3.80011, 8.01727, 13
 operation = 2
 size = Vector3(5.39697, 4.00314, 1)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_jiosu")
+[node name="WorldEnvironment_MoonBurst" type="WorldEnvironment" parent="CSGCombiner3D"]
+environment = SubResource("Environment_odxm3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-1, 1.61895e-08, 8.59107e-08, 0, -0.982704, 0.185186, 8.74228e-08, 0.185186, 0.982704, 0, 0, 0)
