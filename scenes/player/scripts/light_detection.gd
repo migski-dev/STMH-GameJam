@@ -13,7 +13,17 @@ var light_blocked_flag: bool = false
 var just_landed = false
 @export var target_position_bias: float = 20
 
+var play_mode = false
+
+func _ready():
+	var level = get_tree().get_first_node_in_group('levels')
+	if level:
+		play_mode = true 
+
 func _physics_process(delta):
+	if(not play_mode):
+		return
+	
 	# Check if player is currently in the light - might not be needed
 	if is_in_shadow():
 		player.is_in_shadow = true

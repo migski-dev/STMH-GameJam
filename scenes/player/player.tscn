@@ -487,15 +487,15 @@ movement_states = {
 "walk": ExtResource("3_aujnm")
 }
 
-[node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "player")]
-script = ExtResource("6_r4in5")
-animation_tree = NodePath("../MeshRoot/AnimationTree")
-player = NodePath("..")
-
 [node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("player", "mesh_root")]
 script = ExtResource("5_281mm")
 player = NodePath("..")
 mesh_root = NodePath("../MeshRoot/Root Scene")
+
+[node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "player")]
+script = ExtResource("6_r4in5")
+animation_tree = NodePath("../MeshRoot/AnimationTree")
+player = NodePath("..")
 
 [node name="LightDetectionRoot" type="Node3D" parent="." node_paths=PackedStringArray("player", "player_raycast")]
 script = ExtResource("9_psnlo")
