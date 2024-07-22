@@ -48,7 +48,7 @@ func transition_camera(from: Camera3D, to: Camera3D, duration: float = 1.0) -> v
 	
 	to.current = true
 	transitioning = false
-	if GameData.possession_mode:
+	if EventManager.possession_mode:
 		possession_enter_complete.emit()
 	else:
 		possession_exit_complete.emit()

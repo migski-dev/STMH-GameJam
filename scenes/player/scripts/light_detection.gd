@@ -1,7 +1,7 @@
 extends Node3D
 
-signal player_in_light()
-signal on_target_in_light()
+signal on_player_heading_to_light()
+signal on_player_land_in_light()
 #signal on_player_enter_moving_shadow()
 
 @export var player: Player 
@@ -10,13 +10,43 @@ signal on_target_in_light()
 var light_blocked_flag: bool = false 
 @export var player_raycast: RayCast3D 
 
+var just_landed = false
+@export var target_position_bias: float = 20
+
+var play_mode = false
+
+func _ready():
+	var level = get_tree().get_first_node_in_group('levels')
+	if level:
+		play_mode = true 
+
 func _physics_process(delta):
-	#pass
+	if(not play_mode):
+		return
+	
+	# Check if player is currently in the light - might not be needed
 	if is_in_shadow():
 		player.is_in_shadow = true
-		
 	else: 
 		player.is_in_shadow = false
+	
+	# Check if player is exiting shadow
+	if player.is_on_floor() and check_if_heading_into_light(delta) and not player.movement_locked:
+		on_player_heading_to_light.emit()
+				
+func check_if_heading_into_light(delta) -> bool:
+	var target_position : Vector3 = player.global_transform.origin + player.velocity * delta * (target_position_bias)   
+	if EventManager.is_light_blocking_object_moving() :
+		target_position = player.global_transform.origin + Vector3(player.velocity.x - player.moving_shadow_bias.x, player.velocity.y, player.velocity.z - player.moving_shadow_bias.z) * delta * target_position_bias
+	target_position.y += .1
+	
+	target_raycast.global_transform.origin = target_position 
+	raycast_to_light_source(target_raycast, target_raycast.position)
+	
+	if target_raycast.is_colliding():
+		return false
+	else:
+		return true
 
 # Returns false if and only if all of the raycasts are in the light (all do not collide)
 func is_in_shadow() -> bool:
@@ -45,8 +75,8 @@ func is_in_shadow() -> bool:
 			all_collide_with_same = false
 	
 	if all_collide_with_same:
-		GameData.light_blocking_object = colliding_object
-		GameData.local_collision_position = colliding_position
+		EventManager.light_blocking_object = colliding_object
+		#EventManager.local_collision_position = colliding_position
 		
 	
 	return player_in_shadow
@@ -54,7 +84,7 @@ func is_in_shadow() -> bool:
 		
 
 func raycast_to_light_source(raycast: RayCast3D, start_position: Vector3) -> void:
-	var light_dir: Vector3 = GameData.current_light.global_transform.basis.z.normalized() # Direction of Light
+	var light_dir: Vector3 = EventManager.current_light.global_transform.basis.z.normalized() # Direction of Light
 	var light_pos: Vector3 = start_position - light_dir * 1000 # Large Distance in Direction of Light
 	
 	raycast.target_position = start_position - light_pos
@@ -62,13 +92,17 @@ func raycast_to_light_source(raycast: RayCast3D, start_position: Vector3) -> voi
 
 	raycast.force_raycast_update()
 
-# Returns true if the target position is in the shadow; false if in the light
-func check_valid_move(target_source: Vector3) -> bool:
-	target_raycast.global_transform.origin = target_source 
-	raycast_to_light_source(target_raycast, target_raycast.position)
-	
-	if target_raycast.is_colliding():
-		return true	
-	else:
-		return false
 
+
+func _on_lock_timer_end() -> void:
+	if(player.pre_jump_position):
+		player.global_transform.origin = player.pre_jump_position
+		
+	player.movement_locked = false
+
+
+func _on_player_landed():
+	if not is_in_shadow():
+		on_player_land_in_light.emit()
+		player.set_movement_state.emit(player.movement_states["idle"])
+		

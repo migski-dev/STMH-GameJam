@@ -1,25 +1,24 @@
 extends Node3D
 
+@export var directional_light: Node3D
 @onready var player: Player
-var MOVE_SPEED: float = 0.0
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var possession_camera: Camera3D = $Camera3D
+@onready var animation_player: AnimationPlayer = $Sketchfab_Scene/AnimationPlayer
+@onready var possession_camera: Camera3D = $Sketchfab_Scene/Camera3D
 @onready var raycast: RayCast3D = $RayCast3D
-@onready var area3d: Area3D = $"RootNode/door-rotate-square-c/Area3D"
-@onready var collider: StaticBody3D = $"RootNode/door-rotate-square-c/door/StaticBody3D"
-
-@onready var collision: CollisionShape3D = $"RootNode/door-rotate-square-c/door/StaticBody3D/CollisionShape3D"
-@onready var target: Marker3D = $"RootNode/door-rotate-square-c/Marker3D"
+@onready var target: Marker3D = $Marker3D
+var MOVE_SPEED: float = 0.0
 var animation_length: float
 var casted_shadow_position: Vector3
 
+var min_rotation: float = 0.0
+var max_rotation: float = 180
+
 func _ready():
 	player = get_tree().get_first_node_in_group('player')
-	var animation: Animation = animation_player.get_animation("door|door|close|Animation Base Layer")
-	animation.loop_mode = Animation.LOOP_NONE
-	animation_player.play('door|door|close|Animation Base Layer', -1, 0.0, false)
+	#var animation: Animation = animation_player.get_animation("door|door|close|Animation Base Layer")
+	#animation.loop_mode = Animation.LOOP_NONE
+	animation_player.play('Take 01', -1, 0.0, false)
 	animation_length = animation_player.current_animation_length
-	area3d.body_entered.connect(_on_player_finish)
 
 func _physics_process(delta):
 	if(EventManager.light_blocking_object == null):
@@ -31,14 +30,43 @@ func _physics_process(delta):
 	get_shadow_position()
 	
 	if(not CameraTransition.transitioning):
-		if Input.is_action_pressed("left"):
+		if Input.is_action_pressed("right"):
 			if(animation_player.current_animation_position < animation_length):
-				get_shadow_position()
-				animation_player.play('door|door|close|Animation Base Layer', 1, 1.0, false)
-		elif Input.is_action_pressed("right"):
+				animation_player.play('Take 01', -1, 1.5, false)
+				var current_basis = directional_light.transform.basis
+				var current_quat = Quaternion(current_basis)
+				
+				var rotation_angle = deg_to_rad(1)
+				var rotation_quat = Quaternion(Vector3(0,1,0), rotation_angle)
+				
+				var global_transform = Transform3D(current_basis)
+				var rotation_basis = Basis(rotation_quat)
+				
+				var target_basis = current_basis * rotation_basis
+				var target_quat = target_basis.get_rotation_quaternion()
+				
+				var lerped_quat = current_quat.slerp(target_quat, 0.5)
+				directional_light.transform.basis = Basis(lerped_quat)
+				
+				
+		elif Input.is_action_pressed("left"):
 			if(animation_player.current_animation_position > 0):
-				get_shadow_position()
-				animation_player.play_backwards('door|door|close|Animation Base Layer', -1)
+				animation_player.play('Take 01', -1, -1.5, false)
+				
+				var current_basis = directional_light.transform.basis
+				var current_quat = Quaternion(current_basis)
+				
+				var rotation_angle = deg_to_rad(-1)
+				var rotation_quat = Quaternion(Vector3(0,1,0), rotation_angle)
+				
+				var rotation_basis = Basis(rotation_quat)
+				
+				var target_basis = current_basis * rotation_basis
+				var target_quat = target_basis.get_rotation_quaternion()
+				
+				var lerped_quat = current_quat.slerp(target_quat, 0.5)
+				directional_light.transform.basis = Basis(lerped_quat)
+				
 		elif Input.is_action_pressed("interact"):
 			if(EventManager.possession_mode):
 				EventManager.possession_mode = false
@@ -66,10 +94,7 @@ func get_shadow_position():
 	if raycast.is_colliding():
 		casted_shadow_position = raycast.get_collision_point()
 	else:
-		casted_shadow_position = player.global_transform.origin
+		casted_shadow_position = global_transform.origin
 		#return player.global_transform.origin  # Fallback if no collision detected
 
-func _on_player_finish(body: Node3D):
-#	possession end design the architecture
-	print('yay')
 

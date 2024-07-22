@@ -15,21 +15,24 @@ var is_player_able_to_exit: bool = true
 
 func _ready():
 	previous_position = global_transform.origin
+	#path.progress_ratio = 0.1
 
 func _physics_process(delta: float):
 	get_shadow_position()
-	move_object_on_path(delta)
+	
 	
 	if not possession_check():
+		return 
+	if not (EventManager.light_blocking_object == self or EventManager.light_blocking_object.owner == self):
 		return
-	
-	if Input.is_action_pressed("movement") and GameData.possession_mode and not CameraTransition.transitioning:
+	if Input.is_action_pressed("movement") and EventManager.possession_mode and not CameraTransition.transitioning:
 		MOVE_SPEED = Input.get_action_strength("left") - Input.get_action_strength("right")
 	elif Input.is_action_pressed("interact"):
+		print('WOMP WOMP WOMP WOMP')
 		if not is_player_able_to_exit:
 			return
 		MOVE_SPEED = 0
-		GameData.possession_mode = false
+		EventManager.possession_mode = false
 		get_tree().get_first_node_in_group('levels').add_child(player)
 		player = get_tree().get_first_node_in_group('player')
 		player.movement_locked = true
@@ -39,7 +42,7 @@ func _physics_process(delta: float):
 	else:
 		MOVE_SPEED = 0
 		get_shadow_position()
-
+	move_object_on_path(delta)
 
 func move_object_on_path(delta: float):
 	var progress = clamp(path.progress_ratio + MOVE_SPEED/3 * delta, 0, 1)
@@ -47,16 +50,19 @@ func move_object_on_path(delta: float):
 
 
 func possession_check() -> bool:
-	if (not GameData.possession_mode) or CameraTransition.transitioning:
+	if (not EventManager.possession_mode):
 		return false
-	if not (GameData.light_blocking_object == rigid_body):
+	if CameraTransition.transitioning:
 		return false
+	if not (EventManager.light_blocking_object == rigid_body or EventManager.light_blocking_object.owner == self):
+		return false
+		
 	return true
 
 
-func get_shadow_position():
+func get_shadow_position() -> void:
 	var ray_origin = target.global_transform.origin
-	var light_dir = - GameData.current_light.global_transform.basis.z.normalized()
+	var light_dir = - EventManager.current_light.global_transform.basis.z.normalized()
 	var ray_length = 1000.0
 	var ray_end = ray_origin + light_dir*ray_length
 	var space_state = get_world_3d().direct_space_state

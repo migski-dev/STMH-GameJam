@@ -15,7 +15,7 @@ func _on_interacted():
 	print("hi")
 
 func _physics_process(delta):
-	if GameData.light_blocking_object == self:
+	if EventManager.light_blocking_object == self:
 		toggle_shader(true)
 	else:
 		toggle_shader(false)

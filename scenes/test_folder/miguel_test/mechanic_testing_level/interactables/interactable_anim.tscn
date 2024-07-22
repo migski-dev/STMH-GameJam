@@ -35,6 +35,7 @@ collision_mask = 2
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(0.0306866, 0.0286607, 0.999118, 0.00357662, 0.999579, -0.0287838, -0.999523, 0.00445674, 0.0305711, 0.01385, 0.9131, -0.907303)
+gravity_scale = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(4, -1.86265e-09, 2.98023e-08, 0, 4, 4.69154e-08, -2.98023e-08, -4.90109e-08, 4, 0, 0, 0)
