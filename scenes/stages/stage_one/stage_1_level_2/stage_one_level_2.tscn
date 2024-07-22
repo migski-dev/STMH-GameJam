@@ -8,12 +8,12 @@
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_stxqb"]
 panorama = ExtResource("4_gp6c3")
 
-[sub_resource type="Sky" id="Sky_046el"]
+[sub_resource type="Sky" id="Sky_3blnr"]
 sky_material = SubResource("PanoramaSkyMaterial_stxqb")
 
 [sub_resource type="Environment" id="Environment_j3h47"]
 background_mode = 2
-sky = SubResource("Sky_046el")
+sky = SubResource("Sky_3blnr")
 ssao_radius = 8.1
 ssao_intensity = 4.3
 glow_enabled = true
@@ -75,7 +75,9 @@ transform = Transform3D(9.72464, 0, 2.33055, 0, 10, 0, -2.33055, 0, 9.72464, 88.
 [node name="WorldEnvironment_MoonBurst" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_j3h47")
 
-[node name="DirectionalLight_MoonBurst" type="DirectionalLight3D" parent="."]
+[node name="light_container" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="light_container"]
 transform = Transform3D(1, 0, 0, 0, 0.849579, 0.527461, 0, -0.527461, 0.849579, 0, 26.5368, 0)
 light_color = Color(0.52549, 0.619608, 0.733333, 1)
 light_energy = 0.32

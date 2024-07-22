@@ -501,6 +501,7 @@ mesh_root = NodePath("../MeshRoot/Root Scene")
 script = ExtResource("9_psnlo")
 player = NodePath("..")
 player_raycast = NodePath("FrontRayCast")
+target_position_bias = 7.0
 
 [node name="BackRayCast" type="RayCast3D" parent="LightDetectionRoot" groups=["light_raycasts"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00181392, 0.0380146, -0.0615971)
@@ -521,7 +522,7 @@ visible = false
 [node name="TargetRaycast" type="RayCast3D" parent="LightDetectionRoot"]
 
 [node name="MeshRoot" type="Node3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.367867, -0.150805, 0.173111)
 
 [node name="Root Scene" parent="MeshRoot" instance=ExtResource("6_pkfwl")]
 
@@ -556,7 +557,7 @@ script = ExtResource("8_vm7y7")
 [node name="SpringArm3D" type="SpringArm3D" parent="CamRoot/CamYaw/CamPitch"]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0)
 shape = SubResource("SphereShape3D_vm6r1")
-spring_length = 2.0
+spring_length = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="CamRoot/CamYaw/CamPitch/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)

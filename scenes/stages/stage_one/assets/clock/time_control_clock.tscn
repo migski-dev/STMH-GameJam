@@ -135,6 +135,12 @@ _data = {
 [node name="TimeControlClock" type="Node3D" groups=["interactable_group"]]
 script = ExtResource("1_875yr")
 
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00218147)
+collision_mask = 2
+
 [node name="Sketchfab_Scene" type="Node3D" parent="."]
 
 [node name="Sketchfab_model" type="Node3D" parent="Sketchfab_Scene"]
@@ -173,15 +179,14 @@ transform = Transform3D(0.951059, 0, 0.309008, 0, 1, 0, -0.309008, 0, 0.951059, 
 mesh = SubResource("ArrayMesh_dpyks")
 skeleton = NodePath("")
 
+[node name="Camera3D" type="Camera3D" parent="Sketchfab_Scene"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.43631, 1.29223)
+fov = 76.5
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Sketchfab_Scene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0309013, 0.015816)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sketchfab_Scene"]
 libraries = {
 "": SubResource("AnimationLibrary_ckrnx")
 }
-
-[node name="Marker3D" type="Marker3D" parent="Sketchfab_Scene"]
-
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00218147)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.3912)

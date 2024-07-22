@@ -11,7 +11,7 @@ var light_blocked_flag: bool = false
 @export var player_raycast: RayCast3D 
 
 var just_landed = false
-var target_position_bias: float = 5
+@export var target_position_bias: float = 20
 
 func _physics_process(delta):
 	# Check if player is currently in the light - might not be needed
@@ -20,7 +20,7 @@ func _physics_process(delta):
 	else: 
 		player.is_in_shadow = false
 	
-	# Check if player is heading to the light
+	# Check if player is exiting shadow
 	if player.is_on_floor() and check_if_heading_into_light(delta) and not player.movement_locked:
 		on_player_heading_to_light.emit()
 				

@@ -1,24 +1,35 @@
-[gd_scene load_steps=8 format=3 uid="uid://drpj2djjl87p7"]
+[gd_scene load_steps=11 format=3 uid="uid://drpj2djjl87p7"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_x8bmf"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_l7aqs"]
 [ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door/door.tscn" id="3_ewf4q"]
 [ext_resource type="PackedScene" uid="uid://dl8dhskt3uetn" path="res://scenes/stages/stage_one/assets/clock/time_control_clock.tscn" id="4_ear2a"]
 [ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/interactables/interactable_anim.tscn" id="5_5pn8c"]
+[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="6_svrg6"]
 
 [sub_resource type="Curve3D" id="Curve3D_yv6rg"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 69.734, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69.734),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="Environment" id="Environment_23nfn"]
-background_mode = 1
-background_color = Color(0.0980392, 0.0980392, 0.0980392, 0.917647)
-ambient_light_source = 3
-ambient_light_color = Color(0.0784314, 0.239216, 0.341176, 1)
-ambient_light_sky_contribution = 0.94
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_51nhw"]
+panorama = ExtResource("6_svrg6")
+
+[sub_resource type="Sky" id="Sky_046el"]
+sky_material = SubResource("PanoramaSkyMaterial_51nhw")
+
+[sub_resource type="Environment" id="Environment_pd4vg"]
+background_mode = 2
+sky = SubResource("Sky_046el")
+ssao_radius = 8.1
+ssao_intensity = 4.3
+glow_enabled = true
+glow_intensity = 1.86
+glow_strength = 0.87
+glow_bloom = 0.02
+glow_hdr_threshold = 0.44
 
 [node name="StageOneLevelFour" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
@@ -31,40 +42,51 @@ use_collision = true
 collision_layer = 3
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744, -0.0050617, -0.000326336, 0.000567901, 65.7551, 85.5708, 3.26234, 395.104)
+transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744, -0.0050617, -0.000326336, 0.000567901, 65.7551, 85.5699, 3.26419, 371.086)
 use_collision = true
-size = Vector3(4.90974, 1, 2.54968)
+size = Vector3(4.90974, 1, 3.28021)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.717984, -0.695352, 0.031379, 0.479252, -0.461151, 0.746765, -0.504794, 0.551203, 0.664348, 95.0219, 8.7702, 434.676)
+[node name="Player" parent="." instance=ExtResource("2_l7aqs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 318.176)
+
+[node name="Root Scene" parent="." instance=ExtResource("3_ewf4q")]
+transform = Transform3D(-2.99515, 0, -0.170496, 0, 3, 0, 0.170496, 0, -2.99515, 84.5893, -1.11412, 436.347)
+
+[node name="TimeControlClock" parent="." node_paths=PackedStringArray("directional_light") instance=ExtResource("4_ear2a")]
+transform = Transform3D(60, 0, 0, 0, 60, 0, 0, 0, 60, 86.9902, 22.2644, 351.199)
+directional_light = NodePath("../light_container")
+
+[node name="interactable_anim" parent="." node_paths=PackedStringArray("player", "path") instance=ExtResource("5_5pn8c")]
+transform = Transform3D(-1, 0, -8.74228e-08, 7.99974e-17, 1, -9.15064e-10, 8.74228e-08, -9.15064e-10, -1, 86.9808, 7.25849, 399.479)
+player = NodePath("../Player")
+path = NodePath("../Path3D/PathFollow3D")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 9.15064e-10, 0, -9.15064e-10, 1, 86.9808, 7.25849, 399.479)
+curve = SubResource("Curve3D_yv6rg")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+remote_path = NodePath("../../../interactable_anim")
+
+[node name="light_container" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="light_container"]
+transform = Transform3D(-0.762621, -0.646738, -0.0117878, 0.420089, -0.509054, 0.751259, -0.491868, 0.567974, 0.659903, 95.0219, 8.7702, 434.676)
+rotation_edit_mode = 2
+visible = false
 shadow_enabled = true
 shadow_opacity = 0.8
 shadow_blur = 0.0
 directional_shadow_mode = 0
 
-[node name="Player" parent="." instance=ExtResource("2_l7aqs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 370.077)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="light_container"]
+transform = Transform3D(1, 9.21359e-08, -1.486e-07, 0, 0.849893, 0.526956, 1.74846e-07, -0.526956, 0.849893, 0, 26.5368, 0)
+light_color = Color(0.52549, 0.619608, 0.733333, 1)
+light_energy = 0.32
+shadow_enabled = true
 
-[node name="Root Scene" parent="." instance=ExtResource("3_ewf4q")]
-transform = Transform3D(9.98384, 0, 0.568321, 0, 10, 0, -0.568321, 0, 9.98384, 87.5689, -1.99799, 461.09)
-
-[node name="TimeControlClock" parent="." instance=ExtResource("4_ear2a")]
-transform = Transform3D(-60, 0, -5.24537e-06, 0, 60, 0, 5.24537e-06, 0, -60, 86.9902, 20, 348.346)
-
-[node name="interactable_anim" parent="." node_paths=PackedStringArray("player", "path") instance=ExtResource("5_5pn8c")]
-transform = Transform3D(1, 0, 0, 0, 1, 9.15064e-10, 0, -9.15064e-10, 1, 86.9808, 6.59884, 446.663)
-player = NodePath("../Player")
-path = NodePath("../Path3D/PathFollow3D")
-
-[node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 9.15064e-10, 0, -9.15064e-10, 1, 86.9808, 6.59884, 376.929)
-curve = SubResource("Curve3D_yv6rg")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 69.734)
-
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
-remote_path = NodePath("../../../interactable_anim")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_23nfn")
+[node name="WorldEnvironment_MoonBurst" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pd4vg")

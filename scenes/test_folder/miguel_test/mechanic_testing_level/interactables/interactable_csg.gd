@@ -23,10 +23,12 @@ func _physics_process(delta: float):
 	
 	if not possession_check():
 		return 
-	
+	if not (EventManager.light_blocking_object == self or EventManager.light_blocking_object.owner == self):
+		return
 	if Input.is_action_pressed("movement") and EventManager.possession_mode and not CameraTransition.transitioning:
 		MOVE_SPEED = Input.get_action_strength("left") - Input.get_action_strength("right")
 	elif Input.is_action_pressed("interact"):
+		print('WOMP WOMP WOMP WOMP')
 		if not is_player_able_to_exit:
 			return
 		MOVE_SPEED = 0
@@ -52,13 +54,13 @@ func possession_check() -> bool:
 		return false
 	if CameraTransition.transitioning:
 		return false
-	if not (EventManager.light_blocking_object == rigid_body):
+	if not (EventManager.light_blocking_object == rigid_body or EventManager.light_blocking_object.owner == self):
 		return false
 		
 	return true
 
 
-func get_shadow_position():
+func get_shadow_position() -> void:
 	var ray_origin = target.global_transform.origin
 	var light_dir = - EventManager.current_light.global_transform.basis.z.normalized()
 	var ray_length = 1000.0

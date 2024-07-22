@@ -14,11 +14,11 @@ func _ready():
 	animation.loop_mode = Animation.LOOP_LINEAR
 	
 	
-func _physics_process(delta):
-	# Syncs the color of the body to the averaged surface color
-	
-	if(player.is_on_floor()):
-		#body_mesh.get_active_material(0).albedo_color = player.get_color_rect_color()
-		body_mesh.get_active_material(0).albedo_color = Color('#FF0000') #red
-	else:	
-		body_mesh.get_active_material(0).albedo_color = Color('#0000FF') #blue
+#func _physics_process(delta):
+	## Syncs the color of the body to the averaged surface color
+	#
+	#if(player.is_on_floor()):
+		##body_mesh.get_active_material(0).albedo_color = player.get_color_rect_color()
+		#body_mesh.get_active_material(0).albedo_color = Color('#FF0000') #red
+	#else:	
+		#body_mesh.get_active_material(0).albedo_color = Color('#0000FF') #blue

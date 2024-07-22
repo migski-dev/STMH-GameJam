@@ -15,9 +15,8 @@ var pitch_sens : float = 0.07
 var yaw_accel : float = 15
 var pitch_accel : float = 15
 
-#var pitch_max: float = 75
-#var pitch_min: float = -55
-var pitch_max: float =  55
+#var pitch_max: float = -5
+var pitch_max: float =  35
 var pitch_min: float = -75
 
 var tween: Tween
