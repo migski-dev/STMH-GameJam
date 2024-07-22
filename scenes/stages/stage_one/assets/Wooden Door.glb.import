@@ -3,22 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c5jyywj44vrg6"
-<<<<<<<< HEAD:scenes/stages/stage_one/assets/door/Wooden Door.glb.import
-path="res://.godot/imported/Wooden Door.glb-f808cab47814e1d19ba524f86721461e.scn"
-
-[deps]
-
-source_file="res://scenes/stages/stage_one/assets/door/Wooden Door.glb"
-dest_files=["res://.godot/imported/Wooden Door.glb-f808cab47814e1d19ba524f86721461e.scn"]
-========
+uid="uid://duqlhfid81hwn"
 path="res://.godot/imported/Wooden Door.glb-3d110e072a5a239e555f4de21b0334cc.scn"
 
 [deps]
 
 source_file="res://scenes/stages/stage_one/assets/Wooden Door.glb"
 dest_files=["res://.godot/imported/Wooden Door.glb-3d110e072a5a239e555f4de21b0334cc.scn"]
->>>>>>>> origin/main:scenes/stages/stage_one/assets/Wooden Door.glb.import
 
 [params]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_x8bmf"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_l7aqs"]
-[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door/door.tscn" id="3_ewf4q"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_ewf4q"]
 [ext_resource type="PackedScene" uid="uid://dl8dhskt3uetn" path="res://scenes/stages/stage_one/assets/clock/time_control_clock.tscn" id="4_ear2a"]
 [ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/interactables/interactable_anim.tscn" id="5_5pn8c"]
 [ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="6_svrg6"]

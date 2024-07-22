@@ -22,11 +22,11 @@ func _ready():
 	area3d.body_entered.connect(_on_player_finish)
 
 func _physics_process(delta):
-	if(GameData.light_blocking_object == null):
+	if(EventManager.light_blocking_object == null):
 		return
-	if not (GameData.light_blocking_object == self or GameData.light_blocking_object.owner == self):
+	if not (EventManager.light_blocking_object == self or EventManager.light_blocking_object.owner == self):
 		return
-	if(not GameData.possession_mode):
+	if(not EventManager.possession_mode):
 		return
 	get_shadow_position()
 	
@@ -40,8 +40,8 @@ func _physics_process(delta):
 				get_shadow_position()
 				animation_player.play_backwards('door|door|close|Animation Base Layer', -1)
 		elif Input.is_action_pressed("interact"):
-			if(GameData.possession_mode):
-				GameData.possession_mode = false
+			if(EventManager.possession_mode):
+				EventManager.possession_mode = false
 				get_tree().get_first_node_in_group('levels').add_child(player)
 				player = get_tree().get_first_node_in_group('player')
 				player.movement_locked = true
@@ -57,7 +57,7 @@ func reposition_player_to_shadow():
 	player.global_transform.origin = casted_shadow_position
 	
 func get_shadow_position():
-	var light_dir: Vector3 = GameData.current_light.global_transform.basis.z.normalized() # Direction of Light
+	var light_dir: Vector3 = EventManager.current_light.global_transform.basis.z.normalized() # Direction of Light
 	var light_pos: Vector3 = target.global_transform.origin + light_dir * 1000 # Large Distance in Direction of Light
 	raycast.global_transform.origin = target.global_transform.origin 
 	raycast.target_position = target.global_transform.origin - light_pos 
