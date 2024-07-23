@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dib0i03apb2pj"]
 
-[ext_resource type="PackedScene" path="res://scenes/stages/stage_one/assets/door/Wooden Door.glb" id="1_g6gsm"]
+[ext_resource type="PackedScene" uid="uid://duqlhfid81hwn" path="res://scenes/stages/stage_one/assets/door/Wooden Door.glb" id="1_g6gsm"]
 [ext_resource type="Script" path="res://scenes/stages/stage_one/assets/door/door.gd" id="2_h02l0"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2ifqp"]
@@ -49,8 +49,7 @@ transform = Transform3D(-0.179093, 1.59545e-07, -0.983825, -1.59544e-07, 1, 1.91
 callback_mode_process = 0
 
 [node name="Camera3D" type="Camera3D" parent="." index="2"]
-transform = Transform3D(-0.964933, -0.0571191, 0.256204, 0.0266481, 0.949679, 0.312089, -0.261138, 0.307972, -0.914855, 1.28548, 3.86633, -6.81991)
-fov = 102.663
+transform = Transform3D(-0.96442, -0.0332886, 0.26227, 0.0150181, 0.983541, 0.18006, -0.263948, 0.177593, -0.948046, 1.28548, 2.86633, -6.81991)
 
 [node name="RayCast3D" type="RayCast3D" parent="." index="3"]
 transform = Transform3D(0.983703, 0, -0.179798, 0, 1, 0, 0.179798, 0, 0.983703, 0, 0, 0)
