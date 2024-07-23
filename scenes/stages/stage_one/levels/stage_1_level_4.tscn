@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://drpj2djjl87p7"]
 
-[ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_x8bmf"]
-[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_l7aqs"]
-[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_ewf4q"]
-[ext_resource type="PackedScene" uid="uid://dl8dhskt3uetn" path="res://scenes/stages/stage_one/assets/clock/time_control_clock.tscn" id="4_ear2a"]
-[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/interactables/interactable_anim.tscn" id="5_5pn8c"]
-[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="6_svrg6"]
+[ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_6vjgl"]
+[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_iapab"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_hequ8"]
+[ext_resource type="PackedScene" uid="uid://dl8dhskt3uetn" path="res://scenes/stages/stage_one/assets/clock/time_control_clock.tscn" id="4_73idq"]
+[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/interactables/interactable_anim.tscn" id="5_rduit"]
+[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="6_8divp"]
 
 [sub_resource type="Curve3D" id="Curve3D_yv6rg"]
 _data = {
@@ -15,7 +15,7 @@ _data = {
 point_count = 2
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_51nhw"]
-panorama = ExtResource("6_svrg6")
+panorama = ExtResource("6_8divp")
 
 [sub_resource type="Sky" id="Sky_046el"]
 sky_material = SubResource("PanoramaSkyMaterial_51nhw")
@@ -33,7 +33,7 @@ glow_hdr_threshold = 0.44
 
 [node name="StageOneLevelFour" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
-script = ExtResource("1_x8bmf")
+script = ExtResource("1_6vjgl")
 player = NodePath("Player")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
@@ -46,17 +46,17 @@ transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744,
 use_collision = true
 size = Vector3(4.90974, 1, 3.28021)
 
-[node name="Player" parent="." instance=ExtResource("2_l7aqs")]
+[node name="Player" parent="." instance=ExtResource("2_iapab")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 318.176)
 
-[node name="Root Scene" parent="." instance=ExtResource("3_ewf4q")]
+[node name="Root Scene" parent="." instance=ExtResource("3_hequ8")]
 transform = Transform3D(-2.99515, 0, -0.170496, 0, 3, 0, 0.170496, 0, -2.99515, 84.5893, -1.11412, 436.347)
 
-[node name="TimeControlClock" parent="." node_paths=PackedStringArray("directional_light") instance=ExtResource("4_ear2a")]
+[node name="TimeControlClock" parent="." node_paths=PackedStringArray("directional_light") instance=ExtResource("4_73idq")]
 transform = Transform3D(60, 0, 0, 0, 60, 0, 0, 0, 60, 86.9902, 22.2644, 351.199)
 directional_light = NodePath("../light_container")
 
-[node name="interactable_anim" parent="." node_paths=PackedStringArray("player", "path") instance=ExtResource("5_5pn8c")]
+[node name="interactable_anim" parent="." node_paths=PackedStringArray("player", "path") instance=ExtResource("5_rduit")]
 transform = Transform3D(-1, 0, -8.74228e-08, 7.99974e-17, 1, -9.15064e-10, 8.74228e-08, -9.15064e-10, -1, 86.9808, 7.25849, 399.479)
 player = NodePath("../Player")
 path = NodePath("../Path3D/PathFollow3D")

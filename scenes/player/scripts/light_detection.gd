@@ -2,10 +2,12 @@ extends Node3D
 
 signal on_player_heading_to_light()
 signal on_player_land_in_light()
+signal on_player_enter_new_shadow()
 #signal on_player_enter_moving_shadow()
 
 @export var player: Player 
 @onready var target_raycast: RayCast3D = $TargetRaycast
+
 
 var light_blocked_flag: bool = false 
 @export var player_raycast: RayCast3D 
@@ -75,7 +77,9 @@ func is_in_shadow() -> bool:
 			all_collide_with_same = false
 	
 	if all_collide_with_same:
-		EventManager.light_blocking_object = colliding_object
+		if not(colliding_object == EventManager.light_blocking_object):
+			on_player_enter_new_shadow.emit()
+			EventManager.light_blocking_object = colliding_object
 		#EventManager.local_collision_position = colliding_position
 		
 	

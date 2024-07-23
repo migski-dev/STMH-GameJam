@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://b3as3u7vcx1gj"]
 
-[ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_3lnb4"]
-[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_f0m0h"]
-[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_w15jk"]
-[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="4_gp6c3"]
+[ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_33udl"]
+[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_esims"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_af37l"]
+[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="4_oj04d"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_stxqb"]
-panorama = ExtResource("4_gp6c3")
+panorama = ExtResource("4_oj04d")
 
 [sub_resource type="Sky" id="Sky_3blnr"]
 sky_material = SubResource("PanoramaSkyMaterial_stxqb")
@@ -24,7 +24,7 @@ glow_hdr_threshold = 0.44
 
 [node name="StageOneLevelTwo" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
-script = ExtResource("1_3lnb4")
+script = ExtResource("1_33udl")
 player = NodePath("Player")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
@@ -66,10 +66,10 @@ shadow_enabled = true
 shadow_opacity = 0.8
 directional_shadow_mode = 0
 
-[node name="Player" parent="." instance=ExtResource("2_f0m0h")]
+[node name="Player" parent="." instance=ExtResource("2_esims")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 363.322)
 
-[node name="Root Scene" parent="." instance=ExtResource("3_w15jk")]
+[node name="Root Scene" parent="." instance=ExtResource("3_af37l")]
 transform = Transform3D(9.72464, 0, 2.33055, 0, 10, 0, -2.33055, 0, 9.72464, 88.5689, -0.99799, 437.044)
 
 [node name="WorldEnvironment_MoonBurst" type="WorldEnvironment" parent="."]

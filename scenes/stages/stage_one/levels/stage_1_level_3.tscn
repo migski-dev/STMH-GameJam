@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://bnxu5tcavj133"]
 
-[ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_duiv6"]
-[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_d3j34"]
-[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_k064y"]
-[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/interactables/interactable_anim.tscn" id="4_bji8h"]
-[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="5_8cgoj"]
+[ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_5xtdy"]
+[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_dbpve"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door.tscn" id="3_l6j1i"]
+[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/interactables/interactable_anim.tscn" id="4_1cxs8"]
+[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="5_cgpfu"]
 
 [sub_resource type="Curve3D" id="Curve3D_h88h2"]
 _data = {
@@ -14,7 +14,7 @@ _data = {
 point_count = 2
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dov7s"]
-panorama = ExtResource("5_8cgoj")
+panorama = ExtResource("5_cgpfu")
 
 [sub_resource type="Sky" id="Sky_qibks"]
 sky_material = SubResource("PanoramaSkyMaterial_dov7s")
@@ -32,7 +32,7 @@ glow_hdr_threshold = 0.44
 
 [node name="StageOneLevelThree" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
-script = ExtResource("1_duiv6")
+script = ExtResource("1_5xtdy")
 player = NodePath("Player")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
@@ -49,13 +49,13 @@ size = Vector3(4.90974, 1, 2.54968)
 transform = Transform3D(2.50808, 0, 0, 0, 3.14872, 0, 0, 0, 1, 86.1765, 27.5026, 370.756)
 size = Vector3(5.90064, 3.85995, 10.0148)
 
-[node name="Player" parent="." instance=ExtResource("2_d3j34")]
+[node name="Player" parent="." instance=ExtResource("2_dbpve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 339.926)
 
-[node name="Root Scene" parent="." instance=ExtResource("3_k064y")]
+[node name="Root Scene" parent="." instance=ExtResource("3_l6j1i")]
 transform = Transform3D(9.98384, 0, 0.568321, 0, 10, 0, -0.568321, 0, 9.98384, 87.5689, -0.99799, 461.09)
 
-[node name="interactable_anim" parent="." node_paths=PackedStringArray("player", "path") instance=ExtResource("4_bji8h")]
+[node name="interactable_anim" parent="." node_paths=PackedStringArray("player", "path") instance=ExtResource("4_1cxs8")]
 transform = Transform3D(-0.999986, -2.33637e-05, 0.00536354, -4.90803e-12, 0.999991, 0.00435598, -0.00536359, 0.00435592, -0.999976, 86.9808, 6.59884, 373.449)
 player = NodePath("../Player")
 path = NodePath("../Path3D/PathFollow3D")
