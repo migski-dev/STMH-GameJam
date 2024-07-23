@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://43wo8ndeom6m"]
 
-[ext_resource type="Script" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/interactables/interactable_csg.gd" id="1_wp574"]
+[ext_resource type="Script" path="res://scenes/stages/stage_one/assets/block/interactable_csg.gd" id="1_wp574"]
 [ext_resource type="Shader" path="res://scenes/test_folder/belal_test/Outline.gdshader" id="2_vijbf"]
-[ext_resource type="Script" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/MeshInstance3D.gd" id="3_ewg17"]
+[ext_resource type="Script" path="res://scenes/stages/stage_one/assets/block/MeshInstance3D.gd" id="3_ewg17"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xpaj6"]
 

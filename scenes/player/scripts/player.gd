@@ -38,12 +38,13 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if is_movement_ongoing():
 		set_movement_direction.emit(movement_direction)
+
 		
 
 func _input(event: InputEvent) -> void:
 	if movement_locked:
 		return
-	
+
 	if event.is_action_pressed("interact") and is_on_floor() and EventManager.is_light_blocking_object_interactable() and not CameraTransition.transitioning:
 		if not EventManager.possession_mode:
 			EventManager.possession_mode = true
