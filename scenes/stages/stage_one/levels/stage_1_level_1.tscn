@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bygi1pwa3vby4"]
+[gd_scene load_steps=9 format=3 uid="uid://bygi1pwa3vby4"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_2b273"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_3k2bs"]
 [ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door/door.tscn" id="3_pu521"]
 [ext_resource type="Texture2D" uid="uid://c7b30xtmhyu8x" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_ColdNight_Equirect.png" id="4_e82et"]
+[ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/objects/emotion/emotion.tscn" id="5_qa2ak"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_mvfr4"]
 panorama = ExtResource("4_e82et")
@@ -59,3 +60,7 @@ transform = Transform3D(1, 0, 0, 0, 0.849579, 0.527461, 0, -0.527461, 0.849579, 
 light_color = Color(0.376471, 0.517647, 0.666667, 1)
 light_energy = 0.07
 shadow_enabled = true
+
+[node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_qa2ak")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.4905, 11.0859, 395.822)
+player = NodePath("../Player")
