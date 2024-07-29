@@ -1,5 +1,7 @@
 extends Node3D
 
+
+@export var emotion_key: Emotion
 @export var directional_light: Node3D
 @onready var player: Player
 @onready var animation_player: AnimationPlayer = $Sketchfab_Scene/AnimationPlayer
@@ -12,6 +14,8 @@ var casted_shadow_position: Vector3
 
 var min_rotation: float = 0.0
 var max_rotation: float = 180
+
+var unlocked: bool = false
 
 func _ready():
 	player = get_tree().get_first_node_in_group('player')
@@ -92,6 +96,7 @@ func get_shadow_position():
 	raycast.force_raycast_update()
 
 	if raycast.is_colliding():
+		var collider = raycast.get_collider()
 		casted_shadow_position = raycast.get_collision_point()
 	else:
 		casted_shadow_position = global_transform.origin
