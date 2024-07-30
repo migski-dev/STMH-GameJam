@@ -13,9 +13,12 @@ var MOVE_SPEED: float = 0.0
 var casted_shadow_position: Vector3
 var is_player_able_to_exit: bool = true
 var exclusion_array: Array = [] 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready():
+	CameraTransition.possession_enter_complete.connect(on_possession_enter)
+	CameraTransition.possession_exit_complete.connect(on_possession_exit)
 	previous_position = global_transform.origin
 	for interactable in get_tree().get_nodes_in_group('interactable_group'):
 		if interactable.is_class('CollisionObject3D'):
@@ -25,7 +28,6 @@ func _ready():
 
 func _physics_process(delta: float):
 	get_shadow_position()
-	
 	
 	if not possession_check():
 		return 
@@ -46,6 +48,7 @@ func _physics_process(delta: float):
 		MOVE_SPEED = 0
 		get_shadow_position()
 	move_object_on_path(delta)
+
 
 func move_object_on_path(delta: float):
 	var progress = clamp(path.progress_ratio + MOVE_SPEED/3 * delta, 0, 1)
@@ -80,3 +83,11 @@ func get_shadow_position() -> void:
 		casted_shadow_position = raycast_result.position
 	else:
 		is_player_able_to_exit = false
+		
+func on_possession_enter() -> void:
+	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == rigid_body):
+		animation_player.play('possession', -1, 2.0, false)
+
+func on_possession_exit() -> void:
+	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == rigid_body):
+		animation_player.play('possession', -1, -2.0, true)
