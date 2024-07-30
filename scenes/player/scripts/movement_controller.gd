@@ -6,7 +6,7 @@ signal on_player_landed()
 @export var mesh_root: Node3D
 @export var rotation_speed: float = 8
 @export var fall_gravity : float = 30
-@export var target_position_bias: float = 5
+@export var target_position_bias: float = 9
 @export var jump_gravity: float = fall_gravity
 @export var coyote_time: float = 0.5
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dib0i03apb2pj"]
+[gd_scene load_steps=8 format=3 uid="uid://dib0i03apb2pj"]
 
 [ext_resource type="PackedScene" uid="uid://duqlhfid81hwn" path="res://scenes/stages/stage_one/assets/door/Wooden Door.glb" id="1_g6gsm"]
 [ext_resource type="Script" path="res://scenes/stages/stage_one/assets/door/door.gd" id="2_h02l0"]
@@ -9,10 +9,16 @@ data = PackedVector3Array(-0.05, 0.875, 0.225, -0.05, 1.875, 0.225, -0.05, 0.875
 [sub_resource type="BoxShape3D" id="BoxShape3D_gi6mp"]
 size = Vector3(1, 2.14233, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjxjk"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_4utjm"]
+size = Vector3(0.863159, 2, 0.0464478)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ksqbn"]
 albedo_color = Color(0, 0, 0, 1)
 
-[node name="Root Scene" groups=["interactable_group"] instance=ExtResource("1_g6gsm")]
+[sub_resource type="BoxMesh" id="BoxMesh_ubjis"]
+material = SubResource("StandardMaterial3D_ksqbn")
+
+[node name="door" groups=["interactable_group"] instance=ExtResource("1_g6gsm")]
 transform = Transform3D(0.983704, 0, 0.179798, 0, 1, 0, -0.179798, 0, 0.983704, 0, 0, 0)
 script = ExtResource("2_h02l0")
 
@@ -22,25 +28,30 @@ transform = Transform3D(-0.173648, -1.4238e-14, -0.984808, -2.12656e-17, 1, -1.4
 [node name="handle" parent="RootNode/door-rotate-square-c/door" index="0"]
 transform = Transform3D(1, 3.15544e-30, 0, -3.15544e-30, 1, -1.42109e-14, 0, 1.42109e-14, 1, 1.09381e-23, 0.9, 0.75)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="RootNode/door-rotate-square-c/door" index="1"]
+[node name="StaticBody3D" type="StaticBody3D" parent="RootNode/door-rotate-square-c/door" index="1" groups=["interactable_group"]]
 transform = Transform3D(-0.168197, 1.606e-07, 0.985754, -1.606e-07, 1, -1.90324e-07, -0.985754, -1.90324e-07, -0.168197, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RootNode/door-rotate-square-c/door/StaticBody3D" index="0"]
 transform = Transform3D(-0.173647, -7.10543e-15, -0.984801, -8.88178e-14, 1, 1.63425e-13, 0.984801, -3.73035e-14, -0.173647, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_2ifqp")
 
-[node name="Area3D" type="Area3D" parent="RootNode/door-rotate-square-c" index="1"]
+[node name="Area3D" type="Area3D" parent="RootNode/door-rotate-square-c" index="1" groups=["interactable_group"]]
 transform = Transform3D(0.990134, -2.2829e-08, -0.140124, 2.2829e-08, 1, -1.60738e-09, 0.140124, -1.60586e-09, 0.990134, -0.352007, 1.06102, -0.496849)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RootNode/door-rotate-square-c/Area3D" index="0"]
 transform = Transform3D(1, 6.43929e-14, 0, 1.28786e-13, 1, -2.06057e-12, 0, 0, 1, 0, -0.0306396, -8.9407e-08)
 shape = SubResource("BoxShape3D_gi6mp")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RootNode/door-rotate-square-c" index="2"]
-transform = Transform3D(0.990134, -2.2829e-08, -0.140124, 2.28288e-08, 1, -1.6074e-09, 0.140124, -1.60586e-09, 0.990134, -0.468927, 1.06102, 0.0425506)
-use_collision = true
-size = Vector3(1, 2.06714, 0.0517579)
-material = SubResource("StandardMaterial3D_jjxjk")
+[node name="StaticBody3D" type="StaticBody3D" parent="RootNode/door-rotate-square-c" index="2" groups=["interactable_group"]]
+transform = Transform3D(0.990134, -2.2829e-08, -0.140124, 2.28288e-08, 1, -1.60743e-09, 0.140124, -1.60586e-09, 0.990134, -0.45174, 1.06102, -0.0514848)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootNode/door-rotate-square-c/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, -1.37224e-13, 1, 0, 0, 0, 1, 0.00970471, 0.0258787, 0.00106859)
+shape = SubResource("BoxShape3D_4utjm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RootNode/door-rotate-square-c/StaticBody3D" index="1"]
+transform = Transform3D(0.93845, 5.32907e-15, 1.16415e-10, -5.77316e-15, 2.03891, 5.77316e-15, -7.45058e-09, 2.84217e-14, -0.0354624, 0.0162218, 0, -0.0242438)
+mesh = SubResource("BoxMesh_ubjis")
 
 [node name="Marker3D" type="Marker3D" parent="RootNode/door-rotate-square-c" index="3"]
 transform = Transform3D(-0.179093, 1.59545e-07, -0.983825, -1.59544e-07, 1, 1.91208e-07, 0.983825, 1.9121e-07, -0.179093, -0.402475, 1.14881, -0.0735632)

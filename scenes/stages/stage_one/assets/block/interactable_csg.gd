@@ -12,9 +12,15 @@ var MOVE_SPEED: float = 0.0
 @onready var raycast = $RayCast3D
 var casted_shadow_position: Vector3
 var is_player_able_to_exit: bool = true
+var exclusion_array: Array = [] 
+
 
 func _ready():
 	previous_position = global_transform.origin
+	for interactable in get_tree().get_nodes_in_group('interactable_group'):
+		if interactable.is_class('CollisionObject3D'):
+			print(interactable.get_class())
+			exclusion_array.push_back(interactable.get_rid())
 	#path.progress_ratio = 0.1
 
 func _physics_process(delta: float):
@@ -23,12 +29,9 @@ func _physics_process(delta: float):
 	
 	if not possession_check():
 		return 
-	if not (EventManager.light_blocking_object == self or EventManager.light_blocking_object.owner == self):
-		return
-	if Input.is_action_pressed("movement") and EventManager.possession_mode and not CameraTransition.transitioning:
+	if Input.is_action_pressed("movement"):
 		MOVE_SPEED = Input.get_action_strength("left") - Input.get_action_strength("right")
 	elif Input.is_action_pressed("interact"):
-		print('WOMP WOMP WOMP WOMP')
 		if not is_player_able_to_exit:
 			return
 		MOVE_SPEED = 0
@@ -67,10 +70,12 @@ func get_shadow_position() -> void:
 	var ray_end = ray_origin + light_dir*ray_length
 	var space_state = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
-	query.exclude = [rigid_body.get_rid()]
+	# For each object in interactable object group, add to array and exclude
+	query.exclude = exclusion_array
 	var raycast_result = space_state.intersect_ray(query)
 	
 	if(raycast_result):
+		var collider = raycast_result
 		is_player_able_to_exit = true
 		casted_shadow_position = raycast_result.position
 	else:

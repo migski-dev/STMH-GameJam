@@ -26,6 +26,8 @@ var moving_shadow_bias: Vector3 = Vector3.ZERO
 @onready var player_camera: Camera3D = $CamRoot/CamYaw/CamPitch/SpringArm3D/Camera3D
 var possession_locked: bool = false
 
+var has_emotion_key: bool = false
+
 func _ready() -> void:
 	# Set Default movement state
 	set_movement_state.emit(movement_states["idle"])

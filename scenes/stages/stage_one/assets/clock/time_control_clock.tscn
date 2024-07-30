@@ -159,7 +159,7 @@ transform = Transform3D(-0.29086, -0.7711, 0.56639, 0.95517, -0.19988, 0.21839, 
 mesh = SubResource("ArrayMesh_v10ka")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock/Obj_Clock_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock/Obj_Clock_0" groups=["interactable_group"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock/Obj_Clock_0/StaticBody3D"]
 transform = Transform3D(1.001, 0, 0, 0, 1.001, 0, 0, 0, 1.001, 0, 6.44017e-18, 0.0290039)
