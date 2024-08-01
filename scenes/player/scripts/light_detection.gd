@@ -29,6 +29,8 @@ func _physics_process(delta):
 	# Check if player is currently in the light - might not be needed
 	if is_in_shadow():
 		player.is_in_shadow = true
+		# if light block object is interactable -> light_blocking_object.play_interactable_hint
+		# If light blo
 	else: 
 		player.is_in_shadow = false
 	

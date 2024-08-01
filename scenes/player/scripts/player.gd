@@ -33,7 +33,7 @@ func _ready() -> void:
 	set_movement_state.emit(movement_states["idle"])
 	# Capture mouse cursor for mouse look
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	CameraTransition.possession_enter_complete.connect(_on_possession_enter_complete)
+	
 	CameraTransition.possession_exit_complete.connect(_on_possession_exit_complete)
 
 
@@ -92,12 +92,6 @@ func on_jump_buffer_timeout()->void:
 
 func is_movement_ongoing():
 	return abs(movement_direction.x) > 0 or abs(movement_direction.z) > 0
-	
-func _on_possession_enter_complete():
-	#get_tree().get_first_node_in_group('levels').remove_child(self)
-	#print('removed player from tree')
-	pass
-	
 	
 func _on_possession_exit_complete():
 	movement_locked = false

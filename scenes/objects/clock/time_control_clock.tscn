@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dl8dhskt3uetn"]
 
-[ext_resource type="Script" path="res://scenes/stages/stage_one/assets/clock/time_control_clock.gd" id="1_875yr"]
-[ext_resource type="Texture2D" uid="uid://bs7fng1iuohw1" path="res://scenes/stages/stage_one/assets/clock/textures/WhiteAndBlack_baseColor.png" id="1_cg2ni"]
+[ext_resource type="Script" path="res://scenes/objects/clock/time_control_clock.gd" id="1_875yr"]
+[ext_resource type="Texture2D" uid="uid://bs7fng1iuohw1" path="res://scenes/objects/clock/textures/WhiteAndBlack_baseColor.png" id="1_cg2ni"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fo71q"]
 resource_name = "WhiteAndBlack"

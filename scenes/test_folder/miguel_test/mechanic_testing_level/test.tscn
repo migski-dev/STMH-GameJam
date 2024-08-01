@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c75ysyxmlojlv"]
 
 [ext_resource type="Script" path="res://scenes/test_folder/miguel_test/mechanic_testing_level/test.gd" id="1_l6sxd"]
-[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/stages/stage_one/assets/block/moveable_block.tscn" id="2_sla86"]
+[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/block/moveable_block.tscn" id="2_sla86"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="3_ws7i2"]
 
 [sub_resource type="Sky" id="1"]

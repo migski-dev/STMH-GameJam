@@ -78,7 +78,7 @@ interact={
 [layer_names]
 
 3d_render/layer_1="Mesh"
-3d_physics/layer_2="interactable"
+3d_physics/layer_2="interactable and ground"
 
 [physics]
 

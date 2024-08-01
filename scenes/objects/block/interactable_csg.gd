@@ -1,13 +1,17 @@
 extends Node3D
 
+signal on_object_move(progress: float)
+signal on_possession_end(return_position: Vector3)
+
 @export var player: Player
 @export var path: PathFollow3D
+@onready var possession_ui: Node2D = $PossessionProgress
 var previous_position: Vector3
 var current_velocity: Vector3
 var move: bool = true
 var MOVE_SPEED: float = 0.0
 @onready var possession_camera = $Camera3D
-@onready var rigid_body = $RigidBody3D
+@onready var static_body = $StaticBody3D
 @onready var target = $Marker3D
 @onready var raycast = $RayCast3D
 var casted_shadow_position: Vector3
@@ -17,6 +21,7 @@ var exclusion_array: Array = []
 
 
 func _ready():
+	possession_ui.visible = false
 	CameraTransition.possession_enter_complete.connect(on_possession_enter)
 	CameraTransition.possession_exit_complete.connect(on_possession_exit)
 	previous_position = global_transform.origin
@@ -27,32 +32,33 @@ func _ready():
 	#path.progress_ratio = 0.1
 
 func _physics_process(delta: float):
+	if not EventManager.possession_mode:
+		possession_ui.hide_canvas_layer()
+		
 	get_shadow_position()
 	
 	if not possession_check():
 		return 
 	if Input.is_action_pressed("movement"):
 		MOVE_SPEED = Input.get_action_strength("left") - Input.get_action_strength("right")
+		move_object_on_path(delta)
 	elif Input.is_action_pressed("interact"):
 		if not is_player_able_to_exit:
 			return
 		MOVE_SPEED = 0
 		EventManager.possession_mode = false
-		get_tree().get_first_node_in_group('levels').add_child(player)
-		player = get_tree().get_first_node_in_group('player')
-		player.movement_locked = true
-		#get_shadow_position()
-		player.global_transform.origin = casted_shadow_position
-		CameraTransition.transition_camera(get_viewport().get_camera_3d(), player.player_camera)
+		EventManager.on_player_exit_possession(casted_shadow_position)
 	else:
 		MOVE_SPEED = 0
 		get_shadow_position()
-	move_object_on_path(delta)
+	
 
 
 func move_object_on_path(delta: float):
 	var progress = clamp(path.progress_ratio + MOVE_SPEED/3 * delta, 0, 1)
 	path.progress_ratio = progress
+	on_object_move.emit(path.progress_ratio)
+	
 
 
 func possession_check() -> bool:
@@ -60,7 +66,7 @@ func possession_check() -> bool:
 		return false
 	if CameraTransition.transitioning:
 		return false
-	if not (EventManager.light_blocking_object == rigid_body or EventManager.light_blocking_object.owner == self):
+	if not (EventManager.light_blocking_object == static_body or EventManager.light_blocking_object.owner == self):
 		return false
 		
 	return true
@@ -85,9 +91,9 @@ func get_shadow_position() -> void:
 		is_player_able_to_exit = false
 		
 func on_possession_enter() -> void:
-	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == rigid_body):
+	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == static_body):
 		animation_player.play('possession', -1, 2.0, false)
 
 func on_possession_exit() -> void:
-	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == rigid_body):
+	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == static_body):
 		animation_player.play('possession', -1, -2.0, true)

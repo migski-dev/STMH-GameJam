@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs7fng1iuohw1"
-path.s3tc="res://.godot/imported/WhiteAndBlack_baseColor.png-9b11712fdcface2071c1af7eb24b38cd.s3tc.ctex"
+uid="uid://drcsdxqb3x4at"
+path.s3tc="res://.godot/imported/Wooden Door_colormap.png-d31a8ffb83c8236e77686740fd91c20d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://scenes/stages/stage_one/assets/clock/textures/WhiteAndBlack_baseColor.png"
-dest_files=["res://.godot/imported/WhiteAndBlack_baseColor.png-9b11712fdcface2071c1af7eb24b38cd.s3tc.ctex"]
+source_file="res://scenes/objects/door/Wooden Door_colormap.png"
+dest_files=["res://.godot/imported/Wooden Door_colormap.png-d31a8ffb83c8236e77686740fd91c20d.s3tc.ctex"]
 
 [params]
 
