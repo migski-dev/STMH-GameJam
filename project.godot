@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 EventManager="*res://scenes/singletons/event_manager/event_manager.tscn"
 CameraTransition="*res://scenes/singletons/camera_transition/camera_transition.tscn"
+AudioManager="*res://scenes/audio/audio_manager.tscn"
 
 [display]
 

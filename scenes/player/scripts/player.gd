@@ -86,6 +86,7 @@ func jump_input_handler(event: InputEvent) -> void:
 func jump()->void:
 	press_jump.emit(default_jump)
 	jump_available = false
+	AudioManager.jump.play()
 
 func on_jump_buffer_timeout()->void:
 	jump_buffer = false

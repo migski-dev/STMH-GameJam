@@ -13,6 +13,7 @@ func toggle_shader(enable: bool):
 
 func _on_interacted():
 	print("hi")
+	AudioManager.interact.play()
 
 func _physics_process(delta):
 	if EventManager.light_blocking_object == self:
