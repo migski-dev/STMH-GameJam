@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_6vjgl"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_iapab"]
-[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/objects/door/door.tscn" id="3_hequ8"]
-[ext_resource type="PackedScene" uid="uid://dl8dhskt3uetn" path="res://scenes/objects/clock/time_control_clock.tscn" id="4_73idq"]
-[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/block/moveable_block.tscn" id="5_rduit"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/stages/stage_one/assets/door/door.tscn" id="3_hequ8"]
+[ext_resource type="PackedScene" uid="uid://dl8dhskt3uetn" path="res://scenes/stages/stage_one/assets/clock/time_control_clock.tscn" id="4_73idq"]
+[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/stages/stage_one/assets/block/moveable_block.tscn" id="5_rduit"]
 [ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="6_8divp"]
 [ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/objects/emotion/emotion.tscn" id="7_e6cfr"]
 
@@ -51,7 +51,7 @@ size = Vector3(4.90974, 1, 3.28021)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 318.176)
 
 [node name="door" parent="." instance=ExtResource("3_hequ8")]
-transform = Transform3D(2.99515, 0, 0.170496, 0, 3, 0, -0.170496, 0, 2.99515, 84.5893, -1.11412, 436.347)
+transform = Transform3D(-2.99515, 0, -0.170496, 0, 3, 0, 0.170496, 0, -2.99515, 84.5893, -1.11412, 436.347)
 
 [node name="TimeControlClock" parent="." node_paths=PackedStringArray("emotion_key", "directional_light") instance=ExtResource("4_73idq")]
 transform = Transform3D(60, 0, 0, 0, 60, 0, 0, 0, 60, 86.9902, 22.2644, 351.199)
