@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://clmf5s5vyvx5r"]
+[gd_scene load_steps=18 format=3 uid="uid://clmf5s5vyvx5r"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_aoun8"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_lwndi"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/block/moveable_block.tscn" id="5_xogr8"]
 [ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="6_820ku"]
 [ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/objects/emotion/emotion.tscn" id="7_3t0e0"]
+[ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/visible_path/visible_path.tscn" id="8_ikxs8"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_51nhw"]
 panorama = ExtResource("6_820ku")
@@ -25,15 +26,51 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Curve3D" id="Curve3D_yv6rg"]
+[sub_resource type="Curve3D" id="Curve3D_ix4mn"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3.56946, 2.76184, 38.199),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -10.566, 0.0767689, 68.4807),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wrga6"]
-albedo_color = Color(100, 100, 100, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wqkuw"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0)
+
+[sub_resource type="GDScript" id="GDScript_c2eto"]
+script/source = "extends CSGPolygon3D
+
+@onready var anim_player: AnimationPlayer =  $AnimationPlayer
+
+func play_glow() -> void:
+	anim_player.play(\"interact_glow\", -1, 1, false)
+
+func end_glow() -> void: 
+	anim_player.play(\"RESET\", -1, 1, false)
+"
+
+[sub_resource type="Curve3D" id="Curve3D_twly5"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -10.566, 0.0767689, 68.4807),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxuc2"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0)
+
+[sub_resource type="GDScript" id="GDScript_gm6v4"]
+script/source = "extends CSGPolygon3D
+
+@onready var anim_player: AnimationPlayer =  $AnimationPlayer
+
+func play_glow() -> void:
+	anim_player.play(\"interact_glow\", -1, 1, false)
+
+func end_glow() -> void: 
+	anim_player.play(\"RESET\", -1, 1, false)
+"
 
 [node name="StageOneLevelFive" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
@@ -97,68 +134,48 @@ environment = SubResource("Environment_pd4vg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5625, -0.671914, 422.156)
 player = NodePath("../Player")
 
-[node name="PossessionBlockContainer2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 83.5538, 1.59531, 376.763)
+[node name="MovableBlockContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91.566, 6.92323, 392.182)
 
-[node name="moveable_block" parent="PossessionBlockContainer2" node_paths=PackedStringArray("player", "path") instance=ExtResource("5_xogr8")]
-transform = Transform3D(-1, 0, -8.74228e-08, 7.99974e-17, 1, -9.15064e-10, 8.74228e-08, -9.15064e-10, -1, -0.29266, 0.848189, 2.23431)
-player = NodePath("../../Player")
-path = NodePath("../Path3D/PathFollow3D")
+[node name="Path3D" type="Path3D" parent="MovableBlockContainer"]
+curve = SubResource("Curve3D_ix4mn")
 
-[node name="Path3D" type="Path3D" parent="PossessionBlockContainer2"]
-transform = Transform3D(1, 0, 0, 0, 1, 9.15064e-10, 0, -9.15064e-10, 1, -0.29266, 0.848189, 2.23431)
-curve = SubResource("Curve3D_yv6rg")
+[node name="PathFollow3D" type="PathFollow3D" parent="MovableBlockContainer/Path3D"]
+transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999, -0.00110792, -0.152487, -0.00109496, -0.988305, 0, 0, 0)
 
-[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="PossessionBlockContainer2/Path3D"]
-cast_shadow = 0
-polygon = PackedVector2Array(0, 0, 0.05, 0, 0, 0.05)
-mode = 2
-path_node = NodePath("..")
-path_interval_type = 0
-path_interval = 1.0
-path_simplify_angle = 0.0
-path_rotation = 2
-path_local = true
-path_continuous_u = true
-path_u_distance = 1.0
-path_joined = false
-material = SubResource("StandardMaterial3D_wrga6")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="PossessionBlockContainer2/Path3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="PossessionBlockContainer2/Path3D/PathFollow3D"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="MovableBlockContainer/Path3D/PathFollow3D"]
 remote_path = NodePath("../../../moveable_block")
 
-[node name="PossessionBlockContainer3" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78.8289, 11.4411, 387.873)
+[node name="VisiblePath" parent="MovableBlockContainer" instance=ExtResource("8_ikxs8")]
+path_node = NodePath("../Path3D")
+material = SubResource("StandardMaterial3D_wqkuw")
+script = SubResource("GDScript_c2eto")
 
-[node name="moveable_block" parent="PossessionBlockContainer3" node_paths=PackedStringArray("player", "path") instance=ExtResource("5_xogr8")]
-transform = Transform3D(-1, 0, -8.74228e-08, 7.99974e-17, 1, -9.15064e-10, 8.74228e-08, -9.15064e-10, -1, -0.29266, 0.848189, 2.23431)
+[node name="moveable_block" parent="MovableBlockContainer" node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("5_xogr8")]
+transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999, -0.00110792, -0.152487, -0.00109496, -0.988305, 0, 0, 0)
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
+visible_path = NodePath("../VisiblePath")
 
-[node name="Path3D" type="Path3D" parent="PossessionBlockContainer3"]
-transform = Transform3D(1, 0, 0, 0, 1, 9.15064e-10, 0, -9.15064e-10, 1, -0.29266, 0.848189, 2.23431)
-curve = SubResource("Curve3D_yv6rg")
+[node name="MovableBlockContainer2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.8438, 6.92323, 392.182)
 
-[node name="PathFollow3D" type="PathFollow3D" parent="PossessionBlockContainer3/Path3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+[node name="Path3D" type="Path3D" parent="MovableBlockContainer2"]
+curve = SubResource("Curve3D_twly5")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="PossessionBlockContainer3/Path3D/PathFollow3D"]
+[node name="PathFollow3D" type="PathFollow3D" parent="MovableBlockContainer2/Path3D"]
+transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999, -0.00110792, -0.152487, -0.00109496, -0.988305, 0, 0, 0)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="MovableBlockContainer2/Path3D/PathFollow3D"]
 remote_path = NodePath("../../../moveable_block")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="PossessionBlockContainer3/Path3D"]
-cast_shadow = 0
-polygon = PackedVector2Array(0, 0, 0.1, 0, 0, 0.1)
-mode = 2
-path_node = NodePath("../../../PossessionBlockContainer2/Path3D")
-path_interval_type = 0
-path_interval = 1.0
-path_simplify_angle = 0.0
-path_rotation = 2
-path_local = true
-path_continuous_u = true
-path_u_distance = 1.0
-path_joined = false
-material = SubResource("StandardMaterial3D_wrga6")
+[node name="VisiblePath" parent="MovableBlockContainer2" instance=ExtResource("8_ikxs8")]
+path_node = NodePath("../Path3D")
+material = SubResource("StandardMaterial3D_rxuc2")
+script = SubResource("GDScript_gm6v4")
+
+[node name="moveable_block" parent="MovableBlockContainer2" node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("5_xogr8")]
+transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999, -0.00110792, -0.152487, -0.00109496, -0.988305, 0, 0, 0)
+player = NodePath("../../Player")
+path = NodePath("../Path3D/PathFollow3D")
+visible_path = NodePath("../VisiblePath")

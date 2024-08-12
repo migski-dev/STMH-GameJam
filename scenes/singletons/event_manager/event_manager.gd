@@ -1,7 +1,10 @@
 extends Node
 
+signal on_player_enter_new_shadow(object: CollisionObject3D)
+
 var current_light:  Light3D
 var light_blocking_object
+var lbo_instance
 var is_interacted: bool = false
 var possession_mode = false
 var player: Player

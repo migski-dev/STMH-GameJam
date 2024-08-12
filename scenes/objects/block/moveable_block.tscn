@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://43wo8ndeom6m"]
+[gd_scene load_steps=13 format=3 uid="uid://43wo8ndeom6m"]
 
 [ext_resource type="Script" path="res://scenes/objects/block/interactable_csg.gd" id="1_wp574"]
 [ext_resource type="Shader" path="res://scenes/test_folder/belal_test/Outline.gdshader" id="2_vijbf"]
 [ext_resource type="Script" path="res://scenes/objects/block/MeshInstance3D.gd" id="3_ewg17"]
 [ext_resource type="PackedScene" uid="uid://dfyiu55hgaw74" path="res://scenes/user_interface/possession_progress/possession_progress.tscn" id="4_nx23w"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xpaj6"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_rluya"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_movlr"]
 render_priority = 0
@@ -14,11 +14,13 @@ shader_parameter/enable_shader = null
 shader_parameter/outline_color = null
 shader_parameter/outline_width = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ndq0c"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ocebg"]
+resource_local_to_scene = true
 next_pass = SubResource("ShaderMaterial_movlr")
 
-[sub_resource type="BoxMesh" id="BoxMesh_jmwh7"]
-material = SubResource("StandardMaterial3D_ndq0c")
+[sub_resource type="BoxMesh" id="BoxMesh_xgrnf"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ocebg")
 
 [sub_resource type="Animation" id="Animation_o0qm0"]
 length = 0.001
@@ -33,6 +35,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_s8ig1"]
+resource_name = "interact_glow"
+length = 1.7
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody3D/MeshInstance3D:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_46hwd"]
@@ -53,6 +72,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_juiaq"]
 _data = {
 "RESET": SubResource("Animation_o0qm0"),
+"interact_glow": SubResource("Animation_s8ig1"),
 "possession": SubResource("Animation_46hwd")
 }
 
@@ -77,11 +97,11 @@ transform = Transform3D(0.0306866, 0.0286607, 0.999118, 0.00357662, 0.999579, -0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(4, -1.86265e-09, 2.98023e-08, 0, 4, 4.69154e-08, -2.98023e-08, -4.90109e-08, 4, 0, 0, 0)
-shape = SubResource("BoxShape3D_xpaj6")
+shape = SubResource("BoxShape3D_rluya")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(4, 0, 3.72529e-08, 0, 4, 7.67177e-08, -3.72529e-08, -7.88714e-08, 4, -1.19209e-07, 2.38419e-07, 0)
-mesh = SubResource("BoxMesh_jmwh7")
+mesh = SubResource("BoxMesh_xgrnf")
 script = ExtResource("3_ewg17")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

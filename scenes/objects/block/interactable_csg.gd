@@ -5,6 +5,8 @@ signal on_possession_end(return_position: Vector3)
 
 @export var player: Player
 @export var path: PathFollow3D
+@export var visible_path: CSGPolygon3D
+
 @onready var possession_ui: Node2D = $PossessionProgress
 var previous_position: Vector3
 var current_velocity: Vector3
@@ -21,9 +23,11 @@ var exclusion_array: Array = []
 
 
 func _ready():
+	#player.on_player_enter_new_shadow.connect(_on_player_enter_new_shadow)	
 	possession_ui.visible = false
 	CameraTransition.possession_enter_complete.connect(on_possession_enter)
 	CameraTransition.possession_exit_complete.connect(on_possession_exit)
+	EventManager.on_player_enter_new_shadow.connect(_on_player_enter_new_shadow)
 	previous_position = global_transform.origin
 	for interactable in get_tree().get_nodes_in_group('interactable_group'):
 		if interactable.is_class('CollisionObject3D'):
@@ -34,6 +38,15 @@ func _ready():
 func _physics_process(delta: float):
 	if not EventManager.possession_mode:
 		possession_ui.hide_canvas_layer()
+		
+	#if EventManager.light_blocking_object == static_body:
+		#animation_player.play('interact_glow', -1, 1, false)
+		#if(visible_path.has_method("play_glow")):
+			#visible_path.play_glow()
+	#else:
+		#animation_player.play('RESET', -1, 1, false)
+		#if(visible_path.has_method("end_glow")):
+			#visible_path.end_glow()
 		
 	get_shadow_position()
 	
@@ -90,6 +103,9 @@ func get_shadow_position() -> void:
 	else:
 		is_player_able_to_exit = false
 		
+func play_interact_shader() -> void:
+	print('hi')
+		
 func on_possession_enter() -> void:
 	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == static_body):
 		animation_player.play('possession', -1, 2.0, false)
@@ -97,3 +113,27 @@ func on_possession_enter() -> void:
 func on_possession_exit() -> void:
 	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == static_body):
 		animation_player.play('possession', -1, -2.0, true)
+		
+func _on_player_enter_new_shadow() -> void:
+	if EventManager.lbo_instance == self.get_instance_id(): # or EventManager.light_blocking_object.owner == self
+		print_debug('block id: ', self.get_instance_id())
+		print_debug('LBO: ', EventManager.lbo_instance)
+		animation_player.play('interact_glow', -1, 1, false)
+
+		if(visible_path.has_method("play_glow")):
+			visible_path.play_glow()
+	else:
+		animation_player.play('RESET', -1, 1, false)
+		if(visible_path.has_method("end_glow")):
+			visible_path.end_glow()
+	#if EventManager.light_blocking_object.get_owner() == self: # or EventManager.light_blocking_object.owner == self
+		#animation_player.play('interact_glow', -1, 1, false)
+#
+		#if(visible_path.has_method("play_glow")):
+			#visible_path.play_glow()
+	#else:
+		#animation_player.play('RESET', -1, 1, false)
+		#if(visible_path.has_method("end_glow")):
+			#visible_path.end_glow()
+	
+		
