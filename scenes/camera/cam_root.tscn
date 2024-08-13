@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxymgo22qievk"]
+
+[ext_resource type="Script" path="res://scenes/player/scripts/camera_controller.gd" id="1_kmv3v"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vm6r1"]
+radius = 0.07
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3a27g"]
+dof_blur_far_distance = 5.0
+dof_blur_far_transition = 8.0
+dof_blur_near_distance = 5.0
+dof_blur_near_transition = 6.0
+dof_blur_amount = 0.2
+
+[node name="CamRoot" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02791, 0)
+script = ExtResource("1_kmv3v")
+
+[node name="CamYaw" type="Node3D" parent="."]
+
+[node name="CamPitch" type="Node3D" parent="CamYaw"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CamYaw/CamPitch"]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_vm6r1")
+spring_length = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="CamYaw/CamPitch/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+cull_mask = 524287
+attributes = SubResource("CameraAttributesPractical_3a27g")
+current = true

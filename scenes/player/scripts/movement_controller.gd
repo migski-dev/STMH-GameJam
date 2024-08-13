@@ -19,10 +19,17 @@ var speed: float
 var cam_rotation : float = 0
 var lock_time: float = 1.0
 
+func _ready():
+	CameraTransition.possession_exit_complete.connect(_on_possession_exit_complete)
+	CameraTransition.possession_enter_complete.connect(_on_possession_enter_complete)
+	EventManager.on_possession_enter_start.connect(_on_possession_enter_start)
+	EventManager.on_possession_exit_start.connect(_on_possession_exit_start)
+
 func _physics_process(delta):
-	set_horizontal_velocity()
-	set_vertical_velocity(delta)
-	move_player(delta)
+	if not player.movement_locked:
+		set_horizontal_velocity()
+		set_vertical_velocity(delta)
+		move_player(delta)
 	set_rotations(delta)
 
 
@@ -124,8 +131,7 @@ func _on_player_heading_to_light():
 
 func _on_player_land_in_light():
 	player.movement_locked = true
-	velocity = Vector3.ZERO
-	player.velocity = Vector3.ZERO
+	reset_movement()
 	get_tree().create_timer(lock_time).timeout.connect(_on_lock_timer_end)
 
 func _on_lock_timer_end() -> void:
@@ -134,5 +140,25 @@ func _on_lock_timer_end() -> void:
 	
 	player.movement_locked = false
 
+func _on_possession_exit_complete() -> void: 
+	reset_movement()
+	
+	
+func _on_possession_enter_complete() -> void: 
+	reset_movement()
 
 
+func reset_movement() -> void:
+	player.movement_locked = true
+	velocity = Vector3.ZERO
+	player.velocity = Vector3.ZERO
+	player.movement_direction = Vector3.ZERO
+
+func _on_possession_enter_start() -> void: 
+	reset_movement()
+
+
+func _on_possession_exit_start() -> void: 
+	print_debug('player velocity: ', player.velocity)
+	print_debug('controller velocity: ', velocity)
+	reset_movement()

@@ -4,8 +4,8 @@ extends Node3D
 @export var emotion_key: Emotion
 @export var directional_light: Node3D
 @onready var player: Player
-@onready var animation_player: AnimationPlayer = $Sketchfab_Scene/AnimationPlayer
-@onready var possession_camera: Camera3D = $Sketchfab_Scene/Camera3D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var possession_camera: Camera3D = $CamRoot/CamYaw/CamPitch/SpringArm3D/Camera3D
 @onready var raycast: RayCast3D = $RayCast3D
 @onready var target: Marker3D = $Marker3D
 var MOVE_SPEED: float = 0.0
@@ -73,6 +73,7 @@ func _physics_process(delta):
 				
 		elif Input.is_action_pressed("interact"):
 			if(EventManager.possession_mode):
+				EventManager.on_possession_exit_start.emit()
 				EventManager.possession_mode = false
 				get_tree().get_first_node_in_group('levels').add_child(player)
 				player = get_tree().get_first_node_in_group('player')

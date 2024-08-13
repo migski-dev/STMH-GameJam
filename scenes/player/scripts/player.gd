@@ -10,7 +10,7 @@ signal on_player_enter_new_shadow()
 signal press_jump(_jump_state: JumpState)
 @export var jump_states: Dictionary
 @export var default_jump: JumpState
-@export var jump_buffer_time: float = 0.3
+@export var jump_buffer_time: float = 0.1
 @onready var jump_available:bool = true
 @onready var jump_buffer:bool = false
 var pre_jump_position: Vector3
@@ -50,19 +50,20 @@ func _input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("interact") and is_on_floor() and EventManager.is_light_blocking_object_interactable() and not CameraTransition.transitioning:
 		if not EventManager.possession_mode:
+			EventManager.on_possession_enter_start.emit()
 			EventManager.possession_mode = true
 			CameraTransition.transition_camera(player_camera, EventManager.light_blocking_object.get_owner().possession_camera, 1.0)
 		#else:
 			#CameraTransition.transition_camera(EventManager.light_blocking_object.get_owner().possession_camera, player_camera, 1.0)
 		
-	if not EventManager.possession_mode: 
+	if not EventManager.possession_mode and not movement_locked: 
 		movement_input_handler(event)
 		jump_input_handler(event)
 
 func movement_input_handler(event: InputEvent) -> void:
 	if event.is_action("movement"):
-		movement_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-		movement_direction.z = Input.get_action_strength("back") - Input.get_action_strength("forward")
+		movement_direction.x = Input.get_action_strength("left") - Input.get_action_strength("right")
+		movement_direction.z = Input.get_action_strength("forward") - Input.get_action_strength("back")
 			
 		if is_movement_ongoing():
 			if Input.is_action_pressed("left") || Input.is_action_pressed("right") || Input.is_action_pressed("forward") || Input.is_action_pressed("back") :

@@ -1,6 +1,8 @@
 extends Node
 
 signal on_player_enter_new_shadow(object: CollisionObject3D)
+signal on_possession_exit_start
+signal on_possession_enter_start
 
 var current_light:  Light3D
 var light_blocking_object
@@ -33,4 +35,5 @@ func on_player_exit_possession(casted_shadow_position: Vector3) -> void:
 	player.movement_locked = true
 	player.global_transform.origin = casted_shadow_position
 	CameraTransition.transition_camera(get_viewport().get_camera_3d(), player.player_camera)
+	
 

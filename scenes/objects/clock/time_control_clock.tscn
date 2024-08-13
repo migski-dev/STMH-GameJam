@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dl8dhskt3uetn"]
+[gd_scene load_steps=16 format=3 uid="uid://dl8dhskt3uetn"]
 
 [ext_resource type="Script" path="res://scenes/objects/clock/time_control_clock.gd" id="1_875yr"]
 [ext_resource type="Texture2D" uid="uid://bs7fng1iuohw1" path="res://scenes/objects/clock/textures/WhiteAndBlack_baseColor.png" id="1_cg2ni"]
+[ext_resource type="Script" path="res://scenes/player/scripts/camera_controller.gd" id="3_c6rkb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fo71q"]
 resource_name = "WhiteAndBlack"
@@ -132,6 +133,16 @@ _data = {
 "Take 01": SubResource("Animation_lpokv")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_vm6r1"]
+radius = 0.07
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3a27g"]
+dof_blur_far_distance = 5.0
+dof_blur_far_transition = 8.0
+dof_blur_near_distance = 5.0
+dof_blur_near_transition = 6.0
+dof_blur_amount = 0.2
+
 [node name="TimeControlClock" type="Node3D" groups=["interactable_group"]]
 script = ExtResource("1_875yr")
 
@@ -166,7 +177,7 @@ transform = Transform3D(1.001, 0, 0, 0, 1.001, 0, 0, 0, 1.001, 0, 6.44017e-18, 0
 shape = SubResource("CylinderShape3D_vue5k")
 
 [node name="Obj_Hand_001" type="Node3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock"]
-transform = Transform3D(-1, 0, -1.34309e-06, 0, 1, 0, 1.34309e-06, 0, -1, 0, -0.02172, 0.02906)
+transform = Transform3D(0.999657, 0, 0.026178, 0, 1, 0, -0.026178, 0, 0.999657, 0, -0.02172, 0.02906)
 
 [node name="Obj_Hand_001_0" type="MeshInstance3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock/Obj_Hand_001"]
 mesh = SubResource("ArrayMesh_6rjw1")
@@ -179,14 +190,28 @@ transform = Transform3D(0.951059, 0, 0.309008, 0, 1, 0, -0.309008, 0, 0.951059, 
 mesh = SubResource("ArrayMesh_dpyks")
 skeleton = NodePath("")
 
-[node name="Camera3D" type="Camera3D" parent="Sketchfab_Scene"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.43631, 1.29223)
-fov = 76.5
-
 [node name="OmniLight3D" type="OmniLight3D" parent="Sketchfab_Scene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0309013, 0.015816)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sketchfab_Scene"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sketchfab_Scene")
 libraries = {
 "": SubResource("AnimationLibrary_ckrnx")
 }
+
+[node name="CamRoot" type="Node3D" parent="."]
+script = ExtResource("3_c6rkb")
+
+[node name="CamYaw" type="Node3D" parent="CamRoot"]
+
+[node name="CamPitch" type="Node3D" parent="CamRoot/CamYaw"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CamRoot/CamYaw/CamPitch"]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_vm6r1")
+spring_length = 0.7
+
+[node name="Camera3D" type="Camera3D" parent="CamRoot/CamYaw/CamPitch/SpringArm3D"]
+cull_mask = 524287
+attributes = SubResource("CameraAttributesPractical_3a27g")
+current = true

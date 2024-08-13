@@ -3,7 +3,7 @@ extends Node3D
 @onready var player: Player
 var MOVE_SPEED: float = 0.0
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var possession_camera: Camera3D = $Camera3D
+@onready var possession_camera: Camera3D = $CamRoot/CamYaw/CamPitch/SpringArm3D/Camera3D
 @onready var raycast: RayCast3D = $RayCast3D
 @onready var area3d: Area3D = $"RootNode/door-rotate-square-c/Area3D"
 @onready var collider: StaticBody3D = $"RootNode/door-rotate-square-c/door/StaticBody3D"

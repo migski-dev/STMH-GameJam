@@ -12,7 +12,7 @@ var previous_position: Vector3
 var current_velocity: Vector3
 var move: bool = true
 var MOVE_SPEED: float = 0.0
-@onready var possession_camera = $Camera3D
+@onready var possession_camera = $CamRoot/CamYaw/CamPitch/SpringArm3D/Camera3D
 @onready var static_body = $StaticBody3D
 @onready var target = $Marker3D
 @onready var raycast = $RayCast3D
@@ -20,10 +20,9 @@ var casted_shadow_position: Vector3
 var is_player_able_to_exit: bool = true
 var exclusion_array: Array = [] 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
+@onready var mesh: MeshInstance3D = $StaticBody3D/MeshInstance3D
 
 func _ready():
-	#player.on_player_enter_new_shadow.connect(_on_player_enter_new_shadow)	
 	possession_ui.visible = false
 	CameraTransition.possession_enter_complete.connect(on_possession_enter)
 	CameraTransition.possession_exit_complete.connect(on_possession_exit)
@@ -33,33 +32,23 @@ func _ready():
 		if interactable.is_class('CollisionObject3D'):
 			print(interactable.get_class())
 			exclusion_array.push_back(interactable.get_rid())
-	#path.progress_ratio = 0.1
+
 
 func _physics_process(delta: float):
-	if not EventManager.possession_mode:
-		possession_ui.hide_canvas_layer()
-		
-	#if EventManager.light_blocking_object == static_body:
-		#animation_player.play('interact_glow', -1, 1, false)
-		#if(visible_path.has_method("play_glow")):
-			#visible_path.play_glow()
-	#else:
-		#animation_player.play('RESET', -1, 1, false)
-		#if(visible_path.has_method("end_glow")):
-			#visible_path.end_glow()
-		
-	get_shadow_position()
-	
 	if not possession_check():
 		return 
+	
+	get_shadow_position()
+	
 	if Input.is_action_pressed("movement"):
-		MOVE_SPEED = Input.get_action_strength("left") - Input.get_action_strength("right")
+		MOVE_SPEED = Input.get_action_strength("right") - Input.get_action_strength("left")
 		move_object_on_path(delta)
 	elif Input.is_action_pressed("interact"):
 		if not is_player_able_to_exit:
 			return
 		MOVE_SPEED = 0
 		EventManager.possession_mode = false
+		EventManager.on_possession_exit_start.emit()
 		EventManager.on_player_exit_possession(casted_shadow_position)
 	else:
 		MOVE_SPEED = 0
@@ -103,37 +92,28 @@ func get_shadow_position() -> void:
 	else:
 		is_player_able_to_exit = false
 		
-func play_interact_shader() -> void:
-	print('hi')
 		
 func on_possession_enter() -> void:
 	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == static_body):
 		animation_player.play('possession', -1, 2.0, false)
+		#animation_player.play('interact_glow', -1, 1, false)
+
 
 func on_possession_exit() -> void:
 	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == static_body):
+		possession_ui.hide_canvas_layer()
 		animation_player.play('possession', -1, -2.0, true)
+		animation_player.play('interact_glow', -1, 1, false)
+		#animation_player.play('RESET', -1, 1, false)
+		
 		
 func _on_player_enter_new_shadow() -> void:
-	if EventManager.lbo_instance == self.get_instance_id(): # or EventManager.light_blocking_object.owner == self
-		print_debug('block id: ', self.get_instance_id())
-		print_debug('LBO: ', EventManager.lbo_instance)
+	if EventManager.light_blocking_object == static_body : # or EventManager.lbo_instance == self.get_instance_id()
 		animation_player.play('interact_glow', -1, 1, false)
-
 		if(visible_path.has_method("play_glow")):
 			visible_path.play_glow()
 	else:
 		animation_player.play('RESET', -1, 1, false)
 		if(visible_path.has_method("end_glow")):
 			visible_path.end_glow()
-	#if EventManager.light_blocking_object.get_owner() == self: # or EventManager.light_blocking_object.owner == self
-		#animation_player.play('interact_glow', -1, 1, false)
-#
-		#if(visible_path.has_method("play_glow")):
-			#visible_path.play_glow()
-	#else:
-		#animation_player.play('RESET', -1, 1, false)
-		#if(visible_path.has_method("end_glow")):
-			#visible_path.end_glow()
-	
-		
+
