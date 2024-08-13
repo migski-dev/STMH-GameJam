@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c7b1ix1wtarcb"]
+[gd_scene load_steps=29 format=3 uid="uid://c7b1ix1wtarcb"]
 
 [ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_bx071"]
 [ext_resource type="Resource" uid="uid://8bp5tv13u3t2" path="res://resources/movement_states/stand.tres" id="2_7yl7o"]
@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://scenes/player/scripts/movement_controller.gd" id="5_281mm"]
 [ext_resource type="PackedScene" uid="uid://byqcnramq3jkb" path="res://scenes/player/assets/green_blob.tscn" id="6_pkfwl"]
 [ext_resource type="Script" path="res://scenes/player/scripts/animation_controller.gd" id="6_r4in5"]
-[ext_resource type="Script" path="res://scenes/player/scripts/camera_controller.gd" id="8_vm7y7"]
 [ext_resource type="Script" path="res://scenes/player/scripts/light_detection.gd" id="9_psnlo"]
+[ext_resource type="PackedScene" uid="uid://dxymgo22qievk" path="res://scenes/camera/cam_root.tscn" id="10_yes40"]
 
 [sub_resource type="Animation" id="Animation_hyk4x"]
 resource_name = "CharacterArmature|Bite_Front"
@@ -522,16 +522,6 @@ node_connections = [&"movement_anim_speed", 0, &"movement_blend", &"output", 0, 
 [sub_resource type="SphereShape3D" id="SphereShape3D_22656"]
 radius = 0.456193
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_vm6r1"]
-radius = 0.07
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3a27g"]
-dof_blur_far_distance = 5.0
-dof_blur_far_transition = 8.0
-dof_blur_near_distance = 5.0
-dof_blur_near_transition = 6.0
-dof_blur_amount = 0.2
-
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_bx071")
 jump_states = {
@@ -606,29 +596,14 @@ parameters/movement_blend/blend_position = 0
 transform = Transform3D(0.998359, 0, 0, 0, 0.998359, 0, 0, 0, 0.998359, -0.016256, 0.542683, 0.00238013)
 shape = SubResource("SphereShape3D_22656")
 
-[node name="CamRoot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02791, 0)
-script = ExtResource("8_vm7y7")
-
-[node name="CamYaw" type="Node3D" parent="CamRoot"]
-
-[node name="CamPitch" type="Node3D" parent="CamRoot/CamYaw"]
-
-[node name="SpringArm3D" type="SpringArm3D" parent="CamRoot/CamYaw/CamPitch"]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0)
-shape = SubResource("SphereShape3D_vm6r1")
-spring_length = 3.0
-
-[node name="Camera3D" type="Camera3D" parent="CamRoot/CamYaw/CamPitch/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-cull_mask = 524287
-attributes = SubResource("CameraAttributesPractical_3a27g")
-current = true
+[node name="CamRoot" parent="." instance=ExtResource("10_yes40")]
+transform = Transform3D(-1, 0, -2.62268e-07, 0, 1, 0, 2.62268e-07, 0, -1, 0, 1.02791, 0)
 
 [connection signal="press_jump" from="." to="MovementController" method="_on_player_press_jump"]
 [connection signal="set_movement_direction" from="." to="MovementController" method="_on_set_movement_direction"]
 [connection signal="set_movement_state" from="." to="MovementController" method="_on_set_movement_state"]
 [connection signal="set_movement_state" from="." to="AnimationController" method="_on_set_movement_state"]
+[connection signal="set_movement_state" from="." to="CamRoot" method="_on_set_movement_state"]
 [connection signal="on_player_landed" from="MovementController" to="LightDetectionRoot" method="_on_player_landed"]
 [connection signal="on_player_heading_to_light" from="LightDetectionRoot" to="MovementController" method="_on_player_heading_to_light"]
 [connection signal="on_player_land_in_light" from="LightDetectionRoot" to="MovementController" method="_on_player_land_in_light"]
