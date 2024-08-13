@@ -179,10 +179,5 @@ jump_states = {
 "jump": ExtResource("4_f1qbs")
 }
 
-[node name="Skeleton3D" parent="Player/MeshRoot/Root Scene/RootNode/CharacterArmature" index="0"]
-bones/0/rotation = Quaternion(0.707107, 0, 0, 0.707107)
-bones/2/rotation = Quaternion(0.688499, -0.161151, 0.161151, 0.688499)
-bones/4/rotation = Quaternion(4.44089e-16, 4.42751e-16, -1.24545e-24, 1)
-
 [editable path="Player"]
 [editable path="Player/MeshRoot/Root Scene"]

@@ -66,8 +66,11 @@ func movement_input_handler(event: InputEvent) -> void:
 		if is_movement_ongoing():
 			if Input.is_action_pressed("left") || Input.is_action_pressed("right") || Input.is_action_pressed("forward") || Input.is_action_pressed("back") :
 				set_movement_state.emit(movement_states['walk'])
+				if not AudioManager.slide.playing:
+					AudioManager.slide.play()
 		else:
 			set_movement_state.emit(movement_states['idle'])
+			AudioManager.slide.stop()
 
 func jump_input_handler(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2aygshtk8xds"]
+[gd_scene load_steps=7 format=3 uid="uid://b2aygshtk8xds"]
 
 [ext_resource type="Script" path="res://scenes/audio/audio_manager.gd" id="1_j3wew"]
 [ext_resource type="AudioStream" uid="uid://cofuc8g74rj6n" path="res://scenes/audio/Spring In My Step (i1jOvVfNwDQ).mp3" id="2_f81w8"]
 [ext_resource type="AudioStream" uid="uid://blbkq2h74miir" path="res://scenes/audio/jump.ogg" id="3_v0jcg"]
-[ext_resource type="Script" path="res://scenes/audio/Sliding.gd" id="4_afyk0"]
+[ext_resource type="Script" path="res://scenes/audio/slide.gd" id="4_afyk0"]
 [ext_resource type="AudioStream" uid="uid://hggrlnn5npws" path="res://scenes/audio/hi.mp3" id="4_n6lr4"]
+[ext_resource type="AudioStream" uid="uid://ce4pdchiltlo0" path="res://scenes/audio/slide.ogg" id="4_yqaun"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_j3wew")
@@ -18,8 +19,8 @@ bus = &"Music"
 stream = ExtResource("3_v0jcg")
 bus = &"SFX"
 
-[node name="Sliding" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_v0jcg")
+[node name="Slide" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_yqaun")
 bus = &"SFX"
 script = ExtResource("4_afyk0")
 
