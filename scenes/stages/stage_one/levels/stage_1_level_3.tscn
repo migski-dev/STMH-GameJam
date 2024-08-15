@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnxu5tcavj133"]
+[gd_scene load_steps=11 format=3 uid="uid://bnxu5tcavj133"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_5xtdy"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_dbpve"]
 [ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/objects/door/door.tscn" id="3_l6j1i"]
+[ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/visible_path/visible_path.tscn" id="4_0kjq0"]
 [ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/block/moveable_block.tscn" id="4_1cxs8"]
 [ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="5_cgpfu"]
 
@@ -49,20 +50,22 @@ size = Vector3(4.90974, 1, 2.54968)
 transform = Transform3D(2.50808, 0, 0, 0, 3.14872, 0, 0, 0, 1, 86.1765, 27.5026, 370.756)
 size = Vector3(5.90064, 3.85995, 10.0148)
 
-[node name="Player" parent="." instance=ExtResource("2_dbpve")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 339.926)
-
 [node name="Root Scene" parent="." instance=ExtResource("3_l6j1i")]
 transform = Transform3D(9.98384, 0, 0.568321, 0, 10, 0, -0.568321, 0, 9.98384, 87.5689, -0.99799, 461.09)
 
-[node name="interactable_anim" parent="." node_paths=PackedStringArray("player", "path") instance=ExtResource("4_1cxs8")]
+[node name="interactable_anim" parent="." node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("4_1cxs8")]
 transform = Transform3D(-0.999986, -2.33637e-05, 0.00536354, -4.90803e-12, 0.999991, 0.00435598, -0.00536359, 0.00435592, -0.999976, 86.9808, 6.59884, 373.449)
 player = NodePath("../Player")
 path = NodePath("../Path3D/PathFollow3D")
+visible_path = NodePath("../Path3D/VisiblePath")
 
 [node name="Path3D" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 9.15064e-10, 0, -9.15064e-10, 1, 86.9808, 6.59884, 373.449)
 curve = SubResource("Curve3D_h88h2")
+
+[node name="VisiblePath" parent="Path3D" instance=ExtResource("4_0kjq0")]
+transform = Transform3D(-0.999986, -2.33637e-05, 0.00536354, 0, 0.999991, 0.00435598, -0.00536359, 0.00435592, -0.999976, 0, 0, 0)
+path_node = NodePath("../PathFollow3D")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
 transform = Transform3D(-0.999986, -2.33637e-05, 0.00536354, 0, 0.999991, 0.00435598, -0.00536359, 0.00435592, -0.999976, 0, 0, 0)
@@ -87,3 +90,6 @@ shadow_enabled = true
 
 [node name="WorldEnvironment_MoonBurst" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_apk7v")
+
+[node name="Player" parent="." instance=ExtResource("2_dbpve")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 339.926)
