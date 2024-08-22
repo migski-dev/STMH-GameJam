@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://clmf5s5vyvx5r"]
+[gd_scene load_steps=21 format=3 uid="uid://clmf5s5vyvx5r"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_aoun8"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_lwndi"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/block/moveable_block.tscn" id="5_xogr8"]
 [ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="6_820ku"]
 [ext_resource type="Script" path="res://resources/emotion_state.gd" id="6_bcv4q"]
+[ext_resource type="Resource" uid="uid://dx2wunvnjbpx8" path="res://resources/emotion_states/anger.tres" id="6_lce0c"]
 [ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/objects/emotion/emotion.tscn" id="7_3t0e0"]
 [ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/visible_path/visible_path.tscn" id="8_ikxs8"]
 
@@ -27,7 +28,7 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_8tdag"]
+[sub_resource type="Resource" id="Resource_f670k"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -57,13 +58,6 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_kxcwi"]
-resource_local_to_scene = true
-script = ExtResource("6_bcv4q")
-emotion_name = "anger"
-color = Color(1.002, 0, 0, 1)
-color_fluctuate_array = Array[Color]([Color(1, 0.247059, 0.188235, 1), Color(0.552941, 0.0235294, 0, 1), Color(1, 0.388235, 0.321569, 1)])
-
 [sub_resource type="Curve3D" id="Curve3D_twly5"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -10.566, 0.0767689, 68.4807),
@@ -86,13 +80,6 @@ func play_glow() -> void:
 func end_glow() -> void: 
 	anim_player.play(\"RESET\", -1, 1, false)
 "
-
-[sub_resource type="Resource" id="Resource_xw0et"]
-resource_local_to_scene = true
-script = ExtResource("6_bcv4q")
-emotion_name = "anger"
-color = Color(1.002, 0, 0, 1)
-color_fluctuate_array = Array[Color]([Color(1, 0.247059, 0.188235, 1), Color(0.552941, 0.0235294, 0, 1), Color(1, 0.388235, 0.321569, 1)])
 
 [node name="StageOneLevelFive" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
@@ -150,7 +137,7 @@ environment = SubResource("Environment_pd4vg")
 
 [node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_3t0e0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5625, -0.671914, 422.156)
-emotion_state = SubResource("Resource_8tdag")
+emotion_state = SubResource("Resource_f670k")
 player = NodePath("../Player")
 
 [node name="MovableBlockContainer" type="Node3D" parent="."]
@@ -175,7 +162,7 @@ transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_kxcwi")
+required_emotion = ExtResource("6_lce0c")
 
 [node name="MovableBlockContainer2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.8438, 6.92323, 392.182)
@@ -199,7 +186,6 @@ transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_xw0et")
 
 [node name="Player" parent="." instance=ExtResource("2_lwndi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 341.72)

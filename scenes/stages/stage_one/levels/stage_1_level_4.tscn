@@ -51,9 +51,8 @@ size = Vector3(4.90974, 1, 3.28021)
 [node name="door" parent="." instance=ExtResource("3_hequ8")]
 transform = Transform3D(2.99515, 0, 0.170496, 0, 3, 0, -0.170496, 0, 2.99515, 84.5893, -1.11412, 436.347)
 
-[node name="TimeControlClock" parent="." node_paths=PackedStringArray("emotion_key", "directional_light") instance=ExtResource("4_73idq")]
+[node name="TimeControlClock" parent="." node_paths=PackedStringArray("directional_light") instance=ExtResource("4_73idq")]
 transform = Transform3D(60, 0, 0, 0, 60, 0, 0, 0, 60, 86.9902, 22.2644, 351.199)
-emotion_key = NodePath("../Emotion")
 directional_light = NodePath("../light_container")
 
 [node name="moveable_block" parent="." node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("5_rduit")]

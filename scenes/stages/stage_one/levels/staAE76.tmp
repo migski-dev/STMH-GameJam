@@ -41,7 +41,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_mpjeo"]
+[sub_resource type="Resource" id="Resource_an1dq"]
 resource_local_to_scene = true
 script = ExtResource("4_ur4nx")
 emotion_name = "anger"
@@ -83,12 +83,46 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_6tfyk"]
+[sub_resource type="GDScript" id="GDScript_mx418"]
 resource_local_to_scene = true
-script = ExtResource("4_ur4nx")
-emotion_name = "anger"
-color = Color(1.002, 0, 0, 1)
-color_fluctuate_array = Array[Color]([Color(1, 0.247059, 0.188235, 1), Color(0.552941, 0.0235294, 0, 1), Color(1, 0.388235, 0.321569, 1)])
+script/source = "extends CharacterBody3D
+class_name Emotion
+
+@export var emotion_state: EmotionState
+@export var player: CharacterBody3D
+@onready var mesh: MeshInstance3D = $CollisionShape3D/MeshInstance3D
+var follow_player: bool
+
+func _ready():
+	mesh.get_active_material(0).albedo_color = emotion_state.color
+	mesh.get_active_material(0).emission = emotion_state.color
+
+	
+func _process(delta):
+	if not EventManager.possession_mode and follow_player:
+		var emotion_transform: Vector3 = self.global_transform.origin
+		var player_transform: Vector3 = player.global_transform.origin
+		var distance: Vector3 = player_transform - emotion_transform
+		
+		if distance.length() > 1:
+			self.global_transform.origin = emotion_transform + distance / 100	
+
+
+func _on_snap_area_body_entered(body):
+	player.current_emotion = emotion_state
+	follow_player = true
+	
+func random_color_fluctuate() -> void:
+	mesh.get_active_material(0).emission = mesh.get_active_material(0).albedo_color
+	var dest_color = emotion_state.color_fluctuate_array.pick_random()
+	var speed = .5
+	mesh.get_active_material(0).emission = mesh.get_active_material(0).emission.lerp(dest_color, speed)
+	
+func reset_color() -> void: 
+	var dest_color = emotion_state.color
+	var speed = .5
+	mesh.get_active_material(0).emission = mesh.get_active_material(0).emission.lerp(dest_color, speed)
+"
 
 [node name="StageOneLevelSix" type="Node3D" groups=["levels"]]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -65, 0, -311.663)
@@ -200,7 +234,7 @@ transform = Transform3D(-0.833503, -0.44454, 0.328111, -1.49012e-08, 0.593849, 0
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_mpjeo")
+required_emotion = SubResource("Resource_an1dq")
 
 [node name="MovableBlockContainer3" type="Node3D" parent="."]
 transform = Transform3D(-3.12874, -17.5146, 9.13517, 0, 9.24904, 17.7329, -19.7538, 2.77408, -1.44689, -156.857, 76.368, 484.628)
@@ -263,12 +297,6 @@ transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 89.1627,
 [node name="house" parent="." instance=ExtResource("10_7fgp3")]
 transform = Transform3D(-2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 117, 0, 249)
 
-[node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_g0nt8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.3349, 1.87169, 289.762)
-emotion_state = SubResource("Resource_6tfyk")
-player = NodePath("../Player")
-
-[node name="Emotion2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_g0nt8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 0, 292)
-emotion_state = ExtResource("5_hbaft")
-player = NodePath("../Player")
+[node name="Emotion2" parent="." instance=ExtResource("5_g0nt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, 0, 254)
+script = SubResource("GDScript_mx418")

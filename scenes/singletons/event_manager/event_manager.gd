@@ -3,6 +3,7 @@ extends Node
 signal on_player_enter_new_shadow(object: CollisionObject3D)
 signal on_possession_exit_start
 signal on_possession_enter_start
+signal on_player_acquire_emotion(emotion: EmotionState)
 
 var current_light:  Light3D
 var light_blocking_object

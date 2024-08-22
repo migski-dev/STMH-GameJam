@@ -6,10 +6,11 @@
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_a3sjb")
-shader_parameter/outline_color = Color(255, 255, 255, 255)
-shader_parameter/outline_width = 1.0
-shader_parameter/player_in_shadow = false
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/size = 1.05
+shader_parameter/enable_shader = false
 
 [resource]
 resource_local_to_scene = true
 next_pass = SubResource("ShaderMaterial_kqsyo")
+albedo_color = Color(0.772549, 0.772549, 0.772549, 1)

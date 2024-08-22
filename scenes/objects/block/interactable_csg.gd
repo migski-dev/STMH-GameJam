@@ -7,6 +7,8 @@ signal on_possession_end(return_position: Vector3)
 @export var path: PathFollow3D
 @export var visible_path: CSGPolygon3D
 
+@export var required_emotion: EmotionState
+
 @onready var possession_ui: Node2D = $PossessionProgress
 var previous_position: Vector3
 var current_velocity: Vector3
@@ -21,8 +23,11 @@ var is_player_able_to_exit: bool = true
 var exclusion_array: Array = [] 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var mesh: MeshInstance3D = $StaticBody3D/MeshInstance3D
+var shader_material: ShaderMaterial
 
 func _ready():
+	shader_material = mesh.get_active_material(0).next_pass
+	shader_material.set_shader_parameter("color", required_emotion.color)
 	possession_ui.visible = false
 	CameraTransition.possession_enter_complete.connect(on_possession_enter)
 	CameraTransition.possession_exit_complete.connect(on_possession_exit)
@@ -30,7 +35,6 @@ func _ready():
 	previous_position = global_transform.origin
 	for interactable in get_tree().get_nodes_in_group('interactable_group'):
 		if interactable.is_class('CollisionObject3D'):
-			print(interactable.get_class())
 			exclusion_array.push_back(interactable.get_rid())
 
 

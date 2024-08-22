@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EmotionState" load_steps=2 format=3 uid="uid://srayy4n8l38n"]
+
+[ext_resource type="Script" path="res://resources/emotion_state.gd" id="1_miyub"]
+
+[resource]
+script = ExtResource("1_miyub")
+emotion_name = "anxiety"
+color = Color(0.839216, 0.74902, 0, 1)
+color_fluctuate_array = Array[Color]([Color(1, 0.901961, 0.32549, 1), Color(0.929412, 0.658824, 0, 1), Color(1, 0.937255, 0.101961, 1)])
