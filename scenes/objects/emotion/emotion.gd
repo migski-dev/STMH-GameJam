@@ -2,9 +2,10 @@ extends CharacterBody3D
 class_name Emotion
 
 @export var emotion_state: EmotionState
-@export var player: CharacterBody3D
+@export var player: Player
 @onready var mesh: MeshInstance3D = $CollisionShape3D/MeshInstance3D
 var follow_player: bool
+var follow_reference: CharacterBody3D
 
 func _ready():
 	mesh.get_active_material(0).albedo_color = emotion_state.color
@@ -14,16 +15,25 @@ func _ready():
 func _process(delta):
 	if not EventManager.possession_mode and follow_player:
 		var emotion_transform: Vector3 = self.global_transform.origin
-		var player_transform: Vector3 = player.global_transform.origin
-		var distance: Vector3 = player_transform - emotion_transform
+		var tail_transform: Vector3 = follow_reference.global_transform.origin
+		var distance: Vector3 = tail_transform - emotion_transform
 		
 		if distance.length() > 1:
 			self.global_transform.origin = emotion_transform + distance / 100	
 
 
 func _on_snap_area_body_entered(body):
-	player.current_emotion = emotion_state
-	follow_player = true
+	
+	if(follow_player == false):
+		player.current_emotion = emotion_state
+		if(player.current_emotion_orbs.size() == 0):
+			follow_reference = player
+		else:
+			follow_reference = player.current_emotion_orbs.back() 
+		player.current_emotion_orbs.push_back(self)
+		follow_player = true
+		print(player.current_emotion_orbs)
+	
 	
 func random_color_fluctuate() -> void:
 	mesh.get_active_material(0).emission = mesh.get_active_material(0).albedo_color

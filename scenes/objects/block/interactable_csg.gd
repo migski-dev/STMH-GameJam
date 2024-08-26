@@ -36,6 +36,8 @@ func _ready():
 	for interactable in get_tree().get_nodes_in_group('interactable_group'):
 		if interactable.is_class('CollisionObject3D'):
 			exclusion_array.push_back(interactable.get_rid())
+			
+
 
 
 func _physics_process(delta: float):
@@ -107,17 +109,28 @@ func on_possession_exit() -> void:
 	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == static_body):
 		possession_ui.hide_canvas_layer()
 		animation_player.play('possession', -1, -2.0, true)
-		animation_player.play('interact_glow', -1, 1, false)
+		#animation_player.play('interact_glow', -1, 1, false)
 		#animation_player.play('RESET', -1, 1, false)
 		
 		
 func _on_player_enter_new_shadow() -> void:
 	if EventManager.light_blocking_object == static_body : # or EventManager.lbo_instance == self.get_instance_id()
-		animation_player.play('interact_glow', -1, 1, false)
+		#animation_player.play('interact_glow', -1, 1, false)
+		emotion_color_glow_on()
 		if(visible_path.has_method("play_glow")):
 			visible_path.play_glow()
 	else:
-		animation_player.play('RESET', -1, 1, false)
+		#animation_player.play('RESET', -1, 1, false)
+		emotion_color_glow_off()
 		if(visible_path.has_method("end_glow")):
 			visible_path.end_glow()
 
+func emotion_color_glow_on() -> void:
+	var emotion_color: Color = required_emotion.color
+	var mesh_material: Material = mesh.get_active_material(0)
+	mesh_material.emission_enabled = true
+	mesh_material.emission = emotion_color * .25
+	
+func emotion_color_glow_off() -> void:
+	var mesh_material: Material = mesh.get_active_material(0)
+	mesh_material.emission_enabled = false

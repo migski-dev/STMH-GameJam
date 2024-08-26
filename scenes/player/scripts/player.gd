@@ -27,6 +27,7 @@ var moving_shadow_bias: Vector3 = Vector3.ZERO
 @onready var player_camera: Camera3D = $CamRoot/CamYaw/CamPitch/SpringArm3D/Camera3D
 var possession_locked: bool = false
 
+var current_emotion_orbs: Array[Emotion]
 var current_emotion: EmotionState
 var in_dialogue: bool = false
 
@@ -53,11 +54,19 @@ func _input(event: InputEvent) -> void:
 	if not EventManager.possession_mode and not movement_locked: 
 		movement_input_handler(event)
 		jump_input_handler(event)
-
+		
+func check_if_player_has_emotion(emotion: EmotionState) -> bool:
+	var emotion_name = emotion.emotion_name
+	for emotion_orb in current_emotion_orbs:
+		if emotion_name == emotion_orb.emotion_state.emotion_name:
+			return true
+	return false
+	
+	
 func possession_input_handler(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and is_on_floor() and EventManager.is_light_blocking_object_interactable() and not CameraTransition.transitioning:
 		if not EventManager.possession_mode:
-			if (not current_emotion == null) and EventManager.light_blocking_object.owner.required_emotion.emotion_name == current_emotion.emotion_name:
+			if (not current_emotion_orbs.size() == 0) and check_if_player_has_emotion(EventManager.light_blocking_object.owner.required_emotion):
 				EventManager.on_possession_enter_start.emit()
 				EventManager.possession_mode = true
 				CameraTransition.transition_camera(player_camera, EventManager.light_blocking_object.get_owner().possession_camera, 1.0)
@@ -124,3 +133,4 @@ func _on_player_acquire_emotion(emotion: EmotionState)->void:
 
 func _on_dialogue_ended(resource) -> void:
 	in_dialogue = false
+

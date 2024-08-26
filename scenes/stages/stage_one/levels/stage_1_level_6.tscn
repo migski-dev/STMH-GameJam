@@ -41,7 +41,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_mpjeo"]
+[sub_resource type="Resource" id="Resource_6l26v"]
 resource_local_to_scene = true
 script = ExtResource("4_ur4nx")
 emotion_name = "anger"
@@ -83,7 +83,7 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_6tfyk"]
+[sub_resource type="Resource" id="Resource_ype87"]
 resource_local_to_scene = true
 script = ExtResource("4_ur4nx")
 emotion_name = "anger"
@@ -200,7 +200,7 @@ transform = Transform3D(-0.833503, -0.44454, 0.328111, -1.49012e-08, 0.593849, 0
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_mpjeo")
+required_emotion = SubResource("Resource_6l26v")
 
 [node name="MovableBlockContainer3" type="Node3D" parent="."]
 transform = Transform3D(-3.12874, -17.5146, 9.13517, 0, 9.24904, 17.7329, -19.7538, 2.77408, -1.44689, -156.857, 76.368, 484.628)
@@ -265,7 +265,7 @@ transform = Transform3D(-2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 117, 0
 
 [node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_g0nt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.3349, 1.87169, 289.762)
-emotion_state = SubResource("Resource_6tfyk")
+emotion_state = SubResource("Resource_ype87")
 player = NodePath("../Player")
 
 [node name="Emotion2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_g0nt8")]

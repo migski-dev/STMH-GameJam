@@ -27,7 +27,7 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_8tdag"]
+[sub_resource type="Resource" id="Resource_c60lv"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -57,7 +57,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_kxcwi"]
+[sub_resource type="Resource" id="Resource_4mpfv"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -87,7 +87,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_xw0et"]
+[sub_resource type="Resource" id="Resource_6o2un"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -150,7 +150,7 @@ environment = SubResource("Environment_pd4vg")
 
 [node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_3t0e0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5625, -0.671914, 422.156)
-emotion_state = SubResource("Resource_8tdag")
+emotion_state = SubResource("Resource_c60lv")
 player = NodePath("../Player")
 
 [node name="MovableBlockContainer" type="Node3D" parent="."]
@@ -175,7 +175,7 @@ transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_kxcwi")
+required_emotion = SubResource("Resource_4mpfv")
 
 [node name="MovableBlockContainer2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.8438, 6.92323, 392.182)
@@ -199,7 +199,7 @@ transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_xw0et")
+required_emotion = SubResource("Resource_6o2un")
 
 [node name="Player" parent="." instance=ExtResource("2_lwndi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 341.72)
