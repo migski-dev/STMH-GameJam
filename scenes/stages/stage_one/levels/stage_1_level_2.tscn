@@ -66,9 +66,6 @@ shadow_enabled = true
 shadow_opacity = 0.8
 directional_shadow_mode = 0
 
-[node name="Player" parent="." instance=ExtResource("2_esims")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 363.322)
-
 [node name="Root Scene" parent="." instance=ExtResource("3_af37l")]
 transform = Transform3D(9.72464, 0, 2.33055, 0, 10, 0, -2.33055, 0, 9.72464, 88.5689, -0.99799, 437.044)
 
@@ -82,3 +79,6 @@ transform = Transform3D(1, 0, 0, 0, 0.849579, 0.527461, 0, -0.527461, 0.849579, 
 light_color = Color(0.52549, 0.619608, 0.733333, 1)
 light_energy = 0.32
 shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("2_esims")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 363.322)

@@ -11,7 +11,6 @@ func _on_moveable_block_on_object_move(path_progress) -> void:
 	canvas_layer.show()
 	progress = path_progress
 	progress_bar.value = progress
-	print(progress_bar.value)
 
 func hide_canvas_layer():
 	canvas_layer.hide()

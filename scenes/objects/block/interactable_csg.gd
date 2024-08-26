@@ -7,6 +7,8 @@ signal on_possession_end(return_position: Vector3)
 @export var path: PathFollow3D
 @export var visible_path: CSGPolygon3D
 
+@export var required_emotion: EmotionState
+
 @onready var possession_ui: Node2D = $PossessionProgress
 var previous_position: Vector3
 var current_velocity: Vector3
@@ -21,8 +23,11 @@ var is_player_able_to_exit: bool = true
 var exclusion_array: Array = [] 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var mesh: MeshInstance3D = $StaticBody3D/MeshInstance3D
+var shader_material: ShaderMaterial
 
 func _ready():
+	shader_material = mesh.get_active_material(0).next_pass
+	shader_material.set_shader_parameter("color", required_emotion.color)
 	possession_ui.visible = false
 	CameraTransition.possession_enter_complete.connect(on_possession_enter)
 	CameraTransition.possession_exit_complete.connect(on_possession_exit)
@@ -30,8 +35,9 @@ func _ready():
 	previous_position = global_transform.origin
 	for interactable in get_tree().get_nodes_in_group('interactable_group'):
 		if interactable.is_class('CollisionObject3D'):
-			print(interactable.get_class())
 			exclusion_array.push_back(interactable.get_rid())
+			
+
 
 
 func _physics_process(delta: float):
@@ -103,17 +109,28 @@ func on_possession_exit() -> void:
 	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == static_body):
 		possession_ui.hide_canvas_layer()
 		animation_player.play('possession', -1, -2.0, true)
-		animation_player.play('interact_glow', -1, 1, false)
+		#animation_player.play('interact_glow', -1, 1, false)
 		#animation_player.play('RESET', -1, 1, false)
 		
 		
 func _on_player_enter_new_shadow() -> void:
 	if EventManager.light_blocking_object == static_body : # or EventManager.lbo_instance == self.get_instance_id()
-		animation_player.play('interact_glow', -1, 1, false)
+		#animation_player.play('interact_glow', -1, 1, false)
+		emotion_color_glow_on()
 		if(visible_path.has_method("play_glow")):
 			visible_path.play_glow()
 	else:
-		animation_player.play('RESET', -1, 1, false)
+		#animation_player.play('RESET', -1, 1, false)
+		emotion_color_glow_off()
 		if(visible_path.has_method("end_glow")):
 			visible_path.end_glow()
 
+func emotion_color_glow_on() -> void:
+	var emotion_color: Color = required_emotion.color
+	var mesh_material: Material = mesh.get_active_material(0)
+	mesh_material.emission_enabled = true
+	mesh_material.emission = emotion_color * .25
+	
+func emotion_color_glow_off() -> void:
+	var mesh_material: Material = mesh.get_active_material(0)
+	mesh_material.emission_enabled = false

@@ -25,10 +25,12 @@ var tween: Tween
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+
 func _input(event):
 	if event is InputEventMouseMotion: 
 		yaw += -event.relative.x * yaw_sens
 		pitch += -event.relative.y * pitch_sens
+
 
 func _physics_process(delta):
 	pitch = clamp(pitch, pitch_min, pitch_max)
@@ -37,6 +39,7 @@ func _physics_process(delta):
 	pitch_node.rotation_degrees.x = lerp(pitch_node.rotation_degrees.x, pitch, pitch_accel * delta)
 	
 	set_cam_rotation.emit(yaw_node.rotation.y)
+
 
 func _on_set_movement_state(_movement_state: MovementState):
 	if tween:

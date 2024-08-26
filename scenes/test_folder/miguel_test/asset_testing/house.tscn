@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bloje3xa50k2e"]
+
+[ext_resource type="PackedScene" uid="uid://bnpovhc3kmm8d" path="res://scenes/test_folder/miguel_test/asset_testing/house.glb" id="1_fgwe3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u86kd"]
+metallic_specular = 0.0
+
+[node name="house" instance=ExtResource("1_fgwe3")]
+
+[node name="Box 6" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_u86kd")

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ShadowGame"
-run/main_scene="res://scenes/user_interface/main_menu/menu.tscn"
+run/main_scene="res://scenes/stages/stage_one/levels/stage_1_level_5.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 EventManager="*res://scenes/singletons/event_manager/event_manager.tscn"
 CameraTransition="*res://scenes/singletons/camera_transition/camera_transition.tscn"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [display]
 
@@ -28,6 +29,10 @@ window/size/viewport_height=768
 [editor]
 
 movie_writer/movie_file="C:/Users/NewDe/Documents/STMH_GameJam/demo_videos/intro_demo.avi"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 
@@ -74,6 +79,10 @@ interact={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://dialogue/player/missing_emotion.dialogue")
 
 [layer_names]
 
