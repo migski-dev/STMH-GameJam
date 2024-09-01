@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://cghl28s8qnkac"
+path="res://.godot/imported/missing_emotion.dialogue-b932260038362cde915e542248d7aa33.tres"
+
+[deps]
+
+source_file="res://assets/dialogue/player/missing_emotion.dialogue"
+dest_files=["res://.godot/imported/missing_emotion.dialogue-b932260038362cde915e542248d7aa33.tres"]
+
+[params]
+
+defaults=true

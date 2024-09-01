@@ -75,8 +75,8 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_348lu"]
 
 [node name="Emotion" type="CharacterBody3D"]
-collision_layer = 4
-collision_mask = 5
+collision_layer = 8
+collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_p52l5")
 

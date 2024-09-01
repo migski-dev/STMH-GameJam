@@ -74,7 +74,7 @@ func possession_input_handler(event: InputEvent) -> void:
 				if(not in_dialogue):
 					in_dialogue = true
 					var path = "player/missing_emotion.dialogue"
-					DialogueManager.show_dialogue_balloon(load("res://dialogue/" + path), "start")
+					DialogueManager.show_dialogue_balloon(load("res://assets/dialogue/" + path), "start")
 					await DialogueManager.dialogue_ended
 				
 		#else:

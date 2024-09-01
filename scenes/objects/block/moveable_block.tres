@@ -13,4 +13,5 @@ shader_parameter/enable_shader = false
 [resource]
 resource_local_to_scene = true
 next_pass = SubResource("ShaderMaterial_kqsyo")
+diffuse_mode = 2
 emission_enabled = true

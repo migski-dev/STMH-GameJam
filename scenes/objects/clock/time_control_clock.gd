@@ -8,6 +8,7 @@ extends Node3D
 @onready var possession_camera: Camera3D = $CamRoot/CamYaw/CamPitch/SpringArm3D/Camera3D
 @onready var raycast: RayCast3D = $RayCast3D
 @onready var target: Marker3D = $Marker3D
+@export var required_emotion: EmotionState
 
 var MOVE_SPEED: float = 0.0
 var animation_length: float

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cae7c02357q6r"]
+[gd_scene load_steps=21 format=3 uid="uid://cae7c02357q6r"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_at7ei"]
 [ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/objects/door/door.tscn" id="2_d3yub"]
@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://srayy4n8l38n" path="res://resources/emotion_states/anxiety.tres" id="5_hbaft"]
 [ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/visible_path/visible_path.tscn" id="6_44tv4"]
 [ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/block/moveable_block.tscn" id="7_0olbj"]
-[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="7_qd5ya"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="8_tkp8a"]
 [ext_resource type="PackedScene" uid="uid://bloje3xa50k2e" path="res://scenes/test_folder/miguel_test/asset_testing/house.tscn" id="10_7fgp3"]
 
@@ -15,11 +14,12 @@
 albedo_color = Color(0.792157, 0.792157, 0.792157, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eftls"]
+diffuse_mode = 2
 albedo_color = Color(0.8, 0.8, 0.8, 1)
 
 [sub_resource type="Curve3D" id="Curve3D_aor3d"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2.23229, -5.47391, 3.36755),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11.7928, 0.631599, 0.901749),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -41,7 +41,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_6l26v"]
+[sub_resource type="Resource" id="Resource_t60mn"]
 resource_local_to_scene = true
 script = ExtResource("4_ur4nx")
 emotion_name = "anger"
@@ -65,16 +65,13 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_66b4k"]
-panorama = ExtResource("7_qd5ya")
-
 [sub_resource type="Sky" id="Sky_iafvu"]
-sky_material = SubResource("PanoramaSkyMaterial_66b4k")
 
 [sub_resource type="Environment" id="Environment_pd4vg"]
 background_mode = 2
 sky = SubResource("Sky_iafvu")
 ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.97
 ssao_radius = 8.1
 ssao_intensity = 4.3
 glow_enabled = true
@@ -83,7 +80,7 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_ype87"]
+[sub_resource type="Resource" id="Resource_me6wo"]
 resource_local_to_scene = true
 script = ExtResource("4_ur4nx")
 emotion_name = "anger"
@@ -128,7 +125,7 @@ use_collision = true
 material = SubResource("StandardMaterial3D_eftls")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="PlayerStartContainer"]
-transform = Transform3D(74.0681, 0, 0, 0, 20.0184, 0, 0, 0, 20.0184, 101.23, 15.0549, 62.7568)
+transform = Transform3D(74.0681, 0, 0, 0, 20.0184, 0, 0, 0, 20.0184, 101.23, 13.0549, 62.7568)
 use_collision = true
 collision_layer = 3
 size = Vector3(1, 1.64563, 1)
@@ -141,7 +138,7 @@ collision_layer = 3
 material = SubResource("StandardMaterial3D_eftls")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="PlayerStartContainer"]
-transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 218.047, 3.44006, 22.4193)
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 218.047, 3.44006, 32.4193)
 use_collision = true
 collision_layer = 3
 material = SubResource("StandardMaterial3D_eftls")
@@ -165,7 +162,7 @@ collision_layer = 3
 material = SubResource("StandardMaterial3D_eftls")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="PlayerStartContainer"]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 183.557, 6.42395, 18.7629)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 183.557, 6.42395, 44.7629)
 use_collision = true
 collision_layer = 3
 size = Vector3(3.1698, 1, 1.46436)
@@ -179,13 +176,13 @@ size = Vector3(3.1698, 1, 1.46436)
 material = SubResource("StandardMaterial3D_eftls")
 
 [node name="MovableBlockContainer2" type="Node3D" parent="."]
-transform = Transform3D(-3.12874, -17.5146, 9.13517, 0, 9.24904, 17.7329, -19.7538, 2.77408, -1.44689, -156.857, 76.368, 369.628)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -156.857, 76.368, 369.628)
 
 [node name="Path3D" type="Path3D" parent="MovableBlockContainer2"]
 curve = SubResource("Curve3D_aor3d")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="MovableBlockContainer2/Path3D"]
-transform = Transform3D(-0.833503, -0.44454, 0.328111, -2.98023e-08, 0.593849, 0.804576, -0.552514, 0.670617, -0.494976, 0, 0, 0)
+transform = Transform3D(-0.0762435, -0.0531709, -0.99567, -1.86264e-09, 0.998577, -0.0533261, 0.997087, -0.00406578, -0.0761351, 0, 0, 0)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="MovableBlockContainer2/Path3D/PathFollow3D"]
 remote_path = NodePath("../../../moveable_block")
@@ -196,20 +193,20 @@ material = SubResource("StandardMaterial3D_6dyyt")
 script = SubResource("GDScript_iomjt")
 
 [node name="moveable_block" parent="MovableBlockContainer2" node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("7_0olbj")]
-transform = Transform3D(-0.833503, -0.44454, 0.328111, -1.49012e-08, 0.593849, 0.804576, -0.552514, 0.670617, -0.494976, 0, 0, 0)
+transform = Transform3D(-0.0762435, -0.0531709, -0.99567, -1.86264e-09, 0.998577, -0.0533261, 0.997087, -0.00406578, -0.0761351, 0, 0, 0)
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_6l26v")
+required_emotion = SubResource("Resource_t60mn")
 
 [node name="MovableBlockContainer3" type="Node3D" parent="."]
-transform = Transform3D(-3.12874, -17.5146, 9.13517, 0, 9.24904, 17.7329, -19.7538, 2.77408, -1.44689, -156.857, 76.368, 484.628)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -156.857, 76.368, 458.628)
 
 [node name="Path3D" type="Path3D" parent="MovableBlockContainer3"]
 curve = SubResource("Curve3D_aor3d")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="MovableBlockContainer3/Path3D"]
-transform = Transform3D(-0.833503, -0.44454, 0.328111, -2.98023e-08, 0.593849, 0.804576, -0.552514, 0.670617, -0.494976, 0, 0, 0)
+transform = Transform3D(-0.0762435, -0.0531709, -0.99567, -1.86264e-09, 0.998577, -0.0533261, 0.997087, -0.00406578, -0.0761351, 0, 0, 0)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="MovableBlockContainer3/Path3D/PathFollow3D"]
 remote_path = NodePath("../../../moveable_block")
@@ -220,7 +217,7 @@ material = SubResource("StandardMaterial3D_fknm6")
 script = SubResource("GDScript_pelj8")
 
 [node name="moveable_block" parent="MovableBlockContainer3" node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("7_0olbj")]
-transform = Transform3D(-0.833503, -0.44454, 0.328111, -1.49012e-08, 0.593849, 0.804576, -0.552514, 0.670617, -0.494976, 0, 0, 0)
+transform = Transform3D(-0.0762435, -0.0531709, -0.99567, -1.86264e-09, 0.998577, -0.0533261, 0.997087, -0.00406578, -0.0761351, 0, 0, 0)
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
@@ -243,10 +240,10 @@ directional_shadow_mode = 0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="light_container"]
 transform = Transform3D(1, 9.21359e-08, -1.486e-07, 0, 0.849893, 0.526956, 1.74846e-07, -0.526956, 0.849893, 0, 26.5368, 0)
-light_color = Color(0.52549, 0.619608, 0.733333, 1)
-light_energy = 0.32
+light_color = Color(0.462745, 0.462745, 0.462745, 1)
+light_energy = 5.0
 shadow_enabled = true
-directional_shadow_mode = 1
+directional_shadow_mode = 0
 
 [node name="WorldEnvironment_MoonBurst" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pd4vg")
@@ -265,7 +262,7 @@ transform = Transform3D(-2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 117, 0
 
 [node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_g0nt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.3349, 1.87169, 289.762)
-emotion_state = SubResource("Resource_ype87")
+emotion_state = SubResource("Resource_me6wo")
 player = NodePath("../Player")
 
 [node name="Emotion2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_g0nt8")]

@@ -23,7 +23,6 @@ func _process(delta):
 
 
 func _on_snap_area_body_entered(body):
-	
 	if(follow_player == false):
 		player.current_emotion = emotion_state
 		if(player.current_emotion_orbs.size() == 0):
@@ -32,7 +31,6 @@ func _on_snap_area_body_entered(body):
 			follow_reference = player.current_emotion_orbs.back() 
 		player.current_emotion_orbs.push_back(self)
 		follow_player = true
-		print(player.current_emotion_orbs)
 	
 	
 func random_color_fluctuate() -> void:

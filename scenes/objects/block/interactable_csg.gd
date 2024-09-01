@@ -24,6 +24,8 @@ var exclusion_array: Array = []
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var mesh: MeshInstance3D = $StaticBody3D/MeshInstance3D
 var shader_material: ShaderMaterial
+@onready var sprite3D: Sprite3D = $Sprite3D
+
 
 func _ready():
 	shader_material = mesh.get_active_material(0).next_pass
@@ -102,6 +104,7 @@ func get_shadow_position() -> void:
 func on_possession_enter() -> void:
 	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == static_body):
 		animation_player.play('possession', -1, 2.0, false)
+		prompt_text_off()
 		#animation_player.play('interact_glow', -1, 1, false)
 
 
@@ -109,6 +112,7 @@ func on_possession_exit() -> void:
 	if(EventManager.light_blocking_object == self or EventManager.light_blocking_object == static_body):
 		possession_ui.hide_canvas_layer()
 		animation_player.play('possession', -1, -2.0, true)
+		prompt_text_on()
 		#animation_player.play('interact_glow', -1, 1, false)
 		#animation_player.play('RESET', -1, 1, false)
 		
@@ -129,8 +133,22 @@ func emotion_color_glow_on() -> void:
 	var emotion_color: Color = required_emotion.color
 	var mesh_material: Material = mesh.get_active_material(0)
 	mesh_material.emission_enabled = true
-	mesh_material.emission = emotion_color * .25
+	mesh_material.emission = emotion_color * .4
+	prompt_text_on()
+	
 	
 func emotion_color_glow_off() -> void:
 	var mesh_material: Material = mesh.get_active_material(0)
 	mesh_material.emission_enabled = false
+	prompt_text_off()
+	
+	
+func prompt_text_on()-> void:
+	sprite3D.visible = true
+
+	
+func prompt_text_off()-> void:
+	sprite3D.visible = false
+	
+
+
