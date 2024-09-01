@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b22wtwkd21tjg"]
+
+[ext_resource type="PackedScene" uid="uid://hacud7cw4gqj" path="res://assets/models/classroom/chair.glb" id="1_vcjnd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o2usd"]
+
+[node name="school_chair" instance=ExtResource("1_vcjnd")]
+
+[node name="chair" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_o2usd")

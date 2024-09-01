@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://df4shrmumxwgu"]
+
+[ext_resource type="PackedScene" uid="uid://dljiv85782frx" path="res://assets/models/office/PRINCIPALOFFICEshelf.glb" id="1_ui014"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5hcmt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8g2t6"]
+
+[node name="PRINCIPALOFFICEshelf2" instance=ExtResource("1_ui014")]
+
+[node name="PRINCIPALOFFICEshelf" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_5hcmt")
+
+[node name="PRINCIPALOFFICEshelf_1" parent="PRINCIPALOFFICEshelf" index="0"]
+material_override = SubResource("StandardMaterial3D_8g2t6")
+
+[node name="PRINCIPALOFFICEshelf_2" parent="PRINCIPALOFFICEshelf" index="1"]
+material_override = SubResource("StandardMaterial3D_8g2t6")
+
+[node name="PRINCIPALOFFICEshelf_3" parent="PRINCIPALOFFICEshelf" index="2"]
+material_override = SubResource("StandardMaterial3D_8g2t6")
+
+[node name="PRINCIPALOFFICEshelf_4" parent="PRINCIPALOFFICEshelf" index="3"]
+material_override = SubResource("StandardMaterial3D_8g2t6")
+
+[node name="PRINCIPALOFFICEshelf_5" parent="PRINCIPALOFFICEshelf" index="4"]
+material_override = SubResource("StandardMaterial3D_8g2t6")
+
+[node name="PRINCIPALOFFICEshelf_6" parent="PRINCIPALOFFICEshelf" index="5"]
+material_override = SubResource("StandardMaterial3D_8g2t6")

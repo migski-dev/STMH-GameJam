@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_6vjgl"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_iapab"]
-[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/objects/door/door.tscn" id="3_hequ8"]
-[ext_resource type="PackedScene" uid="uid://dl8dhskt3uetn" path="res://scenes/objects/clock/time_control_clock.tscn" id="4_73idq"]
-[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/block/moveable_block.tscn" id="5_rduit"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/objects/possessable_objects/door/door.tscn" id="3_hequ8"]
+[ext_resource type="PackedScene" uid="uid://dl8dhskt3uetn" path="res://scenes/objects/possessable_objects/clock/time_control_clock.tscn" id="4_73idq"]
+[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/possessable_objects/block/moveable_block.tscn" id="5_rduit"]
 [ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="6_8divp"]
-[ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/visible_path/visible_path.tscn" id="6_84tgo"]
-[ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/objects/emotion/emotion.tscn" id="7_e6cfr"]
+[ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/possessable_objects/visible_path/visible_path.tscn" id="6_84tgo"]
+[ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/emotion/emotion.tscn" id="7_e6cfr"]
 
 [sub_resource type="Curve3D" id="Curve3D_yv6rg"]
 _data = {

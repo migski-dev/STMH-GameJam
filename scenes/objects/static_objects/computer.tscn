@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c77fsij02xnjt"]
+
+[ext_resource type="PackedScene" uid="uid://b1gn3no7knddp" path="res://assets/models/computer_room/COMPUTERscreen.glb" id="1_4paji"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3txw"]
+
+[node name="COMPUTERscreen2" instance=ExtResource("1_4paji")]
+
+[node name="COMPUTERscreen" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_o3txw")
