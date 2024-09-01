@@ -81,10 +81,6 @@ func is_in_shadow() -> bool:
 	if all_collide_with_same:
 		if not(colliding_object == EventManager.light_blocking_object):
 			EventManager.light_blocking_object = colliding_object
-			if(colliding_object.has_method('get_owner') and  colliding_object.get_owner().has_method('get_instance_id')):
-				EventManager.lbo_instance = colliding_object.get_owner().get_instance_id()
-			else:
-				EventManager.lbo_instance = null
 			
 			EventManager.on_player_enter_new_shadow.emit()
 			#player.on_player_enter_new_shadow.emit()

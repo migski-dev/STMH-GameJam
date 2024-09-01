@@ -91,7 +91,7 @@ interact={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://assets/dialogue/player/missing_emotion.dialogue")
+locale/translations_pot_files=PackedStringArray("res://assets/dialogue/player/missing_emotion.dialogue", "res://dialogue/player/missing_emotion.dialogue")
 
 [layer_names]
 

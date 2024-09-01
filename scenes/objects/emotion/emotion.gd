@@ -18,7 +18,7 @@ func _process(delta):
 		var tail_transform: Vector3 = follow_reference.global_transform.origin
 		var distance: Vector3 = tail_transform - emotion_transform
 		
-		if distance.length() > 1:
+		if distance.length() > 2.5:
 			self.global_transform.origin = emotion_transform + distance / 100	
 
 

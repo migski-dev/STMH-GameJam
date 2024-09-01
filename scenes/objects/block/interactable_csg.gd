@@ -118,7 +118,7 @@ func on_possession_exit() -> void:
 		
 		
 func _on_player_enter_new_shadow() -> void:
-	if EventManager.light_blocking_object == static_body : # or EventManager.lbo_instance == self.get_instance_id()
+	if EventManager.light_blocking_object == static_body :
 		#animation_player.play('interact_glow', -1, 1, false)
 		emotion_color_glow_on()
 		if(visible_path.has_method("play_glow")):
