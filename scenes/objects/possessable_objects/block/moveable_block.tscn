@@ -65,11 +65,10 @@ collision_mask = 2
 transform = Transform3D(4, -1.86265e-09, 2.98023e-08, 0, 4, 4.69154e-08, -2.98023e-08, -4.90109e-08, 4, 0, 0, 0)
 shape = SubResource("BoxShape3D_rluya")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" node_paths=PackedStringArray("static_body")]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(4, 0, 3.72529e-08, 0, 4, 7.67177e-08, -3.72529e-08, -7.88714e-08, 4, -1.19209e-07, 2.38419e-07, 0)
 mesh = SubResource("BoxMesh_xgrnf")
 script = ExtResource("3_ewg17")
-static_body = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

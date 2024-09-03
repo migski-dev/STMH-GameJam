@@ -1,7 +1,7 @@
 extends MeshInstance3D
 
 var shader_material : ShaderMaterial
-@export var static_body: StaticBody3D
+@onready var static_body: StaticBody3D = $StaticBody3D
 
 func _ready() -> void:
 	#EventManager.on_player_enter_new_shadow.connect(_on_player_enter_new_shadow)
@@ -13,7 +13,6 @@ func _ready() -> void:
 	
 func toggle_shader(enable: bool) -> void:
 	shader_material.set_shader_parameter("enable_shader", enable)
-#
 #func _on_player_enter_new_shadow() -> void: 
 	#if(static_body == null):
 		#return

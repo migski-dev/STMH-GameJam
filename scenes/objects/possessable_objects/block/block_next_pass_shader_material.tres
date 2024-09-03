@@ -3,7 +3,9 @@
 [ext_resource type="Shader" path="res://scenes/objects/possessable_objects/block/moveable_block.gdshader" id="1_tkfik"]
 
 [resource]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_tkfik")
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/color = Color(0.870588, 0, 0, 1)
 shader_parameter/size = 1.05
+shader_parameter/enable_shader = true

@@ -6,6 +6,7 @@ signal set_cam_rotation(_cam_rotation: float)
 @onready var pitch_node = $CamYaw/CamPitch
 @onready var camera = $CamYaw/CamPitch/SpringArm3D/Camera3D
 
+
 var yaw: float = 0
 var pitch: float = 0
 
@@ -27,17 +28,11 @@ func _ready():
 
 
 func _input(event):
-	if event is InputEventMouseMotion: 
-		yaw += -event.relative.x * yaw_sens
-		pitch += -event.relative.y * pitch_sens
-
-#func _process(delta):
-	#pitch = clamp(pitch, pitch_min, pitch_max)
-	#
-	#yaw_node.rotation_degrees.y = lerp(yaw_node.rotation_degrees.y, yaw, yaw_accel * delta)
-	#pitch_node.rotation_degrees.x = lerp(pitch_node.rotation_degrees.x, pitch, pitch_accel * delta)
-	#
-	#set_cam_rotation.emit(yaw_node.rotation.y)
+	pass
+	#if event is InputEventMouseMotion: 
+		#yaw += -event.relative.x * yaw_sens
+		#pitch += -event.relative.y * pitch_sens
+	
 
 func _physics_process(delta):
 	pitch = clamp(pitch, pitch_min, pitch_max)

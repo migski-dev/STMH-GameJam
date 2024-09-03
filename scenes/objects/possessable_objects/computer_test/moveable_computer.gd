@@ -25,7 +25,7 @@ var exclusion_array: Array = []
 @onready var mesh: MeshInstance3D = $COMPUTERscreen
 var shader_material: ShaderMaterial
 @onready var sprite3D: Sprite3D = $Sprite3D
-
+@onready var camera: Camera3D = $CamRoot/CamYaw/CamPitch/SpringArm3D/Camera3D
 
 func _ready():
 	shader_material = mesh.get_active_material(0).next_pass
@@ -51,6 +51,7 @@ func _physics_process(delta: float):
 	if Input.is_action_pressed("movement"):
 		MOVE_SPEED = Input.get_action_strength("right") - Input.get_action_strength("left")
 		move_object_on_path(delta)
+		
 	elif Input.is_action_pressed("interact"):
 		if not is_player_able_to_exit:
 			return
@@ -66,6 +67,7 @@ func _physics_process(delta: float):
 
 func move_object_on_path(delta: float):
 	var progress = clamp(path.progress_ratio + MOVE_SPEED/3 * delta, 0, 1)
+	camera.fov = clamp(camera.fov - MOVE_SPEED/4, 20, 140)
 	path.progress_ratio = progress
 	on_object_move.emit(path.progress_ratio)
 	

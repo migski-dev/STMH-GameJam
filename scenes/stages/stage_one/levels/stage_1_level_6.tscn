@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cae7c02357q6r"]
+[gd_scene load_steps=21 format=3 uid="uid://cae7c02357q6r"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_at7ei"]
 [ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/objects/possessable_objects/door/door.tscn" id="2_d3yub"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/emotion/emotion.tscn" id="5_g0nt8"]
 [ext_resource type="PackedScene" uid="uid://c5stjulqtxdj" path="res://scenes/objects/possessable_objects/computer_test/moveable_computer.tscn" id="5_vgdp7"]
 [ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/possessable_objects/visible_path/visible_path.tscn" id="6_44tv4"]
-[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/possessable_objects/block/moveable_block.tscn" id="7_0olbj"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="8_tkp8a"]
 [ext_resource type="PackedScene" uid="uid://b67jivsc31kab" path="res://scenes/objects/static_objects/school_desk.tscn" id="10_k71jx"]
 [ext_resource type="PackedScene" uid="uid://b22wtwkd21tjg" path="res://scenes/objects/static_objects/school_chair.tscn" id="11_0bnrq"]
@@ -23,30 +22,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dyyt"]
-transparency = 1
-albedo_color = Color(0, 0, 0, 0)
-
-[sub_resource type="GDScript" id="GDScript_iomjt"]
-resource_local_to_scene = true
-script/source = "extends CSGPolygon3D
-
-@onready var anim_player: AnimationPlayer =  $AnimationPlayer
-
-func play_glow() -> void:
-	anim_player.play(\"interact_glow\", -1, 1, false)
-
-func end_glow() -> void: 
-	anim_player.play(\"RESET\", -1, 1, false)
-"
-
-[sub_resource type="Resource" id="Resource_cgrbo"]
-resource_local_to_scene = true
-script = ExtResource("4_ur4nx")
-emotion_name = "anger"
-color = Color(1.002, 0, 0, 1)
-color_fluctuate_array = Array[Color]([Color(1, 0.247059, 0.188235, 1), Color(0.552941, 0.0235294, 0, 1), Color(1, 0.388235, 0.321569, 1)])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fknm6"]
 transparency = 1
@@ -65,7 +40,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_o3caw"]
+[sub_resource type="Resource" id="Resource_tg2q7"]
 resource_local_to_scene = true
 script = ExtResource("4_ur4nx")
 emotion_name = "anger"
@@ -87,7 +62,7 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_sieuv"]
+[sub_resource type="Resource" id="Resource_o741m"]
 resource_local_to_scene = true
 script = ExtResource("4_ur4nx")
 emotion_name = "anger"
@@ -126,30 +101,6 @@ material = SubResource("StandardMaterial3D_fiukr")
 [node name="PlayerStartContainer" type="Node3D" parent="."]
 transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 88.3677, 0, 241.133)
 
-[node name="MovableBlockContainer2" type="Node3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -156.857, 76.368, 1089.63)
-
-[node name="Path3D" type="Path3D" parent="MovableBlockContainer2"]
-curve = SubResource("Curve3D_aor3d")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="MovableBlockContainer2/Path3D"]
-transform = Transform3D(-0.0762434, -0.0531709, -0.99567, -1.86264e-09, 0.998577, -0.0533261, 0.997086, -0.00406578, -0.0761351, 0, 0, 0)
-
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="MovableBlockContainer2/Path3D/PathFollow3D"]
-remote_path = NodePath("../../../moveable_block")
-
-[node name="VisiblePath" parent="MovableBlockContainer2" instance=ExtResource("6_44tv4")]
-path_node = NodePath("../Path3D")
-material = SubResource("StandardMaterial3D_6dyyt")
-script = SubResource("GDScript_iomjt")
-
-[node name="moveable_block" parent="MovableBlockContainer2" node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("7_0olbj")]
-transform = Transform3D(-0.0762434, -0.0531709, -0.99567, -1.86264e-09, 0.998577, -0.0533261, 0.997086, -0.00406578, -0.0761351, 0, 0, 0)
-player = NodePath("../../Player")
-path = NodePath("../Path3D/PathFollow3D")
-visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_cgrbo")
-
 [node name="MovableBlockContainer3" type="Node3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 21.3025, 15.0392, 377.677)
 
@@ -175,7 +126,7 @@ transform = Transform3D(3.93402e-07, 0, -3.00001, 0, 3.00011, 0, 3, 0, 3.93403e-
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_o3caw")
+required_emotion = SubResource("Resource_tg2q7")
 
 [node name="door" parent="." instance=ExtResource("2_d3yub")]
 transform = Transform3D(0.85248, 0, -14.9758, 0, 15, 0, 14.9758, 0, 0.85248, 335.618, -1.11412, 386.29)
@@ -209,11 +160,11 @@ light_energy = 9.566
 spot_range = 20.858
 
 [node name="Player" parent="." instance=ExtResource("8_tkp8a")]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 84.9107, 1, 246.712)
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 66.9107, 1, 387.107)
 
 [node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_g0nt8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.3349, 1.87169, 474.392)
-emotion_state = SubResource("Resource_sieuv")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.342, 1.87169, 391.246)
+emotion_state = SubResource("Resource_o741m")
 player = NodePath("../Player")
 
 [node name="ObjectContainer" type="Node3D" parent="."]
@@ -267,17 +218,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.4781, 0, 375)
 [node name="book3" parent="RandomObjects" instance=ExtResource("14_pdclw")]
 transform = Transform3D(8.90445, 1.50137, -23.3122, 18.9277, -15.0856, 6.25819, -13.6913, -19.8789, -6.50987, 189.571, 25.1363, 84.2425)
 
+[node name="CollisionShape3D" parent="RandomObjects/book3/book/StaticBody3D" index="0"]
+disabled = true
+
 [node name="book6" parent="RandomObjects" instance=ExtResource("14_pdclw")]
 transform = Transform3D(15.8588, -15.3332, 11.764, 12.0311, -4.07659, -21.5322, 15.1246, 19.3203, 4.79298, 135.132, 27.8503, 75.4205)
 
-[node name="book7" parent="RandomObjects" instance=ExtResource("14_pdclw")]
-transform = Transform3D(-13.6904, -7.05761, -19.6917, 13.5254, -20.9394, -1.89854, -15.9574, -11.6932, 15.285, 186.43, 15.031, 112.749)
+[node name="CollisionShape3D" parent="RandomObjects/book6/book/StaticBody3D" index="0"]
+disabled = true
 
-[node name="book_0024" parent="RandomObjects" instance=ExtResource("14_ydxqh")]
-transform = Transform3D(27.071, 3.16918, -12.5346, 12.929, -6.63568, 26.2451, -7.21505e-06, -29.0848, -7.35363, 214.221, 19.4524, 94.2897)
+[node name="book7" parent="RandomObjects" instance=ExtResource("14_pdclw")]
+transform = Transform3D(-13.6904, -7.05761, -19.6917, 13.5254, -20.9394, -1.89854, -15.9574, -11.6932, 15.285, 166.286, 15.031, -65.7627)
+
+[node name="CollisionShape3D" parent="RandomObjects/book7/book/StaticBody3D" index="0"]
+disabled = true
 
 [node name="book_0025" parent="RandomObjects" instance=ExtResource("14_ydxqh")]
 transform = Transform3D(11.879, -1.88324, 27.4835, 22.9139, 17.2895, -8.71917, -15.2919, 24.4443, 8.28447, 131.313, 24.0807, 103.959)
+
+[node name="CollisionShape3D" parent="RandomObjects/book_0025/book_002/StaticBody3D" index="0"]
+disabled = true
 
 [node name="book8" parent="RandomObjects" instance=ExtResource("14_pdclw")]
 transform = Transform3D(8.90445, 1.50137, -23.3122, 18.9277, -15.0856, 6.25819, -13.6913, -19.8789, -6.50987, 189.571, 25.1363, -115.938)
@@ -297,17 +257,40 @@ transform = Transform3D(11.879, -1.88324, 27.4835, 22.9139, 17.2895, -8.71917, -
 [node name="SchoolDesk5" parent="RandomObjects" instance=ExtResource("10_k71jx")]
 transform = Transform3D(-12.9051, -7.3647, 20.1053, 1.75887, 23.0307, 9.5653, -21.3393, 6.35213, -11.3704, 170.541, 21.9614, 105.195)
 
+[node name="CollisionShape3D" parent="RandomObjects/SchoolDesk5/table/StaticBody3D" index="0"]
+disabled = true
+
 [node name="SchoolDesk6" parent="RandomObjects" instance=ExtResource("10_k71jx")]
 transform = Transform3D(7.88156, -11.0775, -20.9802, -10.3689, -21.4927, 7.45282, -21.3393, 6.35213, -11.3704, 277.961, 49.2574, 121.39)
+
+[node name="CollisionShape3D" parent="RandomObjects/SchoolDesk6/table/StaticBody3D" index="0"]
+disabled = true
 
 [node name="school_chair5" parent="RandomObjects" instance=ExtResource("11_0bnrq")]
 transform = Transform3D(0.616481, 24.1619, 6.38923, 21.1546, 2.89875, -13.0031, -13.308, 5.72712, -20.3739, 35.0008, 56.7933, 128.88)
 
-[node name="school_chair6" parent="RandomObjects" instance=ExtResource("11_0bnrq")]
-transform = Transform3D(-20.3109, -0.87701, -14.5499, 2.29029, 24.4528, -4.67105, 14.3952, -5.12786, -19.7859, 247.649, 48.0496, 152.728)
+[node name="CollisionShape3D" parent="RandomObjects/school_chair5/chair/StaticBody3D" index="0"]
+disabled = true
 
 [node name="school_chair7" parent="RandomObjects" instance=ExtResource("11_0bnrq")]
-transform = Transform3D(12.8285, 18.0203, 11.6491, 20.5307, -6.36207, -12.7677, -6.23863, 16.1182, -18.0633, 136.683, 21.6403, 149.773)
+transform = Transform3D(12.8285, 18.0203, 11.6491, 20.5307, -6.36207, -12.7677, -6.23863, 16.1182, -18.0633, 251.524, 21.6403, -85.8323)
+
+[node name="CollisionShape3D" parent="RandomObjects/school_chair7/chair/StaticBody3D" index="0"]
+disabled = true
 
 [node name="school_chair8" parent="RandomObjects" instance=ExtResource("11_0bnrq")]
 transform = Transform3D(-15.118, 7.31778, -18.5175, -19.5294, -9.97998, 12.0001, -3.87956, 21.7222, 11.7515, 247.649, 48.0496, 76.162)
+
+[node name="CollisionShape3D" parent="RandomObjects/school_chair8/chair/StaticBody3D" index="0"]
+disabled = true
+
+[editable path="MovableBlockContainer3/COMPUTERscreen2"]
+[editable path="RandomObjects/book3"]
+[editable path="RandomObjects/book6"]
+[editable path="RandomObjects/book7"]
+[editable path="RandomObjects/book_0025"]
+[editable path="RandomObjects/SchoolDesk5"]
+[editable path="RandomObjects/SchoolDesk6"]
+[editable path="RandomObjects/school_chair5"]
+[editable path="RandomObjects/school_chair7"]
+[editable path="RandomObjects/school_chair8"]

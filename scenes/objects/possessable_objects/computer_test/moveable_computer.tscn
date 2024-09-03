@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scenes/objects/possessable_objects/block/MeshInstance3D.gd" id="3_i0jfm"]
 [ext_resource type="Material" uid="uid://doucnfxtmg86b" path="res://scenes/objects/possessable_objects/block/block_next_pass_shader_material.tres" id="3_jnwt4"]
 [ext_resource type="PackedScene" uid="uid://dfyiu55hgaw74" path="res://scenes/user_interface/possession_progress/possession_progress.tscn" id="5_gddue"]
-[ext_resource type="Script" path="res://scenes/player/scripts/camera_controller.gd" id="6_p5v5s"]
+[ext_resource type="Script" path="res://scenes/objects/possessable_objects/object_camera.gd" id="6_tpyk2"]
 [ext_resource type="Texture2D" uid="uid://cqofk5kju2xed" path="res://assets/icons/keyboard_e.png" id="7_34p7p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3txw"]
@@ -62,23 +62,24 @@ libraries = {
 autoplay = "RESET"
 
 [node name="CamRoot" type="Node3D" parent="." index="3"]
-transform = Transform3D(1, -8.44011e-10, 1.06474e-14, 7.78281e-10, 0.922127, 0.386888, -3.26548e-10, -0.386888, 0.922127, 0, 0.0112813, -0.0223215)
-script = ExtResource("6_p5v5s")
+transform = Transform3D(1, -8.44011e-10, 1.06474e-14, 7.78281e-10, 0.922127, 0.386888, -3.26548e-10, -0.386888, 0.922127, 0, 0.357224, -0.0223215)
+script = ExtResource("6_tpyk2")
 
 [node name="CamYaw" type="Node3D" parent="CamRoot" index="0"]
 
 [node name="CamPitch" type="Node3D" parent="CamRoot/CamYaw" index="0"]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CamRoot/CamYaw/CamPitch" index="0"]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0)
+transform = Transform3D(-1, -6.11577e-08, 1.30073e-07, 1.33767e-08, 0.861435, 0.507869, -1.43109e-07, 0.507869, -0.861435, 0, 0, 0)
 shape = SubResource("SphereShape3D_vm6r1")
-spring_length = 2.0
+spring_length = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="CamRoot/CamYaw/CamPitch/SpringArm3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+transform = Transform3D(1, -2.44641e-07, 9.00174e-08, 2.44641e-07, 0.999999, -1.3411e-07, -9.00174e-08, 7.45058e-08, 0.999999, 0, 0.984, 0)
 cull_mask = 524287
 attributes = SubResource("CameraAttributesPractical_3a27g")
 current = true
+fov = 120.0
 
 [node name="RayCast3D" type="RayCast3D" parent="." index="4"]
 transform = Transform3D(0.0306866, 0.0286607, 0.999118, 0.00357662, 0.999579, -0.0287838, -0.999523, 0.00445674, 0.0305711, 0.01385, 0.18124, 0.092697)
@@ -88,7 +89,7 @@ collision_mask = 2
 transform = Transform3D(0.0306866, 0.0286607, 0.999118, 0.00357662, 0.999579, -0.0287838, -0.999523, 0.00445674, 0.0305711, 0.01385, 0.190884, -0.0651521)
 
 [node name="Sprite3D" type="Sprite3D" parent="." index="6"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 1.03935, 1.16385e-08)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.650332, 1.16385e-08)
 billboard = 1
 no_depth_test = true
 texture = ExtResource("7_34p7p")

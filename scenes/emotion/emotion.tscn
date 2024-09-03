@@ -76,7 +76,7 @@ _data = {
 
 [node name="Emotion" type="CharacterBody3D"]
 collision_layer = 8
-collision_mask = 9
+collision_mask = 8
 motion_mode = 1
 script = ExtResource("1_p52l5")
 
