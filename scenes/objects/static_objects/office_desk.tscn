@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ho0n4d7e4k1u"]
+
+[ext_resource type="PackedScene" uid="uid://cpwsm51uw2p0p" path="res://assets/models/office/PRINCIPALOFFICEdesk.glb" id="1_n6hgl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fanvd"]
+diffuse_mode = 2
+
+[node name="PRINCIPALOFFICEdesk2" instance=ExtResource("1_n6hgl")]
+
+[node name="PRINCIPALOFFICEdesk" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_fanvd")
+
+[node name="PRINCIPALOFFICEdesk_1" parent="PRINCIPALOFFICEdesk" index="0"]
+material_override = SubResource("StandardMaterial3D_fanvd")
+
+[node name="PRINCIPALOFFICEdesk_2" parent="PRINCIPALOFFICEdesk" index="1"]
+material_override = SubResource("StandardMaterial3D_fanvd")
+
+[node name="PRINCIPALOFFICEdesk_3" parent="PRINCIPALOFFICEdesk" index="2"]
+material_override = SubResource("StandardMaterial3D_fanvd")
+
+[node name="PRINCIPALOFFICEdesk_4" parent="PRINCIPALOFFICEdesk" index="3"]
+material_override = SubResource("StandardMaterial3D_fanvd")

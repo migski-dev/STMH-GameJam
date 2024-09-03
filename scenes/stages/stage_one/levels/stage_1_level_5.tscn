@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/emotion/emotion.tscn" id="7_3t0e0"]
 [ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/possessable_objects/visible_path/visible_path.tscn" id="8_ikxs8"]
 
-[sub_resource type="Resource" id="Resource_56xg6"]
+[sub_resource type="Resource" id="Resource_n0pv6"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -34,7 +34,7 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_2k6p1"]
+[sub_resource type="Resource" id="Resource_60jab"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -64,7 +64,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_vadlw"]
+[sub_resource type="Resource" id="Resource_eowin"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -94,7 +94,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_pfhsu"]
+[sub_resource type="Resource" id="Resource_5x77l"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -117,9 +117,9 @@ use_collision = true
 size = Vector3(22.1619, 1, 5.38646)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(55.6819, 0, 0, 0, 8.72314, 0, 0, 0, 1, 52.1739, 10.4355, 456.018)
+transform = Transform3D(55.6819, 0, 0, 0, 8.72314, 0, 0, 0, 1, 99.7087, 1.62903, 456.018)
 use_collision = true
-size = Vector3(1.82745, 3.53528, 1)
+size = Vector3(3.53482, 1.51618, 1)
 
 [node name="PlayerStartContainer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.3677, 0, 342.515)
@@ -134,7 +134,7 @@ transform = Transform3D(2.99515, 0, 0.170496, 0, 3, 0, -0.170496, 0, 2.99515, 14
 [node name="TimeControlClock" parent="." node_paths=PackedStringArray("directional_light") instance=ExtResource("4_t5s85")]
 transform = Transform3D(60, 0, 0, 0, 60, 0, 0, 0, 60, 154.275, 22.2644, 433.327)
 directional_light = NodePath("../light_container")
-required_emotion = SubResource("Resource_56xg6")
+required_emotion = SubResource("Resource_n0pv6")
 
 [node name="light_container" type="Node3D" parent="."]
 
@@ -158,7 +158,7 @@ environment = SubResource("Environment_pd4vg")
 
 [node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_3t0e0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5625, -0.671914, 375.156)
-emotion_state = SubResource("Resource_2k6p1")
+emotion_state = SubResource("Resource_60jab")
 player = NodePath("../Player")
 
 [node name="MovableBlockContainer" type="Node3D" parent="."]
@@ -183,7 +183,7 @@ transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_vadlw")
+required_emotion = SubResource("Resource_eowin")
 
 [node name="MovableBlockContainer2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.8438, 6.92323, 392.182)
@@ -207,7 +207,7 @@ transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_pfhsu")
+required_emotion = SubResource("Resource_5x77l")
 
 [node name="Player" parent="." instance=ExtResource("2_lwndi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 341.72)
