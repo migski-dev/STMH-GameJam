@@ -64,6 +64,7 @@ bind/3/bone = -1
 bind/3/pose = Transform3D(1, 0, 0, 0, 6.12323e-17, 1, 0, -1, 6.12323e-17, 0, -0.0137953, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxoyu"]
+render_priority = 1
 transparency = 1
 albedo_color = Color(0, 0, 0, 1)
 

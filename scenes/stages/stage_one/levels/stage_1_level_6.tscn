@@ -1,9 +1,9 @@
 [gd_scene load_steps=21 format=3 uid="uid://cae7c02357q6r"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_at7ei"]
-[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/objects/possessable_objects/door/door.tscn" id="2_d3yub"]
 [ext_resource type="Script" path="res://resources/emotion_state.gd" id="4_ur4nx"]
 [ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/emotion/emotion.tscn" id="5_g0nt8"]
+[ext_resource type="PackedScene" uid="uid://c2pdvbdktloaw" path="res://scenes/portal/portal.tscn" id="5_ro0b6"]
 [ext_resource type="PackedScene" uid="uid://c5stjulqtxdj" path="res://scenes/objects/possessable_objects/computer_test/moveable_computer.tscn" id="5_vgdp7"]
 [ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/possessable_objects/visible_path/visible_path.tscn" id="6_44tv4"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="8_tkp8a"]
@@ -18,7 +18,7 @@ albedo_color = Color(0.792157, 0.792157, 0.792157, 1)
 
 [sub_resource type="Curve3D" id="Curve3D_aor3d"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11.7928, 0.631599, 0.901749),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -40,7 +40,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_tg2q7"]
+[sub_resource type="Resource" id="Resource_k4axl"]
 resource_local_to_scene = true
 script = ExtResource("4_ur4nx")
 emotion_name = "anger"
@@ -62,7 +62,7 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_o741m"]
+[sub_resource type="Resource" id="Resource_x0mkg"]
 resource_local_to_scene = true
 script = ExtResource("4_ur4nx")
 emotion_name = "anger"
@@ -85,30 +85,30 @@ size = Vector3(46, 1, 6.0025)
 material = SubResource("StandardMaterial3D_fiukr")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744, -0.0050617, -0.000326336, 0.000567901, 65.7551, 262.834, 2.86253, 238.045)
+transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744, -0.0050617, -0.000326336, 0.000567901, 65.7551, 262.835, 2.86082, 260.267)
 operation = 2
 use_collision = true
-size = Vector3(32, 1.33801, 2.19099)
+size = Vector3(32, 1.33801, 2.86689)
 material = SubResource("StandardMaterial3D_fiukr")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744, -0.0050617, -0.000326336, 0.000567901, 65.7551, 262.833, 2.86424, 543.159)
+transform = Transform3D(8.63953, 0.000119657, 0.00248373, -0.000140128, 7.37744, -0.0050617, -0.000326336, 0.000567901, 65.7551, 262.833, 2.86444, 540.523)
 operation = 2
 use_collision = true
-size = Vector3(32, 1.33801, 3.08023)
+size = Vector3(32, 1.33801, 3.16042)
 material = SubResource("StandardMaterial3D_fiukr")
 
 [node name="PlayerStartContainer" type="Node3D" parent="."]
 transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 88.3677, 0, 241.133)
 
 [node name="MovableBlockContainer3" type="Node3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 21.3025, 15.0392, 377.677)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 21.3025, 15.0392, 393.916)
 
 [node name="Path3D" type="Path3D" parent="MovableBlockContainer3"]
 curve = SubResource("Curve3D_aor3d")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="MovableBlockContainer3/Path3D"]
-transform = Transform3D(-0.0762434, -0.0531709, -0.99567, -1.86264e-09, 0.998577, -0.0533261, 0.997086, -0.00406578, -0.0761351, 0, 0, 0)
+transform = Transform3D(-4.3711e-08, 0, -0.999993, 0, 1, 0, 0.99999, 0, -4.37111e-08, 0, 0, 0)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="MovableBlockContainer3/Path3D/PathFollow3D"]
 transform = Transform3D(1, 4.65661e-10, 0, 0, 1, 6.98492e-10, 0, 4.59841e-09, 1, 0, 0, 0)
@@ -126,10 +126,16 @@ transform = Transform3D(3.93402e-07, 0, -3.00001, 0, 3.00011, 0, 3, 0, 3.93403e-
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_tg2q7")
+required_emotion = SubResource("Resource_k4axl")
 
-[node name="door" parent="." instance=ExtResource("2_d3yub")]
-transform = Transform3D(0.85248, 0, -14.9758, 0, 15, 0, 14.9758, 0, 0.85248, 335.618, -1.11412, 386.29)
+[node name="CamRoot" parent="MovableBlockContainer3/COMPUTERscreen2" index="3"]
+transform = Transform3D(0.999922, 0.00484815, -0.0115553, 7.78281e-10, 0.922127, 0.386888, 0.0125311, -0.386858, 0.922055, 0, 0.357224, -0.0223215)
+
+[node name="Camera3D" parent="MovableBlockContainer3/COMPUTERscreen2/CamRoot/CamYaw/CamPitch/SpringArm3D" index="0"]
+cull_mask = 524285
+
+[node name="Portal" parent="." instance=ExtResource("5_ro0b6")]
+transform = Transform3D(0.85248, 0, -14.9758, 0, 15, 0, 14.9758, 0, 0.85248, 372.386, -1.11412, 394.29)
 
 [node name="light_container" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
@@ -148,6 +154,7 @@ transform = Transform3D(1, 9.21361e-08, -1.486e-07, 0, 0.849893, 0.526956, 1.748
 light_color = Color(0.462745, 0.462745, 0.462745, 1)
 light_energy = 5.0
 shadow_enabled = true
+shadow_blur = 0.5
 directional_shadow_mode = 0
 
 [node name="WorldEnvironment_MoonBurst" type="WorldEnvironment" parent="."]
@@ -160,42 +167,42 @@ light_energy = 9.566
 spot_range = 20.858
 
 [node name="Player" parent="." instance=ExtResource("8_tkp8a")]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 66.9107, 1, 387.107)
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 69.7549, 1, 264.653)
 
 [node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_g0nt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.342, 1.87169, 391.246)
-emotion_state = SubResource("Resource_o741m")
+emotion_state = SubResource("Resource_x0mkg")
 player = NodePath("../Player")
 
 [node name="ObjectContainer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.59076)
 
 [node name="SchoolDesk2" parent="ObjectContainer" instance=ExtResource("10_k71jx")]
-transform = Transform3D(-12.1472, -1.83237, 21.7736, 4.69895, 24.11, 4.65048, -21.3393, 6.35213, -11.3704, 45.0868, 17.5983, 253.279)
+transform = Transform3D(-12.1472, -1.83237, 21.7736, 4.69895, 24.11, 4.65048, -21.3393, 6.35213, -11.3704, 45.0868, 17.5983, 261.936)
 
 [node name="SchoolDesk4" parent="ObjectContainer" instance=ExtResource("10_k71jx")]
-transform = Transform3D(5.26671, -15.7527, -18.6846, -11.912, -18.344, 12.1078, -21.3393, 6.35213, -11.3704, 155.907, 19.2822, 269.474)
+transform = Transform3D(5.26671, -15.7527, -18.6846, -11.912, -18.344, 12.1078, -21.3393, 6.35213, -11.3704, 155.907, 19.2822, 278.131)
 
 [node name="school_chair" parent="ObjectContainer" instance=ExtResource("11_0bnrq")]
-transform = Transform3D(5.49759, 24.1766, 3.20505, 20.437, -2.77416, -14.1291, -13.308, 5.72712, -20.3739, -78.7065, 82.8651, 276.964)
+transform = Transform3D(6.10427, 23.8874, 4.13937, 20.437, -2.77416, -14.1291, -13.0409, 6.83379, -20.2048, -78.7065, 82.8651, 285.621)
 
 [node name="school_chair2" parent="ObjectContainer" instance=ExtResource("11_0bnrq")]
-transform = Transform3D(-19.2288, 4.8083, -15.236, 6.93059, 23.9914, -1.17544, 14.3952, -5.12786, -19.7859, 126.139, 25.1251, 300.812)
+transform = Transform3D(-19.2288, 4.8083, -15.236, 6.93059, 23.9914, -1.17544, 14.3952, -5.12786, -19.7859, 126.139, 25.1251, 309.469)
 
 [node name="school_chair4" parent="ObjectContainer" instance=ExtResource("11_0bnrq")]
-transform = Transform3D(17.2334, 16.0576, 8.37648, 17.0027, -10.3614, -15.1178, -6.23863, 16.1182, -18.0633, 12.0739, 25.1251, 297.858)
+transform = Transform3D(-8.02913, 14.3265, -18.849, 17.0027, -10.3614, -15.1178, -16.4755, -17.6747, -6.41582, 12.0739, 25.1251, 306.515)
 
 [node name="school_chair3" parent="ObjectContainer" instance=ExtResource("11_0bnrq")]
 transform = Transform3D(-19.2288, 4.80831, -15.236, -15.4985, -11.4031, 15.9614, -3.87956, 21.7222, 11.7515, 126.139, 25.1251, 224.246)
 
 [node name="SchoolDesk3" parent="ObjectContainer" instance=ExtResource("10_k71jx")]
-transform = Transform3D(-7.12947, -22.1306, 9.18747, -12.7229, 11.6189, 18.1144, -20.3051, 0.49028, -14.576, 22.1358, 18.381, 332.353)
+transform = Transform3D(3.62593, -19.5851, 15.1089, -12.7229, 11.6189, 18.1144, -21.2127, -10.3164, -8.28189, 22.1358, 18.381, 332.353)
 
 [node name="SchoolDesk7" parent="ObjectContainer" instance=ExtResource("10_k71jx")]
 transform = Transform3D(-3.99006, -24.2193, 4.74386, -14.0278, 6.17936, 19.7493, -20.3051, 0.490281, -14.576, 225.799, 17.4091, 292.8)
 
 [node name="PRINCIPALOFFICEdesk2" parent="ObjectContainer" instance=ExtResource("13_qhggc")]
-transform = Transform3D(-1.63413, -6.16956, 7.69845, 5.19671, -7.17129, -4.644, 8.38592, 3.24177, 4.37803, 32.5982, 19.5889, 505.905)
+transform = Transform3D(-8.48221, 2.796, 4.49826, 3.82734, 9.10647, 1.55676, -3.66106, 3.04211, -8.79444, 32.5982, 38.4248, 501.182)
 
 [node name="book2" parent="ObjectContainer" instance=ExtResource("14_pdclw")]
 transform = Transform3D(16.1923, -5.14662, -18.339, 13.2422, -14.2598, 15.694, -13.6913, -19.8789, -6.50987, 57.964, 17.0006, 434.74)

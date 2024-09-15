@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/emotion/emotion.tscn" id="7_3t0e0"]
 [ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/possessable_objects/visible_path/visible_path.tscn" id="8_ikxs8"]
 
-[sub_resource type="Resource" id="Resource_hxra8"]
+[sub_resource type="Resource" id="Resource_tlqw2"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -34,7 +34,7 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_qovk1"]
+[sub_resource type="Resource" id="Resource_qm3d0"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -64,7 +64,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_q4kxy"]
+[sub_resource type="Resource" id="Resource_pdasg"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -94,7 +94,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_n66kv"]
+[sub_resource type="Resource" id="Resource_2ce2t"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -134,7 +134,7 @@ transform = Transform3D(2.99515, 0, 0.170496, 0, 3, 0, -0.170496, 0, 2.99515, 14
 [node name="TimeControlClock" parent="." node_paths=PackedStringArray("directional_light") instance=ExtResource("4_t5s85")]
 transform = Transform3D(60, 0, 0, 0, 60, 0, 0, 0, 60, 154.275, 22.2644, 433.327)
 directional_light = NodePath("../light_container")
-required_emotion = SubResource("Resource_hxra8")
+required_emotion = SubResource("Resource_tlqw2")
 
 [node name="light_container" type="Node3D" parent="."]
 
@@ -158,7 +158,7 @@ environment = SubResource("Environment_pd4vg")
 
 [node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_3t0e0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5625, -0.671914, 375.156)
-emotion_state = SubResource("Resource_qovk1")
+emotion_state = SubResource("Resource_qm3d0")
 player = NodePath("../Player")
 
 [node name="MovableBlockContainer" type="Node3D" parent="."]
@@ -178,12 +178,9 @@ path_node = NodePath("../Path3D")
 material = SubResource("StandardMaterial3D_wqkuw")
 script = SubResource("GDScript_c2eto")
 
-[node name="moveable_block" parent="MovableBlockContainer" node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("5_xogr8")]
+[node name="moveable_block" parent="MovableBlockContainer" instance=ExtResource("5_xogr8")]
 transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999, -0.00110792, -0.152487, -0.00109496, -0.988305, 0, 0, 0)
-player = NodePath("../../Player")
-path = NodePath("../Path3D/PathFollow3D")
-visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_q4kxy")
+required_emotion = SubResource("Resource_pdasg")
 
 [node name="MovableBlockContainer2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.8438, 6.92323, 392.182)
@@ -202,12 +199,9 @@ path_node = NodePath("../Path3D")
 material = SubResource("StandardMaterial3D_rxuc2")
 script = SubResource("GDScript_gm6v4")
 
-[node name="moveable_block" parent="MovableBlockContainer2" node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("5_xogr8")]
+[node name="moveable_block" parent="MovableBlockContainer2" instance=ExtResource("5_xogr8")]
 transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999, -0.00110792, -0.152487, -0.00109496, -0.988305, 0, 0, 0)
-player = NodePath("../../Player")
-path = NodePath("../Path3D/PathFollow3D")
-visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_n66kv")
+required_emotion = SubResource("Resource_2ce2t")
 
 [node name="Player" parent="." instance=ExtResource("2_lwndi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 341.72)

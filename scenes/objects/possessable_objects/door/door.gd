@@ -10,6 +10,8 @@ var MOVE_SPEED: float = 0.0
 
 @onready var collision: CollisionShape3D = $"RootNode/door-rotate-square-c/door/StaticBody3D/CollisionShape3D"
 @onready var target: Marker3D = $"RootNode/door-rotate-square-c/Marker3D"
+@export var required_emotion: EmotionState
+
 var animation_length: float
 var casted_shadow_position: Vector3
 

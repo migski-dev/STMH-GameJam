@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2pdvbdktloaw"]
+
+[ext_resource type="Shader" path="res://scenes/objects/possessable_objects/door/door.gdshader" id="1_77wpa"]
+[ext_resource type="Texture2D" uid="uid://dedhgmomrhvjb" path="res://assets/textures/portaltexture.jpg" id="2_3xwep"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_bttei"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yi2us"]
+render_priority = 0
+shader = ExtResource("1_77wpa")
+shader_parameter/warp_ScreenSpace = false
+shader_parameter/texture_albedo = ExtResource("2_3xwep")
+
+[node name="Portal" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.40012, 0, 0, 0, 2.93199, 0, 0, 0, 0.0707011, 0, 1.48419, 0)
+layers = 2
+mesh = SubResource("SphereMesh_bttei")
+surface_material_override/0 = SubResource("ShaderMaterial_yi2us")

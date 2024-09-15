@@ -1,11 +1,23 @@
-[gd_scene load_steps=16 format=3 uid="uid://dl8dhskt3uetn"]
+[gd_scene load_steps=21 format=3 uid="uid://dl8dhskt3uetn"]
 
 [ext_resource type="Script" path="res://scenes/objects/possessable_objects/clock/time_control_clock.gd" id="1_875yr"]
 [ext_resource type="Texture2D" uid="uid://bs7fng1iuohw1" path="res://scenes/objects/possessable_objects/clock/textures/WhiteAndBlack_baseColor.png" id="1_cg2ni"]
 [ext_resource type="Script" path="res://scenes/player/scripts/camera_controller.gd" id="3_c6rkb"]
+[ext_resource type="Shader" path="res://scenes/objects/possessable_objects/block/moveable_block.gdshader" id="3_e28q2"]
+[ext_resource type="Script" path="res://scenes/objects/possessable_objects/clock/clock_outline.gd" id="4_drlqo"]
+[ext_resource type="Texture2D" uid="uid://cqofk5kju2xed" path="res://assets/icons/keyboard_e.png" id="4_l3mqb"]
+[ext_resource type="PackedScene" uid="uid://dfyiu55hgaw74" path="res://scenes/user_interface/possession_progress/possession_progress.tscn" id="7_f4i3r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkpyh"]
+render_priority = 0
+shader = ExtResource("3_e28q2")
+shader_parameter/color = Color(255, 255, 255, 255)
+shader_parameter/size = 1.05
+shader_parameter/enable_shader = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fo71q"]
 resource_name = "WhiteAndBlack"
+next_pass = SubResource("ShaderMaterial_jkpyh")
 cull_mode = 2
 albedo_texture = ExtResource("1_cg2ni")
 roughness = 0.6
@@ -119,14 +131,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("Sketchfab_model/Root/Obj_Clock/Obj_Hand_001")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.0130901, 0, 0.999914, 0.0333333, 1, 0, 0.0130901, 0, 0.999914, 0.0666667, 1, 0, 0.0209446, 0, 0.999781, 5.03333, 1, 0, 0.999945, 0, -0.0104713, 5.06667, 1, 0, -0.999781, 0, 0.0209446, 9.96667, 1, 0, -0.0104715, 0, 0.999945, 10, 1, 0, 0, 0, 1)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.0130901, 0, 0.999914, 0.0666667, 1, 0, 0.0209446, 0, 0.999781, 5.03333, 1, 0, 0.999945, 0, -0.0104713, 5.06667, 1, 0, -0.999781, 0, 0.0209446, 9.96667, 1, 0, -0.0104715, 0, 0.999945, 10, 1, 0, 0, 0, 1)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = true
 tracks/1/enabled = true
 tracks/1/path = NodePath("Sketchfab_model/Root/Obj_Clock/Obj_Hand")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.15643, 0, 0.987689, 0.0333333, 1, 0, 0.15643, 0, 0.987689, 0.4, 1, 0, 0.998027, 0, -0.0627862, 0.466667, 1, 0, -0.982286, 0, 0.187388, 0.8, 1, 0, -0.125337, 0, 0.992114, 0.833333, 1, 0, 1.2582e-05, 0, 1, 1, 1, 0, 0.15643, 0, 0.987689, 1.03333, 1, 0, 0.15643, 0, 0.987689, 1.4, 1, 0, 0.998027, 0, -0.0627862, 1.46667, 1, 0, -0.982286, 0, 0.187388, 1.8, 1, 0, -0.125337, 0, 0.992114, 1.83333, 1, 0, 1.2582e-05, 0, 1, 2, 1, 0, 0.15643, 0, 0.987689, 2.03333, 1, 0, 0.15643, 0, 0.987689, 2.4, 1, 0, 0.998027, 0, -0.0627862, 2.46667, 1, 0, -0.982286, 0, 0.187388, 2.8, 1, 0, -0.125337, 0, 0.992114, 2.83333, 1, 0, 1.2582e-05, 0, 1, 3, 1, 0, 0.15643, 0, 0.987689, 3.03333, 1, 0, 0.15643, 0, 0.987689, 3.4, 1, 0, 0.998027, 0, -0.0627862, 3.46667, 1, 0, -0.982286, 0, 0.187388, 3.8, 1, 0, -0.125337, 0, 0.992114, 3.83333, 1, 0, 1.2582e-05, 0, 1, 4, 1, 0, 0.15643, 0, 0.987689, 4.03333, 1, 0, 0.15643, 0, 0.987689, 4.4, 1, 0, 0.998027, 0, -0.0627862, 4.46667, 1, 0, -0.982286, 0, 0.187388, 4.8, 1, 0, -0.125337, 0, 0.992114, 4.83333, 1, 0, 1.2582e-05, 0, 1, 5, 1, 0, 0.15643, 0, 0.987689, 5.03333, 1, 0, 0.15643, 0, 0.987689, 5.4, 1, 0, 0.998027, 0, -0.0627862, 5.46667, 1, 0, -0.982286, 0, 0.187388, 5.8, 1, 0, -0.125337, 0, 0.992114, 5.83333, 1, 0, 1.2582e-05, 0, 1, 6, 1, 0, 0.15643, 0, 0.987689, 6.03333, 1, 0, 0.15643, 0, 0.987689, 6.4, 1, 0, 0.998027, 0, -0.0627862, 6.46667, 1, 0, -0.982286, 0, 0.187388, 6.8, 1, 0, -0.125337, 0, 0.992114, 6.83333, 1, 0, 1.2582e-05, 0, 1, 7, 1, 0, 0.15643, 0, 0.987689, 7.03333, 1, 0, 0.15643, 0, 0.987689, 7.4, 1, 0, 0.998027, 0, -0.0627862, 7.46667, 1, 0, -0.982286, 0, 0.187388, 7.8, 1, 0, -0.125337, 0, 0.992114, 7.83333, 1, 0, 1.2582e-05, 0, 1, 8, 1, 0, 0.15643, 0, 0.987689, 8.03333, 1, 0, 0.15643, 0, 0.987689, 8.4, 1, 0, 0.998027, 0, -0.0627862, 8.46667, 1, 0, -0.982286, 0, 0.187388, 8.8, 1, 0, -0.125337, 0, 0.992114, 8.83333, 1, 0, 1.2582e-05, 0, 1, 9, 1, 0, 0.15643, 0, 0.987689, 9.03333, 1, 0, 0.15643, 0, 0.987689, 9.4, 1, 0, 0.998027, 0, -0.0627862, 9.46667, 1, 0, -0.982286, 0, 0.187388, 9.8, 1, 0, -0.125337, 0, 0.992114, 9.83333, 1, 0, 1.2582e-05, 0, 1)
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.1, 0, 0, 0.4, 1, 0, 0.1, 0, -0.063, 0.466667, 1, 0, -0.982286, 0, 0.187388, 0.8, 1, 0, -0.125337, 0, 0.992114, 0.833333, 1, 0, 1.2582e-05, 0, 1, 1, 1, 0, 0.15643, 0, 0.987689, 1.03333, 1, 0, 0.15643, 0, 0.987689, 1.4, 1, 0, 0.998027, 0, -0.0627862, 1.46667, 1, 0, -0.982286, 0, 0.187388, 1.8, 1, 0, -0.125337, 0, 0.992114, 1.83333, 1, 0, 1.2582e-05, 0, 1, 2, 1, 0, 0.15643, 0, 0.987689, 2.03333, 1, 0, 0.15643, 0, 0.987689, 2.4, 1, 0, 0.998027, 0, -0.0627862, 2.46667, 1, 0, -0.982286, 0, 0.187388, 2.8, 1, 0, -0.125337, 0, 0.992114, 2.83333, 1, 0, 1.2582e-05, 0, 1, 3, 1, 0, 0.15643, 0, 0.987689, 3.03333, 1, 0, 0.15643, 0, 0.987689, 3.4, 1, 0, 0.998027, 0, -0.0627862, 3.46667, 1, 0, -0.982286, 0, 0.187388, 3.8, 1, 0, -0.125337, 0, 0.992114, 3.83333, 1, 0, 1.2582e-05, 0, 1, 4, 1, 0, 0.15643, 0, 0.987689, 4.03333, 1, 0, 0.15643, 0, 0.987689, 4.4, 1, 0, 0.998027, 0, -0.0627862, 4.46667, 1, 0, -0.982286, 0, 0.187388, 4.8, 1, 0, -0.125337, 0, 0.992114, 4.83333, 1, 0, 1.2582e-05, 0, 1, 5, 1, 0, 0.15643, 0, 0.987689, 5.03333, 1, 0, 0.15643, 0, 0.987689, 5.4, 1, 0, 0.998027, 0, -0.0627862, 5.46667, 1, 0, -0.982286, 0, 0.187388, 5.8, 1, 0, -0.125337, 0, 0.992114, 5.83333, 1, 0, 1.2582e-05, 0, 1, 6, 1, 0, 0.15643, 0, 0.987689, 6.03333, 1, 0, 0.15643, 0, 0.987689, 6.4, 1, 0, 0.998027, 0, -0.0627862, 6.46667, 1, 0, -0.982286, 0, 0.187388, 6.8, 1, 0, -0.125337, 0, 0.992114, 6.83333, 1, 0, 1.2582e-05, 0, 1, 7, 1, 0, 0.15643, 0, 0.987689, 7.03333, 1, 0, 0.15643, 0, 0.987689, 7.4, 1, 0, 0.998027, 0, -0.0627862, 7.46667, 1, 0, -0.982286, 0, 0.187388, 7.8, 1, 0, -0.125337, 0, 0.992114, 7.83333, 1, 0, 1.2582e-05, 0, 1, 8, 1, 0, 0.15643, 0, 0.987689, 8.03333, 1, 0, 0.15643, 0, 0.987689, 8.4, 1, 0, 0.998027, 0, -0.0627862, 8.46667, 1, 0, -0.982286, 0, 0.187388, 8.8, 1, 0, -0.125337, 0, 0.992114, 8.83333, 1, 0, 1.2582e-05, 0, 1, 9, 1, 0, 0.15643, 0, 0.987689, 9.03333, 1, 0, 0.15643, 0, 0.987689, 9.4, 1, 0, 0.998027, 0, -0.0627862, 9.46667, 1, 0, -0.982286, 0, 0.187388, 9.8, 1, 0, -0.125337, 0, 0.992114, 9.83333, 1, 0, 1.2582e-05, 0, 1)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ckrnx"]
 _data = {
@@ -169,6 +181,7 @@ transform = Transform3D(-0.29086, -0.7711, 0.56639, 0.95517, -0.19988, 0.21839, 
 [node name="Obj_Clock_0" type="MeshInstance3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock"]
 mesh = SubResource("ArrayMesh_v10ka")
 skeleton = NodePath("")
+script = ExtResource("4_drlqo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock/Obj_Clock_0" groups=["interactable_group"]]
 
@@ -184,7 +197,7 @@ mesh = SubResource("ArrayMesh_6rjw1")
 skeleton = NodePath("")
 
 [node name="Obj_Hand" type="Node3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock"]
-transform = Transform3D(0.951059, 0, 0.309008, 0, 1, 0, -0.309008, 0, 0.951059, 0, -0.02172, 0.02906)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02172, 0.02906)
 
 [node name="Obj_Hand_0" type="MeshInstance3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock/Obj_Hand"]
 mesh = SubResource("ArrayMesh_dpyks")
@@ -198,6 +211,7 @@ root_node = NodePath("../Sketchfab_Scene")
 libraries = {
 "": SubResource("AnimationLibrary_ckrnx")
 }
+autoplay = "Take 01"
 
 [node name="CamRoot" type="Node3D" parent="."]
 script = ExtResource("3_c6rkb")
@@ -215,3 +229,11 @@ spring_length = 0.7
 cull_mask = 524287
 attributes = SubResource("CameraAttributesPractical_3a27g")
 current = true
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.275908, 1.16385e-08)
+billboard = 1
+no_depth_test = true
+texture = ExtResource("4_l3mqb")
+
+[node name="PossessionProgress" parent="." instance=ExtResource("7_f4i3r")]

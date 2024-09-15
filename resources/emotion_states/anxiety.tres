@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://resources/emotion_state.gd" id="1_miyub"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_miyub")
 emotion_name = "anxiety"
 color = Color(0.839216, 0.74902, 0, 1)

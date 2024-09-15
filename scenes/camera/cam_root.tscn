@@ -23,7 +23,7 @@ script = ExtResource("1_kmv3v")
 [node name="SpringArm3D" type="SpringArm3D" parent="CamYaw/CamPitch"]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0)
 shape = SubResource("SphereShape3D_vm6r1")
-spring_length = 10.0
+spring_length = 6.0
 
 [node name="Camera3D" type="Camera3D" parent="CamYaw/CamPitch/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
