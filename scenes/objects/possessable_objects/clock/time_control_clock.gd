@@ -14,6 +14,8 @@ var shader_material: ShaderMaterial
 @onready var sprite3D: Sprite3D = $Sprite3D
 @onready var static_body = $Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock/Obj_Clock_0/StaticBody3D
 @onready var possession_ui: Node2D = $PossessionProgress
+@onready var minute_hand: Node3D = $Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock/Obj_Hand
+@onready var hour_hand = $Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock/Obj_Hand_001
 
 var MOVE_SPEED: float = 0.0
 var animation_length: float
@@ -41,40 +43,39 @@ func _physics_process(delta):
 		return
 	get_shadow_position()
 	if Input.is_action_pressed("right"):
-		if(animation_player.current_animation_position < animation_length):
-			animation_player.play('Take 01', -1, 1.5, false)
-			var current_basis = directional_light.transform.basis
-			var current_quat = Quaternion(current_basis)
+		minute_hand.rotate_y(.1)
+		hour_hand.rotate_y(0.016)
+		var current_basis = directional_light.transform.basis
+		var current_quat = Quaternion(current_basis)
+		
+		var rotation_angle = deg_to_rad(1)
+		var rotation_quat = Quaternion(Vector3(0,1,0), rotation_angle)
+		
+		var global_transform = Transform3D(current_basis)
+		var rotation_basis = Basis(rotation_quat)
+		
+		var target_basis = current_basis * rotation_basis
+		var target_quat = target_basis.get_rotation_quaternion()
+		
+		var lerped_quat = current_quat.slerp(target_quat, 0.5)
+		directional_light.transform.basis = Basis(lerped_quat)
 			
-			var rotation_angle = deg_to_rad(1)
-			var rotation_quat = Quaternion(Vector3(0,1,0), rotation_angle)
-			
-			var global_transform = Transform3D(current_basis)
-			var rotation_basis = Basis(rotation_quat)
-			
-			var target_basis = current_basis * rotation_basis
-			var target_quat = target_basis.get_rotation_quaternion()
-			
-			var lerped_quat = current_quat.slerp(target_quat, 0.5)
-			directional_light.transform.basis = Basis(lerped_quat)
-			
-	elif Input.is_action_pressed("left"):
-		if(animation_player.current_animation_position > 0):
-			animation_player.play('Take 01', -1, -1.5, false)
-			
-			var current_basis = directional_light.transform.basis
-			var current_quat = Quaternion(current_basis)
-			
-			var rotation_angle = deg_to_rad(-1)
-			var rotation_quat = Quaternion(Vector3(0,1,0), rotation_angle)
-			
-			var rotation_basis = Basis(rotation_quat)
-			
-			var target_basis = current_basis * rotation_basis
-			var target_quat = target_basis.get_rotation_quaternion()
-			
-			var lerped_quat = current_quat.slerp(target_quat, 0.5)
-			directional_light.transform.basis = Basis(lerped_quat)
+	elif Input.is_action_pressed("left"):	
+		minute_hand.rotate_y(-.1)
+		hour_hand.rotate_y(-0.016)
+		var current_basis = directional_light.transform.basis
+		var current_quat = Quaternion(current_basis)
+		
+		var rotation_angle = deg_to_rad(-1)
+		var rotation_quat = Quaternion(Vector3(0,1,0), rotation_angle)
+		
+		var rotation_basis = Basis(rotation_quat)
+		
+		var target_basis = current_basis * rotation_basis
+		var target_quat = target_basis.get_rotation_quaternion()
+		
+		var lerped_quat = current_quat.slerp(target_quat, 0.5)
+		directional_light.transform.basis = Basis(lerped_quat)
 			
 	elif Input.is_action_pressed("interact"):
 		if(EventManager.possession_mode):

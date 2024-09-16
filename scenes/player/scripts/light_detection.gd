@@ -59,7 +59,6 @@ func is_in_shadow() -> bool:
 	var colliding_position: Vector3
 	var all_collide_with_same: bool = true
 	var player_in_shadow:bool = false
-	var test: CollisionObject3D
 	
 	for light_check_raycast in raycast_array:
 		raycast_to_light_source(light_check_raycast, player_position)

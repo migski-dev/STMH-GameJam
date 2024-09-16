@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cae7c02357q6r"]
+[gd_scene load_steps=23 format=3 uid="uid://cae7c02357q6r"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_at7ei"]
 [ext_resource type="Script" path="res://resources/emotion_state.gd" id="4_ur4nx"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c2pdvbdktloaw" path="res://scenes/portal/portal.tscn" id="5_ro0b6"]
 [ext_resource type="PackedScene" uid="uid://c5stjulqtxdj" path="res://scenes/objects/possessable_objects/computer_test/moveable_computer.tscn" id="5_vgdp7"]
 [ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/possessable_objects/visible_path/visible_path.tscn" id="6_44tv4"]
+[ext_resource type="Script" path="res://resources/jump_state.gd" id="7_o0rwq"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="8_tkp8a"]
 [ext_resource type="PackedScene" uid="uid://b67jivsc31kab" path="res://scenes/objects/static_objects/school_desk.tscn" id="10_k71jx"]
 [ext_resource type="PackedScene" uid="uid://b22wtwkd21tjg" path="res://scenes/objects/static_objects/school_chair.tscn" id="11_0bnrq"]
@@ -40,7 +41,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_k4axl"]
+[sub_resource type="Resource" id="Resource_bssi3"]
 resource_local_to_scene = true
 script = ExtResource("4_ur4nx")
 emotion_name = "anger"
@@ -62,7 +63,14 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_x0mkg"]
+[sub_resource type="Resource" id="Resource_hf503"]
+resource_local_to_scene = true
+script = ExtResource("7_o0rwq")
+animation_name = "JumpingUp(1)0"
+jump_height = 8.0
+apex_duration = 0.2
+
+[sub_resource type="Resource" id="Resource_wh2x4"]
 resource_local_to_scene = true
 script = ExtResource("4_ur4nx")
 emotion_name = "anger"
@@ -126,7 +134,7 @@ transform = Transform3D(3.93402e-07, 0, -3.00001, 0, 3.00011, 0, 3, 0, 3.93403e-
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_k4axl")
+required_emotion = SubResource("Resource_bssi3")
 
 [node name="CamRoot" parent="MovableBlockContainer3/COMPUTERscreen2" index="3"]
 transform = Transform3D(0.999922, 0.00484815, -0.0115553, 7.78281e-10, 0.922127, 0.386888, 0.0125311, -0.386858, 0.922055, 0, 0.357224, -0.0223215)
@@ -168,10 +176,11 @@ spot_range = 20.858
 
 [node name="Player" parent="." instance=ExtResource("8_tkp8a")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 69.7549, 1, 264.653)
+default_jump = SubResource("Resource_hf503")
 
 [node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_g0nt8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.342, 1.87169, 391.246)
-emotion_state = SubResource("Resource_x0mkg")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.342, 0.796373, 391.246)
+emotion_state = SubResource("Resource_wh2x4")
 player = NodePath("../Player")
 
 [node name="ObjectContainer" type="Node3D" parent="."]

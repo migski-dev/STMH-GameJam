@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b4id8yc3aiopo"]
+[gd_scene load_steps=28 format=3 uid="uid://b4id8yc3aiopo"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_gkhvj"]
 [ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/possessable_objects/visible_path/visible_path.tscn" id="2_rmmut"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="6_tqsuy"]
 [ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/emotion/emotion.tscn" id="7_o88tx"]
 [ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/possessable_objects/block/moveable_block.tscn" id="8_8fuf2"]
+[ext_resource type="Script" path="res://resources/jump_state.gd" id="10_jxylr"]
 
 [sub_resource type="Curve3D" id="Curve3D_pi5ww"]
 _data = {
@@ -33,7 +34,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_nydqq"]
+[sub_resource type="Resource" id="Resource_0gsel"]
 resource_local_to_scene = true
 script = ExtResource("4_q3bwu")
 emotion_name = "anger"
@@ -61,7 +62,7 @@ material = SubResource("StandardMaterial3D_ll45x")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fiukr"]
 albedo_color = Color(0.792157, 0.792157, 0.792157, 1)
 
-[sub_resource type="Resource" id="Resource_m8v0h"]
+[sub_resource type="Resource" id="Resource_6rvby"]
 resource_local_to_scene = true
 script = ExtResource("4_q3bwu")
 emotion_name = "anxiety"
@@ -107,19 +108,26 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_6onc1"]
+[sub_resource type="Resource" id="Resource_wmroq"]
 resource_local_to_scene = true
 script = ExtResource("4_q3bwu")
 emotion_name = "anger"
 color = Color(1.002, 0, 0, 1)
 color_fluctuate_array = Array[Color]([Color(1, 0.247059, 0.188235, 1), Color(0.552941, 0.0235294, 0, 1), Color(1, 0.388235, 0.321569, 1)])
 
-[sub_resource type="Resource" id="Resource_taq8t"]
+[sub_resource type="Resource" id="Resource_6edsv"]
 resource_local_to_scene = true
 script = ExtResource("4_q3bwu")
 emotion_name = "anxiety"
 color = Color(0.839216, 0.74902, 0, 1)
 color_fluctuate_array = Array[Color]([Color(1, 0.901961, 0.32549, 1), Color(0.929412, 0.658824, 0, 1), Color(1, 0.937255, 0.101961, 1)])
+
+[sub_resource type="Resource" id="Resource_iiu4b"]
+resource_local_to_scene = true
+script = ExtResource("10_jxylr")
+animation_name = "JumpingUp(1)0"
+jump_height = 8.0
+apex_duration = 0.2
 
 [node name="StageOneLevelSeven" type="Node3D" groups=["levels"]]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -65, 0, -311.663)
@@ -132,7 +140,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 297.33
 curve = SubResource("Curve3D_pi5ww")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="MovableBlockContainer/Path3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74227e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="MovableBlockContainer/Path3D/PathFollow3D"]
 remote_path = NodePath("../../../moveable_block")
@@ -143,11 +151,11 @@ material = SubResource("StandardMaterial3D_xvxje")
 script = SubResource("GDScript_g6mhv")
 
 [node name="moveable_block" parent="MovableBlockContainer" node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("8_8fuf2")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74227e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 player = NodePath("../../Player")
 path = NodePath("../Path3D/PathFollow3D")
 visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_nydqq")
+required_emotion = SubResource("Resource_0gsel")
 
 [node name="Sprite3D" parent="MovableBlockContainer/moveable_block" index="0"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 4.03935, 1.16385e-08)
@@ -172,7 +180,7 @@ transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 
 [node name="TimeControlClock" parent="." node_paths=PackedStringArray("directional_light") instance=ExtResource("3_524s5")]
 transform = Transform3D(120, 0, 0, 0, 120, 0, 0, 0, 120, 320.597, 37.5709, 552.501)
 directional_light = NodePath("../light_container")
-required_emotion = SubResource("Resource_m8v0h")
+required_emotion = SubResource("Resource_6rvby")
 
 [node name="Sketchfab_Scene" parent="TimeControlClock" index="2"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -216,16 +224,17 @@ spot_range = 20.858
 
 [node name="Anger" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_o88tx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 311.169, 1.87169, 474.716)
-emotion_state = SubResource("Resource_6onc1")
+emotion_state = SubResource("Resource_wmroq")
 player = NodePath("../Player")
 
 [node name="Anxiety" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_o88tx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 324.749, 0, 485.515)
-emotion_state = SubResource("Resource_taq8t")
+emotion_state = SubResource("Resource_6edsv")
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("6_tqsuy")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 315.385, 1, 468.795)
+default_jump = SubResource("Resource_iiu4b")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 308.685, 1.87784, 451.677)
