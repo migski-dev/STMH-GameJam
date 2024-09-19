@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b67jivsc31kab"]
+
+[ext_resource type="PackedScene" uid="uid://bu2e6p0hl68t6" path="res://assets/models/classroom/table.glb" id="1_f0176"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a5h7i"]
+
+[node name="SchoolDesk" instance=ExtResource("1_f0176")]
+
+[node name="table" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_a5h7i")

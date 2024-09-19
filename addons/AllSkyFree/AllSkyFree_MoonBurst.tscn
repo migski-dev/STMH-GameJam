@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfqhn6nqqq76g"]
 
-[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://scenes/stages/stage_one/stage_1_level_3/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="1"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ed0k1"]
 panorama = ExtResource("1")

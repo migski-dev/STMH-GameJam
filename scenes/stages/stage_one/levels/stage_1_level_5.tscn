@@ -1,14 +1,22 @@
-[gd_scene load_steps=22 format=3 uid="uid://clmf5s5vyvx5r"]
+[gd_scene load_steps=25 format=3 uid="uid://clmf5s5vyvx5r"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_aoun8"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_lwndi"]
-[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/objects/door/door.tscn" id="3_0fw8u"]
-[ext_resource type="PackedScene" uid="uid://dl8dhskt3uetn" path="res://scenes/objects/clock/time_control_clock.tscn" id="4_t5s85"]
-[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/block/moveable_block.tscn" id="5_xogr8"]
+[ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/objects/possessable_objects/door/door.tscn" id="3_0fw8u"]
+[ext_resource type="PackedScene" uid="uid://dl8dhskt3uetn" path="res://scenes/objects/possessable_objects/clock/time_control_clock.tscn" id="4_t5s85"]
+[ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/possessable_objects/block/moveable_block.tscn" id="5_xogr8"]
 [ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="6_820ku"]
 [ext_resource type="Script" path="res://resources/emotion_state.gd" id="6_bcv4q"]
-[ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/objects/emotion/emotion.tscn" id="7_3t0e0"]
-[ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/visible_path/visible_path.tscn" id="8_ikxs8"]
+[ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/emotion/emotion.tscn" id="7_3t0e0"]
+[ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/possessable_objects/visible_path/visible_path.tscn" id="8_ikxs8"]
+[ext_resource type="Script" path="res://resources/jump_state.gd" id="10_tihtm"]
+
+[sub_resource type="Resource" id="Resource_7etif"]
+resource_local_to_scene = true
+script = ExtResource("6_bcv4q")
+emotion_name = "anger"
+color = Color(1.002, 0, 0, 1)
+color_fluctuate_array = Array[Color]([Color(1, 0.247059, 0.188235, 1), Color(0.552941, 0.0235294, 0, 1), Color(1, 0.388235, 0.321569, 1)])
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_51nhw"]
 panorama = ExtResource("6_820ku")
@@ -27,7 +35,7 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_c60lv"]
+[sub_resource type="Resource" id="Resource_huo2w"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -57,7 +65,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_4mpfv"]
+[sub_resource type="Resource" id="Resource_kb852"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -87,12 +95,19 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_6o2un"]
+[sub_resource type="Resource" id="Resource_prbnt"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
 color = Color(1.002, 0, 0, 1)
 color_fluctuate_array = Array[Color]([Color(1, 0.247059, 0.188235, 1), Color(0.552941, 0.0235294, 0, 1), Color(1, 0.388235, 0.321569, 1)])
+
+[sub_resource type="Resource" id="Resource_xb2gf"]
+resource_local_to_scene = true
+script = ExtResource("10_tihtm")
+animation_name = "JumpingUp(1)0"
+jump_height = 8.0
+apex_duration = 0.2
 
 [node name="StageOneLevelFive" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
@@ -110,9 +125,9 @@ use_collision = true
 size = Vector3(22.1619, 1, 5.38646)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(55.6819, 0, 0, 0, 8.72314, 0, 0, 0, 1, 52.1739, 10.4355, 456.018)
+transform = Transform3D(55.6819, 0, 0, 0, 8.72314, 0, 0, 0, 1, 99.7087, 1.62903, 456.018)
 use_collision = true
-size = Vector3(1.82745, 3.53528, 1)
+size = Vector3(3.53482, 1.51618, 1)
 
 [node name="PlayerStartContainer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.3677, 0, 342.515)
@@ -127,6 +142,7 @@ transform = Transform3D(2.99515, 0, 0.170496, 0, 3, 0, -0.170496, 0, 2.99515, 14
 [node name="TimeControlClock" parent="." node_paths=PackedStringArray("directional_light") instance=ExtResource("4_t5s85")]
 transform = Transform3D(60, 0, 0, 0, 60, 0, 0, 0, 60, 154.275, 22.2644, 433.327)
 directional_light = NodePath("../light_container")
+required_emotion = SubResource("Resource_7etif")
 
 [node name="light_container" type="Node3D" parent="."]
 
@@ -149,8 +165,8 @@ shadow_enabled = true
 environment = SubResource("Environment_pd4vg")
 
 [node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_3t0e0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5625, -0.671914, 422.156)
-emotion_state = SubResource("Resource_c60lv")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5625, -0.671914, 375.156)
+emotion_state = SubResource("Resource_huo2w")
 player = NodePath("../Player")
 
 [node name="MovableBlockContainer" type="Node3D" parent="."]
@@ -170,12 +186,9 @@ path_node = NodePath("../Path3D")
 material = SubResource("StandardMaterial3D_wqkuw")
 script = SubResource("GDScript_c2eto")
 
-[node name="moveable_block" parent="MovableBlockContainer" node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("5_xogr8")]
+[node name="moveable_block" parent="MovableBlockContainer" instance=ExtResource("5_xogr8")]
 transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999, -0.00110792, -0.152487, -0.00109496, -0.988305, 0, 0, 0)
-player = NodePath("../../Player")
-path = NodePath("../Path3D/PathFollow3D")
-visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_4mpfv")
+required_emotion = SubResource("Resource_kb852")
 
 [node name="MovableBlockContainer2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.8438, 6.92323, 392.182)
@@ -194,12 +207,10 @@ path_node = NodePath("../Path3D")
 material = SubResource("StandardMaterial3D_rxuc2")
 script = SubResource("GDScript_gm6v4")
 
-[node name="moveable_block" parent="MovableBlockContainer2" node_paths=PackedStringArray("player", "path", "visible_path") instance=ExtResource("5_xogr8")]
+[node name="moveable_block" parent="MovableBlockContainer2" instance=ExtResource("5_xogr8")]
 transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999, -0.00110792, -0.152487, -0.00109496, -0.988305, 0, 0, 0)
-player = NodePath("../../Player")
-path = NodePath("../Path3D/PathFollow3D")
-visible_path = NodePath("../VisiblePath")
-required_emotion = SubResource("Resource_6o2un")
+required_emotion = SubResource("Resource_prbnt")
 
 [node name="Player" parent="." instance=ExtResource("2_lwndi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 341.72)
+default_jump = SubResource("Resource_xb2gf")

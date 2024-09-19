@@ -1,0 +1,82 @@
+[gd_scene load_steps=14 format=3 uid="uid://43wo8ndeom6m"]
+
+[ext_resource type="Script" path="res://scenes/objects/possessable_objects/block/interactable_csg.gd" id="1_wp574"]
+[ext_resource type="Script" path="res://scenes/objects/possessable_objects/block/MeshInstance3D.gd" id="3_ewg17"]
+[ext_resource type="Material" uid="uid://b1agftgkbe4pn" path="res://scenes/objects/possessable_objects/block/moveable_block.tres" id="3_mnxxu"]
+[ext_resource type="PackedScene" uid="uid://dfyiu55hgaw74" path="res://scenes/user_interface/possession_progress/possession_progress.tscn" id="4_nx23w"]
+[ext_resource type="PackedScene" uid="uid://dxymgo22qievk" path="res://scenes/camera/cam_root.tscn" id="6_iw6e4"]
+[ext_resource type="Texture2D" uid="uid://cqofk5kju2xed" path="res://assets/icons/keyboard_e.png" id="7_vvbx1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rluya"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xgrnf"]
+resource_local_to_scene = true
+material = ExtResource("3_mnxxu")
+
+[sub_resource type="Animation" id="Animation_o0qm0"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_mkhbr"]
+resource_name = "gleam"
+length = 20.0
+
+[sub_resource type="Animation" id="Animation_s8ig1"]
+resource_name = "interact_glow"
+length = 1.7
+loop_mode = 2
+
+[sub_resource type="Animation" id="Animation_46hwd"]
+resource_name = "possession"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_juiaq"]
+_data = {
+"RESET": SubResource("Animation_o0qm0"),
+"gleam": SubResource("Animation_mkhbr"),
+"interact_glow": SubResource("Animation_s8ig1"),
+"possession": SubResource("Animation_46hwd")
+}
+
+[node name="moveable_block" type="Node3D" groups=["interactable_group"]]
+transform = Transform3D(1, 0, 0, 0, 1, 8.44011e-10, 0, -2.88128e-09, 1, 0, 0, 0)
+script = ExtResource("1_wp574")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.03935, 1.16385e-08)
+billboard = 1
+no_depth_test = true
+texture = ExtResource("7_vvbx1")
+
+[node name="PossessionProgress" parent="." instance=ExtResource("4_nx23w")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.0207873, 0.359361, -0.932967, 0.00161041, 0.933179, 0.359407, 0.999783, 0.00596866, -0.019977, -26.341, 17.9694, -1.99978)
+visible = false
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(0.0306866, 0.0286607, 0.999118, 0.00357662, 0.999579, -0.0287838, -0.999523, 0.00445674, 0.0305711, 0.01385, 0.9131, -0.907303)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(0.0306866, 0.0286607, 0.999118, 0.00357662, 0.999579, -0.0287838, -0.999523, 0.00445674, 0.0305711, 0.01385, 0.9131, -0.907303)
+collision_mask = 2
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["interactable_group"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(4, -1.86265e-09, 2.98023e-08, 0, 4, 4.69154e-08, -2.98023e-08, -4.90109e-08, 4, 0, 0, 0)
+shape = SubResource("BoxShape3D_rluya")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(4, 0, 3.72529e-08, 0, 4, 7.67177e-08, -3.72529e-08, -7.88714e-08, 4, -1.19209e-07, 2.38419e-07, 0)
+mesh = SubResource("BoxMesh_xgrnf")
+script = ExtResource("3_ewg17")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_juiaq")
+}
+autoplay = "RESET"
+
+[node name="CamRoot" parent="." instance=ExtResource("6_iw6e4")]
+transform = Transform3D(-4.37114e-08, -8.44011e-10, 1, 8.44011e-10, 1, 8.44011e-10, -1, 8.44011e-10, -4.37114e-08, 0, 3.8391, 8.09984e-09)
+
+[connection signal="on_object_move" from="." to="PossessionProgress" method="_on_moveable_block_on_object_move"]

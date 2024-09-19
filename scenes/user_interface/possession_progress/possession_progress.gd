@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var progress_bar: ProgressBar = $CanvasLayer/MarginContainer/VBoxContainer/ProgressBar
+@onready var progress_bar: ProgressBar = $CanvasLayer/PanelContainer/Panel/MarginContainer/VBoxContainer/ProgressBar
 var progress: float = 0.0
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 

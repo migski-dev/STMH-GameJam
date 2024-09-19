@@ -59,7 +59,6 @@ func is_in_shadow() -> bool:
 	var colliding_position: Vector3
 	var all_collide_with_same: bool = true
 	var player_in_shadow:bool = false
-	var test: CollisionObject3D
 	
 	for light_check_raycast in raycast_array:
 		raycast_to_light_source(light_check_raycast, player_position)
@@ -81,10 +80,6 @@ func is_in_shadow() -> bool:
 	if all_collide_with_same:
 		if not(colliding_object == EventManager.light_blocking_object):
 			EventManager.light_blocking_object = colliding_object
-			if(colliding_object.has_method('get_owner') and  colliding_object.get_owner().has_method('get_instance_id')):
-				EventManager.lbo_instance = colliding_object.get_owner().get_instance_id()
-			else:
-				EventManager.lbo_instance = null
 			
 			EventManager.on_player_enter_new_shadow.emit()
 			#player.on_player_enter_new_shadow.emit()

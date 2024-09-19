@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwmg1mwncvxdp"]
+
+[ext_resource type="PackedScene" uid="uid://yjtqcdue8cu6" path="res://assets/models/classroom/book.glb" id="1_0fubw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ooti"]
+
+[node name="book2" instance=ExtResource("1_0fubw")]
+
+[node name="book" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_0ooti")

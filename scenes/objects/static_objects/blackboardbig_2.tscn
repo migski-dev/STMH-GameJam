@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://hkabriqrbuti"]
+
+[ext_resource type="PackedScene" uid="uid://danctjs5fcsl3" path="res://assets/models/classroom/blackboardbig.glb" id="1_h0cp1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47y7u"]
+
+[node name="blackboardbig2" instance=ExtResource("1_h0cp1")]
+
+[node name="blackboardbig" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_47y7u")

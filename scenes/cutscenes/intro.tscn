@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://s0u8urfns38b"]
+
+[ext_resource type="PackedScene" uid="uid://u6g2ic10xw31" path="res://scenes/heart/heart.tscn" id="1_igcqe"]
+
+[sub_resource type="Sky" id="Sky_qopur"]
+
+[sub_resource type="Environment" id="Environment_pyyrj"]
+background_mode = 2
+sky = SubResource("Sky_qopur")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.97
+ssao_radius = 8.1
+ssao_intensity = 4.3
+glow_enabled = true
+glow_intensity = 1.86
+glow_strength = 0.87
+glow_bloom = 0.02
+glow_hdr_threshold = 0.44
+
+[node name="Intro" type="Node3D"]
+
+[node name="WorldEnvironment_MoonBurst" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pyyrj")
+
+[node name="Heart" parent="." instance=ExtResource("1_igcqe")]
+transform = Transform3D(-8.74228e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.74228e-09, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.589221, -0.0865297, 0.803325, 0, 0.994249, 0.107095, -0.807972, -0.0631026, 0.585832, 46.7817, 4.96345, 10.5171)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.849892, 0.526956, 0, -0.526956, 0.849893, 0, 26.5, 0)
+light_color = Color(0.462745, 0.462745, 0.462745, 1)
+light_energy = 5.0
+shadow_enabled = true
+shadow_blur = 0.5
+directional_shadow_mode = 0
+sky_mode = 1

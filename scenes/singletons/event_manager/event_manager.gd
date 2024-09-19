@@ -7,7 +7,6 @@ signal on_player_acquire_emotion(emotion: EmotionState)
 
 var current_light:  Light3D
 var light_blocking_object
-var lbo_instance
 var is_interacted: bool = false
 var possession_mode = false
 var player: Player

@@ -1,0 +1,182 @@
+[gd_scene load_steps=16 format=3 uid="uid://cbkb5eb1ckdkd"]
+
+[ext_resource type="Theme" uid="uid://bxl1lc4448h11" path="res://scenes/user_interface/main_menu_3D/main_menu_canvas/menu-theme.tres" id="1_4pphe"]
+[ext_resource type="FontFile" uid="uid://cj73g04odfcvr" path="res://assets/fonts/Roboto/Roboto-Black.ttf" id="2_voi8b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwyso"]
+resource_local_to_scene = true
+bg_color = Color(1.002, 0, 0, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnm6t"]
+bg_color = Color(0.801263, 4.23551e-06, 2.88785e-07, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnbll"]
+bg_color = Color(0.513753, 1.11904e-06, 1.92523e-07, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cop78"]
+bg_color = Color(0.410327, 5.83585e-07, 1.44392e-07, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhxlc"]
+bg_color = Color(0.839216, 0.74902, 0, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rs5m"]
+bg_color = Color(0.754116, 0.672503, 0, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3ism"]
+bg_color = Color(0.486033, 0.431461, 4.81307e-07, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87wdu"]
+bg_color = Color(0.409307, 0.362475, 0, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txmkw"]
+bg_color = Color(0.262745, 0.862745, 0.584314, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfmv5"]
+bg_color = Color(0.20331, 0.664016, 0.448106, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynwrr"]
+bg_color = Color(0.124516, 0.430248, 0.285822, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4vhi"]
+bg_color = Color(0.109001, 0.387111, 0.255636, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="LabelSettings" id="LabelSettings_ubsnk"]
+resource_local_to_scene = true
+font = ExtResource("2_voi8b")
+font_size = 120
+font_color = Color(0, 0, 0, 1)
+shadow_size = 19
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(3, 1)
+
+[node name="Main-menu-canvas" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/AspectRatioContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 290
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 290
+theme_override_constants/margin_bottom = 115
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/AspectRatioContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("1_4pphe")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/AspectRatioContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_4pphe")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/AspectRatioContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/AspectRatioContainer/MarginContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/AspectRatioContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_4pphe")
+theme_override_styles/normal = SubResource("StyleBoxFlat_cwyso")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mnm6t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mnbll")
+theme_override_styles/focus = SubResource("StyleBoxFlat_cop78")
+text = "Play"
+
+[node name="Options" type="Button" parent="CanvasLayer/AspectRatioContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_hhxlc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2rs5m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n3ism")
+theme_override_styles/focus = SubResource("StyleBoxFlat_87wdu")
+text = "Options"
+
+[node name="Credits" type="Button" parent="CanvasLayer/AspectRatioContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_4pphe")
+theme_override_styles/normal = SubResource("StyleBoxFlat_txmkw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dfmv5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ynwrr")
+theme_override_styles/focus = SubResource("StyleBoxFlat_n4vhi")
+text = "Credits
+"
+
+[node name="Label" type="Label" parent="CanvasLayer/AspectRatioContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Umbra"
+label_settings = SubResource("LabelSettings_ubsnk")
+horizontal_alignment = 1
