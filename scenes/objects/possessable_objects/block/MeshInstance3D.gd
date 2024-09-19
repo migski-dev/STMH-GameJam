@@ -8,7 +8,7 @@ func _ready() -> void:
 	CameraTransition.possession_enter_complete.connect(_on_player_enter_possession)
 	CameraTransition.possession_exit_complete.connect(_on_player_exit_possession)
 	shader_material = self.get_active_material(0).next_pass
-	toggle_shader(false)
+	toggle_shader(true)
 	#toggle_shader(true)
 	
 func toggle_shader(enable: bool) -> void:
@@ -30,4 +30,4 @@ func _on_player_enter_possession() -> void:
 		#toggle_shader(true)
 
 func _on_player_exit_possession() -> void: 
-	toggle_shader(false)
+	toggle_shader(true)

@@ -109,7 +109,7 @@ func jump_input_handler(event: InputEvent) -> void:
 		
 		
 func jump()->void:
-	press_jump.emit(default_jump)
+	press_jump.emit(jump_states["default_jump"])
 	jump_available = false
 
 func on_jump_buffer_timeout()->void:

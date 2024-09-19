@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bnxu5tcavj133"]
+[gd_scene load_steps=14 format=3 uid="uid://bnxu5tcavj133"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_5xtdy"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_dbpve"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/possessable_objects/visible_path/visible_path.tscn" id="4_0kjq0"]
 [ext_resource type="PackedScene" uid="uid://43wo8ndeom6m" path="res://scenes/objects/possessable_objects/block/moveable_block.tscn" id="4_1cxs8"]
 [ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="5_cgpfu"]
+[ext_resource type="Script" path="res://resources/jump_state.gd" id="7_s3f0q"]
 
 [sub_resource type="Curve3D" id="Curve3D_h88h2"]
 _data = {
@@ -13,6 +14,11 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0t2xp"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0, 0, 0, 0)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dov7s"]
 panorama = ExtResource("5_cgpfu")
@@ -30,6 +36,13 @@ glow_intensity = 1.86
 glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
+
+[sub_resource type="Resource" id="Resource_kqw6c"]
+resource_local_to_scene = true
+script = ExtResource("7_s3f0q")
+animation_name = "JumpingUp(1)0"
+jump_height = 7.0
+apex_duration = 0.2
 
 [node name="StageOneLevelThree" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
@@ -66,6 +79,7 @@ curve = SubResource("Curve3D_h88h2")
 [node name="VisiblePath" parent="Path3D" instance=ExtResource("4_0kjq0")]
 transform = Transform3D(-0.999986, -2.33637e-05, 0.00536354, 0, 0.999991, 0.00435598, -0.00536359, 0.00435592, -0.999976, 0, 0, 0)
 path_node = NodePath("../PathFollow3D")
+material = SubResource("StandardMaterial3D_0t2xp")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
 transform = Transform3D(-0.999986, -2.33637e-05, 0.00536354, 0, 0.999991, 0.00435598, -0.00536359, 0.00435592, -0.999976, 0, 0, 0)
@@ -93,3 +107,4 @@ environment = SubResource("Environment_apk7v")
 
 [node name="Player" parent="." instance=ExtResource("2_dbpve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 339.926)
+default_jump = SubResource("Resource_kqw6c")

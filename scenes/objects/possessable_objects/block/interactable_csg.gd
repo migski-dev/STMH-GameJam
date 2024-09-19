@@ -66,6 +66,7 @@ func _physics_process(delta: float):
 
 func move_object_on_path(delta: float):
 	var progress = clamp(path.progress_ratio + MOVE_SPEED/3 * delta, 0, 1)
+	#var progress = path.progress_ratio + MOVE_SPEED/3 * delta
 	path.progress_ratio = progress
 	on_object_move.emit(path.progress_ratio)
 	

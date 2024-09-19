@@ -1,0 +1,314 @@
+[gd_scene load_steps=31 format=3 uid="uid://r5udr3lhejh7"]
+
+[ext_resource type="PackedScene" uid="uid://cbkb5eb1ckdkd" path="res://scenes/user_interface/main_menu_3D/main_menu_canvas/main-menu-canvas.tscn" id="1_n38jv"]
+[ext_resource type="PackedScene" uid="uid://u6g2ic10xw31" path="res://scenes/heart/heart.tscn" id="1_pgltp"]
+[ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="1_qaqa3"]
+[ext_resource type="Script" path="res://scenes/user_interface/main_menu_3D/main-menu-3D.gd" id="1_rq11m"]
+[ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/emotion/emotion.tscn" id="1_spbf6"]
+[ext_resource type="Script" path="res://resources/jump_state.gd" id="2_poyw1"]
+[ext_resource type="FontFile" uid="uid://b1cmq8gems1yx" path="res://assets/fonts/Roboto/Roboto-MediumItalic.ttf" id="3_ii8u0"]
+[ext_resource type="Script" path="res://scenes/user_interface/main_menu_3D/follow_path.gd" id="4_175wg"]
+[ext_resource type="FontFile" uid="uid://bp2tpn7ucfdpq" path="res://assets/fonts/Roboto/Roboto-Thin.ttf" id="4_pctik"]
+[ext_resource type="FontFile" uid="uid://cj73g04odfcvr" path="res://assets/fonts/Roboto/Roboto-Black.ttf" id="5_bmy51"]
+[ext_resource type="Script" path="res://resources/emotion_state.gd" id="5_kwn3j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbgj7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hx0eb"]
+bg_color = Color(0.345098, 0.294118, 0.34902, 0.945098)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x80hd"]
+bg_color = Color(0.423529, 0.360784, 0.427451, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c35cm"]
+bg_color = Color(0.513726, 0.447059, 0.521569, 0.937255)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtrus"]
+bg_color = Color(0.458824, 0.360784, 0.478431, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ym7gn"]
+bg_color = Color(0, 0, 0, 0.4)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hldan"]
+bg_color = Color(0, 0, 0, 0.4)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="Theme" id="Theme_0xd0o"]
+resource_local_to_scene = true
+default_font = ExtResource("4_pctik")
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0.972549, 0.968627, 0.972549, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 0)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 0)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/h_separation = 0
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 18
+Button/fonts/font = ExtResource("3_ii8u0")
+Button/styles/disabled = SubResource("StyleBoxFlat_nbgj7")
+Button/styles/focus = SubResource("StyleBoxFlat_hx0eb")
+Button/styles/hover = SubResource("StyleBoxFlat_x80hd")
+Button/styles/normal = SubResource("StyleBoxFlat_c35cm")
+Button/styles/pressed = SubResource("StyleBoxFlat_qtrus")
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_ym7gn")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_hldan")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvahv"]
+resource_local_to_scene = true
+bg_color = Color(1.002, 0, 0, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="LabelSettings" id="LabelSettings_ke2c4"]
+resource_local_to_scene = true
+font = ExtResource("5_bmy51")
+font_size = 120
+font_color = Color(0, 0, 0, 1)
+shadow_size = 19
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(3, 1)
+
+[sub_resource type="Resource" id="Resource_nbawx"]
+resource_local_to_scene = true
+script = ExtResource("2_poyw1")
+animation_name = "JumpingUp(1)0"
+jump_height = 7.0
+apex_duration = 0.2
+
+[sub_resource type="Curve3D" id="Curve3D_7g8eq"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -80.2544, 0, -0.150621, -76.822, 0, 1.605, 76.822, 0, -1.605, -0.410271, 0, -80.3246, 0, 0, 0, 0, 0, 0, 79.4338, 0, -0.150628, 79.0968, 0, 0.606171, -79.0968, 0, -0.606171, -0.410264, 0, 80.6833, 0, 0, 0, 0, 0, 0, -80.2544, 0, -0.150621),
+"tilts": PackedFloat32Array(150, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="Resource" id="Resource_qh7v8"]
+resource_local_to_scene = true
+script = ExtResource("5_kwn3j")
+emotion_name = "anger"
+color = Color(1.002, 0, 0, 1)
+color_fluctuate_array = Array[Color]([Color(1, 0.247059, 0.188235, 1), Color(0.552941, 0.0235294, 0, 1), Color(1, 0.388235, 0.321569, 1)])
+
+[sub_resource type="Resource" id="Resource_1j8l7"]
+resource_local_to_scene = true
+script = ExtResource("5_kwn3j")
+emotion_name = "anxiety"
+color = Color(0.262745, 0.862745, 0.584314, 1)
+color_fluctuate_array = Array[Color]([Color(1, 0.901961, 0.32549, 1), Color(0.929412, 0.658824, 0, 1), Color(1, 0.937255, 0.101961, 1)])
+
+[sub_resource type="Resource" id="Resource_2f5ec"]
+resource_local_to_scene = true
+script = ExtResource("5_kwn3j")
+emotion_name = "anxiety"
+color = Color(0.32549, 0.568627, 0.960784, 1)
+color_fluctuate_array = Array[Color]([Color(1, 0.901961, 0.32549, 1), Color(0.929412, 0.658824, 0, 1), Color(1, 0.937255, 0.101961, 1)])
+
+[sub_resource type="Resource" id="Resource_pgcc2"]
+resource_local_to_scene = true
+script = ExtResource("5_kwn3j")
+emotion_name = "anxiety"
+color = Color(0.839216, 0.74902, 0, 1)
+color_fluctuate_array = Array[Color]([Color(1, 0.901961, 0.32549, 1), Color(0.929412, 0.658824, 0, 1), Color(1, 0.937255, 0.101961, 1)])
+
+[sub_resource type="Resource" id="Resource_hntuo"]
+resource_local_to_scene = true
+script = ExtResource("5_kwn3j")
+emotion_name = "anxiety"
+color = Color(1, 0.552941, 0.952941, 1)
+color_fluctuate_array = Array[Color]([Color(1, 0.901961, 0.32549, 1), Color(0.929412, 0.658824, 0, 1), Color(1, 0.937255, 0.101961, 1)])
+
+[sub_resource type="Sky" id="Sky_aydiy"]
+
+[sub_resource type="Environment" id="Environment_j77fx"]
+background_mode = 2
+sky = SubResource("Sky_aydiy")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.97
+ssao_radius = 8.1
+ssao_intensity = 4.3
+glow_enabled = true
+glow_intensity = 1.86
+glow_strength = 0.87
+glow_bloom = 0.02
+glow_hdr_threshold = 0.44
+fog_light_color = Color(0.368627, 0.4, 0.447059, 1)
+fog_sky_affect = 0.355
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_emission = Color(0.372549, 0.372549, 0.372549, 1)
+
+[node name="Main-menu-3d" type="Node3D"]
+script = ExtResource("1_rq11m")
+
+[node name="Main-menu-canvas" parent="." instance=ExtResource("1_n38jv")]
+
+[node name="PanelContainer" parent="Main-menu-canvas/CanvasLayer/AspectRatioContainer/MarginContainer" index="0"]
+theme = SubResource("Theme_0xd0o")
+
+[node name="Panel" parent="Main-menu-canvas/CanvasLayer/AspectRatioContainer/MarginContainer/PanelContainer" index="0"]
+theme = SubResource("Theme_0xd0o")
+
+[node name="Play" parent="Main-menu-canvas/CanvasLayer/AspectRatioContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" index="0"]
+theme = SubResource("Theme_0xd0o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_uvahv")
+
+[node name="Credits" parent="Main-menu-canvas/CanvasLayer/AspectRatioContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" index="2"]
+theme = SubResource("Theme_0xd0o")
+
+[node name="Label" parent="Main-menu-canvas/CanvasLayer/AspectRatioContainer/MarginContainer" index="1"]
+label_settings = SubResource("LabelSettings_ke2c4")
+
+[node name="Player" parent="." instance=ExtResource("1_qaqa3")]
+transform = Transform3D(0.866024, -0.173061, 0.469098, 0, 0.93819, 0.34612, -0.500003, -0.299748, 0.812495, 114.661, 25.9104, 55.9633)
+visible = false
+default_jump = SubResource("Resource_nbawx")
+
+[node name="PathContainer" type="Node3D" parent="."]
+transform = Transform3D(-4.49045, 0.0549156, 7.79954, 0.0959445, 8.99949, -0.00812579, -7.79914, 0.0790927, -4.49078, 0, -50.1794, 0)
+
+[node name="Path3D1" type="Path3D" parent="PathContainer"]
+transform = Transform3D(0.146728, -0.0372099, -0.0773717, -3.22062e-09, 0.153204, -0.0736793, 0.0858542, 0.0635929, 0.132231, 0, 7.85487, 0)
+curve = SubResource("Curve3D_7g8eq")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="PathContainer/Path3D1"]
+transform = Transform3D(-0.708561, 0, 0.705647, 0, 1, 0, -0.705647, 0, -0.708561, -80.2544, 0, -0.150621)
+use_model_front = true
+tilt_enabled = false
+
+[node name="Emotion" parent="PathContainer/Path3D1/PathFollow3D" instance=ExtResource("1_spbf6")]
+transform = Transform3D(2.21439, 2.06979, -6.30971, -2.86326, 6.29883, 1.06136, 5.99151, 2.24515, 2.83921, 0, 0, 0)
+script = ExtResource("4_175wg")
+emotion_state = SubResource("Resource_qh7v8")
+
+[node name="Path3D2" type="Path3D" parent="PathContainer"]
+transform = Transform3D(0.146728, 0.0596587, -0.0617396, 2.97302e-09, 0.122251, 0.11813, 0.0858542, -0.101959, 0.105515, 0, 7.85487, 0)
+curve = SubResource("Curve3D_7g8eq")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="PathContainer/Path3D2"]
+transform = Transform3D(-0.275751, 0, 0.96123, 0, 1, 0, -0.96123, 0, -0.275751, -24.3129, 0, -76.8913)
+progress = 101.3
+use_model_front = true
+tilt_enabled = false
+
+[node name="Emotion" parent="PathContainer/Path3D2/PathFollow3D" instance=ExtResource("1_spbf6")]
+transform = Transform3D(3.78484, -4.6936, -3.55599, 4.454, 5.04697, -1.92092, 3.85186, -1.224, 5.71533, 0, 0, 0)
+script = ExtResource("4_175wg")
+emotion_state = SubResource("Resource_1j8l7")
+
+[node name="Path3D3" type="Path3D" parent="PathContainer"]
+transform = Transform3D(0.146728, 0.0854561, 0.0082586, 5.28569e-09, -0.0163529, 0.169212, 0.0858542, -0.146047, -0.0141142, 0, 7.85487, 0)
+curve = SubResource("Curve3D_7g8eq")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="PathContainer/Path3D3"]
+transform = Transform3D(0.850194, 0, 0.52647, 0, 1, 0, -0.52647, 0, 0.850194, 64.8909, 0, -46.9261)
+progress = 202.6
+use_model_front = true
+tilt_enabled = false
+
+[node name="Emotion" parent="PathContainer/Path3D3/PathFollow3D" instance=ExtResource("1_spbf6")]
+transform = Transform3D(1.96573, -3.56858, 5.6922, 6.45112, -0.653411, -2.63745, 1.8759, 5.98651, 3.10527, 0, 0, 0)
+script = ExtResource("4_175wg")
+emotion_state = SubResource("Resource_2f5ec")
+
+[node name="Path3D4" type="Path3D" parent="PathContainer"]
+transform = Transform3D(0.146728, 0.0633379, 0.0579592, 2.74806e-09, -0.114765, 0.125415, 0.0858542, -0.108247, -0.0990543, 0, 7.85487, 0)
+curve = SubResource("Curve3D_7g8eq")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="PathContainer/Path3D4"]
+transform = Transform3D(0.836877, 0, -0.547391, 0, 1, 0, 0.547391, 0, 0.836877, 64.3943, 0, 48.8604)
+progress = 303.9
+use_model_front = true
+tilt_enabled = false
+
+[node name="Emotion" parent="PathContainer/Path3D4/PathFollow3D" instance=ExtResource("1_spbf6")]
+transform = Transform3D(4.59243, 2.93232, 4.39444, 4.81954, -4.71022, -1.89364, 2.16372, 4.26794, -5.10911, 0, 0, 0)
+script = ExtResource("4_175wg")
+emotion_state = SubResource("Resource_pgcc2")
+
+[node name="Path3D5" type="Path3D" parent="PathContainer"]
+transform = Transform3D(0.146728, -0.00907703, 0.085373, -3.60824e-09, -0.169047, -0.0179734, 0.0858542, 0.015513, -0.145905, 0, 7.85487, 0)
+curve = SubResource("Curve3D_7g8eq")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="PathContainer/Path3D5"]
+transform = Transform3D(-0.275322, 0, -0.961352, 0, 1, 0, 0.961352, 0, -0.275322, -25.8342, 0, 77.2448)
+progress = 405.2
+use_model_front = true
+tilt_enabled = false
+
+[node name="Emotion" parent="PathContainer/Path3D5/PathFollow3D" instance=ExtResource("1_spbf6")]
+transform = Transform3D(5.46426, -0.724723, -4.3147, -0.621775, -6.96186, 0.381923, -4.33073, 0.0851206, -5.49887, 0, 0, 0)
+script = ExtResource("4_175wg")
+emotion_state = SubResource("Resource_hntuo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.5, 0)
+light_energy = 0.215
+shadow_enabled = true
+shadow_blur = 0.5
+directional_shadow_mode = 0
+sky_mode = 1
+
+[node name="Heart" parent="." instance=ExtResource("1_pgltp")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 9.53409, 0)
+top_level = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.53409, 244.839)
+current = true
+
+[node name="WorldEnvironment_MoonBurst" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_j77fx")
+
+[connection signal="pressed" from="Main-menu-canvas/CanvasLayer/AspectRatioContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Main-menu-canvas/CanvasLayer/AspectRatioContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+
+[editable path="Main-menu-canvas"]
+[editable path="Heart"]

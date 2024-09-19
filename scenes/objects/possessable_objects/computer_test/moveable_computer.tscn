@@ -89,7 +89,7 @@ collision_mask = 2
 transform = Transform3D(0.0306866, 0.0286607, 0.999118, 0.00357662, 0.999579, -0.0287838, -0.999523, 0.00445674, 0.0305711, 0.01385, 0.190884, -0.0651521)
 
 [node name="Sprite3D" type="Sprite3D" parent="." index="6"]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.650332, 1.16385e-08)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.266114, 1.16385e-08)
 billboard = 1
 no_depth_test = true
 texture = ExtResource("7_34p7p")

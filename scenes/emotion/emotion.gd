@@ -18,13 +18,14 @@ func _process(delta):
 		var tail_transform: Vector3 = follow_reference.global_transform.origin
 		var distance: Vector3 = tail_transform - emotion_transform
 		
-		if distance.length() > 2.5:
+		if distance.length() > 4.5:
 			self.global_transform.origin = emotion_transform + distance / 100	
 
 
 func _on_snap_area_body_entered(body):
 	if(follow_player == false):
 		player.current_emotion = emotion_state
+		self.scale = Vector3(.7,.7,.7)
 		if(player.current_emotion_orbs.size() == 0):
 			follow_reference = player
 		else:

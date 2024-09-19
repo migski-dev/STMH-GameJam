@@ -42,7 +42,7 @@ void fragment() {
 	rim += (rims * _OutlineFixed);
 	vec4 texturedRim = vec4(saturate(rim.a * _Opacity)); // make a harder edge
 	vec4 extraRim = (saturate((_Edge + rim.a) * _Opacity) - texturedRim) * _Brightness;// extra edge, subtracting the textured rim
-	vec4 result = (_ColorAura * texturedRim) + (_ColorRim * extraRim);// combine both with colors
+	vec4 result = (_ColorAura * texturedRim * 2.9) + (_ColorRim * extraRim);// combine both with colors
 	float fade = saturate((VERTEX.y + _OffsetFade) * 2.0);
 	
 	result *= fade;

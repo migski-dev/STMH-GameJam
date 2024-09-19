@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bygi1pwa3vby4"]
+[gd_scene load_steps=11 format=3 uid="uid://bygi1pwa3vby4"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_2b273"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_3k2bs"]
 [ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/objects/possessable_objects/door/door.tscn" id="3_pu521"]
 [ext_resource type="PackedScene" uid="uid://dhavwi0uq6seh" path="res://scenes/emotion/emotion.tscn" id="5_qa2ak"]
+[ext_resource type="Script" path="res://resources/jump_state.gd" id="5_yivpa"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_i5w5c"]
 
@@ -24,6 +25,13 @@ glow_intensity = 1.86
 glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
+
+[sub_resource type="Resource" id="Resource_onxmu"]
+resource_local_to_scene = true
+script = ExtResource("5_yivpa")
+animation_name = "JumpingUp(1)0"
+jump_height = 7.0
+apex_duration = 0.2
 
 [node name="ExpositionTest" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -238.905)
@@ -65,3 +73,4 @@ player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_3k2bs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.4516, 0, 468.817)
+default_jump = SubResource("Resource_onxmu")

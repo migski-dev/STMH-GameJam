@@ -195,14 +195,14 @@ transform = Transform3D(1.001, 0, 0, 0, 1.001, 0, 0, 0, 1.001, 0, 6.44017e-18, 0
 shape = SubResource("CylinderShape3D_vue5k")
 
 [node name="Obj_Hand_001" type="Node3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock"]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, -0.02172, 0.02906)
+transform = Transform3D(0.992113, 0, 0.125337, 0, 1, 0, -0.125337, 0, 0.992113, 0, -0.02172, 0.02906)
 
 [node name="Obj_Hand_001_0" type="MeshInstance3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock/Obj_Hand_001"]
 mesh = SubResource("ArrayMesh_6rjw1")
 skeleton = NodePath("")
 
 [node name="Obj_Hand" type="Node3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock"]
-transform = Transform3D(0.876305, 0, 0.481754, 0, 1, 0, -0.481754, 0, 0.876305, 0, -0.02172, 0.02906)
+transform = Transform3D(1.26759e-06, 0, 0.999999, 0, 1, 0, -0.999999, 0, 1.26759e-06, 0, -0.02172, 0.02906)
 
 [node name="Obj_Hand_0" type="MeshInstance3D" parent="Sketchfab_Scene/Sketchfab_model/Root/Obj_Clock/Obj_Hand"]
 mesh = SubResource("ArrayMesh_dpyks")
@@ -228,7 +228,7 @@ script = ExtResource("3_c6rkb")
 [node name="SpringArm3D" type="SpringArm3D" parent="CamRoot/CamYaw/CamPitch"]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 0)
 shape = SubResource("SphereShape3D_vm6r1")
-spring_length = 0.7
+spring_length = 0.4
 
 [node name="Camera3D" type="Camera3D" parent="CamRoot/CamYaw/CamPitch/SpringArm3D"]
 cull_mask = 524287

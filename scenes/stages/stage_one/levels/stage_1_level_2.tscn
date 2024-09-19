@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3as3u7vcx1gj"]
+[gd_scene load_steps=10 format=3 uid="uid://b3as3u7vcx1gj"]
 
 [ext_resource type="Script" path="res://scenes/stages/stage_one/stage_1_level.gd" id="1_33udl"]
 [ext_resource type="PackedScene" uid="uid://c7b1ix1wtarcb" path="res://scenes/player/player.tscn" id="2_esims"]
 [ext_resource type="PackedScene" uid="uid://dib0i03apb2pj" path="res://scenes/objects/possessable_objects/door/door.tscn" id="3_af37l"]
 [ext_resource type="Texture2D" uid="uid://bj0xqwymqfgqx" path="res://addons/AllSkyFree/Skyboxes/AllSkyFree_Sky_MoonBurst_Equirect.png" id="4_oj04d"]
+[ext_resource type="Script" path="res://resources/jump_state.gd" id="5_5cbrf"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_stxqb"]
 panorama = ExtResource("4_oj04d")
@@ -21,6 +22,13 @@ glow_intensity = 1.86
 glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
+
+[sub_resource type="Resource" id="Resource_l5h2s"]
+resource_local_to_scene = true
+script = ExtResource("5_5cbrf")
+animation_name = "JumpingUp(1)0"
+jump_height = 7.0
+apex_duration = 0.2
 
 [node name="StageOneLevelTwo" type="Node3D" node_paths=PackedStringArray("player") groups=["levels"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, -311.663)
@@ -82,3 +90,4 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_esims")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 363.322)
+default_jump = SubResource("Resource_l5h2s")

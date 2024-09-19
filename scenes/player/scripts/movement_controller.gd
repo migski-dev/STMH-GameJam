@@ -35,6 +35,7 @@ func _physics_process(delta):
 
 func set_horizontal_velocity() -> void:
 	if(EventManager.light_blocking_object != null and EventManager.is_light_blocking_object_moving() and player.is_on_floor()):
+		print_debug("UH OH")
 		velocity.x = speed * direction.normalized().x + player.moving_shadow_bias.x
 		velocity.z = speed * direction.normalized().z + player.moving_shadow_bias.z
 	else:
@@ -126,6 +127,9 @@ func _on_player_heading_to_light():
 		player.global_transform.origin -= direction.normalized() * 0.08 * player.moving_shadow_bias.length()
 		player.velocity = -player.velocity * .1 + player.moving_shadow_bias
 	else:
+		if player.is_on_floor() and not player.is_in_shadow:
+			_on_player_land_in_light()
+			#player.global_transform.origin = player.pre_jump_position
 		player.global_transform.origin -= direction.normalized() * 0.04
 		player.velocity = -player.velocity * .1
 

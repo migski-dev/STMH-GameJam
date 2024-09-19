@@ -13,8 +13,7 @@ func _physics_process(delta):
 	animation_tree["parameters/on_floor_blend/blend_amount"] = on_floor_blend
 
 func _jump(jump_state: JumpState):
-	print(AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	animation_tree["parameters/" + "jump" + "/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+	animation_tree["parameters/" + jump_state.animation_name + "/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 func _on_set_movement_state(_movement_state: MovementState):
 	if tween:

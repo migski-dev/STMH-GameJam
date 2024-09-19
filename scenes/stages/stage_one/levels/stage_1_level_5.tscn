@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bf164ue1aecqn" path="res://scenes/objects/possessable_objects/visible_path/visible_path.tscn" id="8_ikxs8"]
 [ext_resource type="Script" path="res://resources/jump_state.gd" id="10_tihtm"]
 
-[sub_resource type="Resource" id="Resource_4hjee"]
+[sub_resource type="Resource" id="Resource_7etif"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -35,7 +35,7 @@ glow_strength = 0.87
 glow_bloom = 0.02
 glow_hdr_threshold = 0.44
 
-[sub_resource type="Resource" id="Resource_71jsl"]
+[sub_resource type="Resource" id="Resource_huo2w"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -65,7 +65,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_4d8p3"]
+[sub_resource type="Resource" id="Resource_kb852"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -95,7 +95,7 @@ func end_glow() -> void:
 	anim_player.play(\"RESET\", -1, 1, false)
 "
 
-[sub_resource type="Resource" id="Resource_h7ebg"]
+[sub_resource type="Resource" id="Resource_prbnt"]
 resource_local_to_scene = true
 script = ExtResource("6_bcv4q")
 emotion_name = "anger"
@@ -142,7 +142,7 @@ transform = Transform3D(2.99515, 0, 0.170496, 0, 3, 0, -0.170496, 0, 2.99515, 14
 [node name="TimeControlClock" parent="." node_paths=PackedStringArray("directional_light") instance=ExtResource("4_t5s85")]
 transform = Transform3D(60, 0, 0, 0, 60, 0, 0, 0, 60, 154.275, 22.2644, 433.327)
 directional_light = NodePath("../light_container")
-required_emotion = SubResource("Resource_4hjee")
+required_emotion = SubResource("Resource_7etif")
 
 [node name="light_container" type="Node3D" parent="."]
 
@@ -166,7 +166,7 @@ environment = SubResource("Environment_pd4vg")
 
 [node name="Emotion" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_3t0e0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5625, -0.671914, 375.156)
-emotion_state = SubResource("Resource_71jsl")
+emotion_state = SubResource("Resource_huo2w")
 player = NodePath("../Player")
 
 [node name="MovableBlockContainer" type="Node3D" parent="."]
@@ -188,7 +188,7 @@ script = SubResource("GDScript_c2eto")
 
 [node name="moveable_block" parent="MovableBlockContainer" instance=ExtResource("5_xogr8")]
 transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999, -0.00110792, -0.152487, -0.00109496, -0.988305, 0, 0, 0)
-required_emotion = SubResource("Resource_4d8p3")
+required_emotion = SubResource("Resource_kb852")
 
 [node name="MovableBlockContainer2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.8438, 6.92323, 392.182)
@@ -209,7 +209,7 @@ script = SubResource("GDScript_gm6v4")
 
 [node name="moveable_block" parent="MovableBlockContainer2" instance=ExtResource("5_xogr8")]
 transform = Transform3D(-0.988305, 0.000168943, 0.152487, -7.27596e-12, 0.999999, -0.00110792, -0.152487, -0.00109496, -0.988305, 0, 0, 0)
-required_emotion = SubResource("Resource_h7ebg")
+required_emotion = SubResource("Resource_prbnt")
 
 [node name="Player" parent="." instance=ExtResource("2_lwndi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.5854, 1, 341.72)

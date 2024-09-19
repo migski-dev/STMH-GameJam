@@ -1,40 +1,10 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://doucnfxtmg86b"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://doucnfxtmg86b"]
 
-[ext_resource type="Shader" path="res://scenes/test_folder/miguel_test/asset_testing/model.gdshader" id="1_7o1ve"]
 [ext_resource type="Shader" path="res://scenes/objects/possessable_objects/block/moveable_block.gdshader" id="1_tkfik"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_o0au4"]
-noise_type = 3
-fractal_octaves = 8
-fractal_lacunarity = 2.75
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hlrwm"]
-seamless = true
-as_normal_map = true
-bump_strength = 32.0
-noise = SubResource("FastNoiseLite_o0au4")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_03qol"]
-render_priority = 0
-shader = ExtResource("1_7o1ve")
-shader_parameter/_Scale = 0.05
-shader_parameter/_Opacity = 10.0
-shader_parameter/_Edge = 0.08
-shader_parameter/_ColorAura = Color(0.85098, 0, 0, 1)
-shader_parameter/_ColorRim = Color(0, 0, 1, 0)
-shader_parameter/_Brightness = 2.0
-shader_parameter/_SpeedX = 4.75e-07
-shader_parameter/_SpeedY = -1.1
-shader_parameter/_OffsetFade = 1.0
-shader_parameter/_GlowBrightness = 3.0
-shader_parameter/_OutlineFixed = 2.0
-shader_parameter/_RimPower2 = 7.0
-shader_parameter/_NoiseTex = SubResource("NoiseTexture2D_hlrwm")
 
 [resource]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_03qol")
 shader = ExtResource("1_tkfik")
 shader_parameter/color = Color(0.870588, 0, 0, 1)
 shader_parameter/size = 1.05
